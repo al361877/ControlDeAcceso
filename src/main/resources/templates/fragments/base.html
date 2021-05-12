@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+
+    <style>
+    html {
+      min-height: 100%;
+      position: relative;
+    }
+    body {
+      margin: 0;
+      margin-bottom: 40px;
+    }
+    footer {
+      background-color: #220f05;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 40px;
+      color: white;
+    }
+    </style>
+    <meta charset="UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    />
+
+    <!-- app css  -->
+    <link type="text/css" th:href="@{/css/estils.css}" href="/css/estils.css"
+          rel="stylesheet"/>
+
+    <title layout:title-pattern="$CONTENT_TITLE">Control Acceso</title>
+</head>
+
+<body style="background-image:url(/images/1811433.jpg)">
+<div th:replace="fragments/nav"></div>
+
+    <div class="container" style="background: rgba(255, 255, 255, 0.2">
+        <br>
+
+            <div class="container" style="background: rgba(255, 255, 255, 0.3">
+
+                <br>
+                <!--<header class="page-header">-->
+                <!--</header>-->
+
+            <div layout:fragment="content"></div>
+    </div>
+</div>
+<br><br>
+
+<footer>
+
+    <div style="width:100%;background-color:#30180b;color:white;"><p class="body">
+        <div style="background: rgba(21, 14, 5, 0.3"><h6 class="mb-0"><br><br></h6></div>
+        <br>
+        <table style="width:100%; ">
+            <tr>
+
+                <td style="text-align: center; color:#D8D8D8;">
+                    ©Control Acceso. Copyright 2021. TODOS LOS DERECHOS RESERVADOS.  √ Usamos Cookies
+                </td>
+
+            </tr>
+            <tr>
+                <td style="text-align: center;">
+                    <a style="color:#D8D8D8; font-size:16px; text-align: right;" > Telefono: 920 14 58 74</a>
+                </td>
+
+
+            </tr>
+            <tr style="text-align: center;">
+                <td>
+                    <a style="color:#D8D8D8; font-size:14px;" href="mailto:al361877@uji.es">control-acceso@gva.es</a><br>
+                </td>
+                <td>
+                    &nbsp;
+                </td>
+                <td>
+                    &nbsp;
+                </td>
+            </tr>
+        </table>
+        <table align="center" border="0">
+            <td><a href="https://www.facebook.com/" target="_blank"><img src="https://image.flaticon.com/icons/svg/145/145802.svg" width="40" height="40"></a></td><td>&nbsp;Facebook&nbsp;&nbsp;</td>
+            <td><a href="https://twitter.com/" target="_blank"><img src="https://image.flaticon.com/icons/svg/145/145812.svg" width="40" height="40"></a></td><td>&nbsp;Twitter&nbsp;&nbsp;</td>
+            <td><a href="https://www.instagram.com/" target="_blank"><img src="https://image.flaticon.com/icons/svg/185/185985.svg" width="40" height="40"></a></td><td>&nbsp;Instagram&nbsp;&nbsp;</td>
+            <td><a href="https://www.youtube.es/" target="_blank"  style="color:white;"><img src="https://image.flaticon.com/icons/svg/185/185983.svg" width="40" height="40">&nbsp;Youtube&nbsp;&nbsp;</a></td><td></td>
+        </table>
+        <br>
+    </div>
+</footer>
+</body>
+</html>

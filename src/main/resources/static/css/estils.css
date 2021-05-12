@@ -1,0 +1,124 @@
+
+
+/* Estil aplicat al cos de la pàgina */
+body {
+   font-family: Verdana, Arial, sans-serif;
+   background-color: white;
+}
+
+/* Capçalera de nivell 1 */
+h1 {
+
+   color: black;
+   font-family:rondalo;
+   font-size:48pt;
+   font-weight:bold;
+   text-align:center;
+
+}
+
+/* Capçalera de nivell 2 */
+h2 {
+   font-family:rondalo;
+   font-size: large;
+   color: #4169E1;
+
+   font-size:40pt;
+
+}
+h4 {
+   font-family:rondalo;
+   font-size: large;
+   color: #000000;
+
+   font-size:28pt;
+
+}
+
+/* Classe CSS error */
+.error {
+     color: red;
+     font-size:80%
+}
+
+/* Classe CSS per atributs erronis */
+.needcorrection {
+     color: red;
+     background-color:yellow;
+}
+
+.loggeduser {
+    color: gray;
+    text-align: right;
+    margin-right: 10pt;
+}
+
+/*botones pagina principal, volver*/
+.boton_personalizado1{
+    text-decoration: none;
+    padding: 10px;
+    font-weight: 600;
+    font-size: 20px;
+    color: #ffffff;
+    background-color: #4169E1;
+    border-radius: 6px;
+    border: 2px solid #0016b0;
+  }
+  .boton_personalizado1:hover{
+    color: #4169E1;
+    background-color: #ffffff;
+
+  }
+  /*añadir*/
+  .boton_añadir{
+      text-decoration: none;
+      padding: 10px;
+      font-weight: 600;
+      font-size: 20px;
+      color: #ffffff;
+      background-color: #008080;
+      border-radius: 6px;
+      border: 2px solid #018356;
+    }
+  .boton_añadir:hover{
+     color: #008080;
+     background-color: #ffffff;
+
+  }
+    /*eliminar*/
+    .boton_eliminar{
+        text-decoration: none;
+        padding: 10px;
+        font-weight: 600;
+        font-size: 20px;
+        color: #ffffff;
+        background-color: #778899;
+        border-radius: 6px;
+        border: 2px solid #000000;
+      }
+    .boton_eliminar:hover{
+       color: #778899;
+       background-color: #ffffff;
+
+    }
+  /*editar*/
+  .boton_editar{
+
+      padding: 10px;
+      font-weight: 600;
+      font-size: 20px;
+      color: #000000;
+      background-color: #B0E0E6;
+      border-radius: 6px;
+      border: 2px solid #7edce7;
+    }
+  .boton_editar:hover{
+     color: #000000;
+     background-color: #ffffff;
+
+  }
+  .botones_nav{
+      color: gray;
+      text-align: right;
+  }
+

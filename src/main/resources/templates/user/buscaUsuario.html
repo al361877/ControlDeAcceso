@@ -1,0 +1,22 @@
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Espais naturals</title>
+    <link rel="stylesheet" type="text/css" href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+</head>
+<body>
+<h1>Hola <input type="text" th:object=""</h1>
+<h2>Tus datos son:</h2>
+
+<div th:object=:{: ${classificacions.keySet()}">
+    <h4 th:text="${pais}"></h4>
+    <ul>
+        <li th:each="nadador: ${classificacions.get(pais)}">
+            <span th:text="${nadador.nom}"></span>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

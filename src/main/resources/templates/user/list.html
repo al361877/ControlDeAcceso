@@ -1,0 +1,58 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <title>Gestionar ciudadanos</title>
+    <meta charset=" UTF-8" />
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+
+    <style>
+body {
+  background-color: lightgreen;
+}
+
+div {
+  background-color: white;
+}
+
+
+</style>
+</head>
+<body>
+
+
+<div  layout:fragment="content" >
+    <h1>Llista de ciudadanos</h1>
+    <div align="center">
+        <table  class="table table-striped">
+            <thead>
+            <tr>
+                <th >Nombre</th>
+                <th >Telefono</th>
+                <th >Email</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user: ${usuarios}">
+                <td  th:text="${user.nombre}"></td>
+                <td  th:text="${user.telefono}"></td>
+                <td th:text="${user.email}"></td>
+                <td th:text="${#temporals.format(user.nacimiento,'dd MMMM yyyy')}"></td>
+                <td><a th:href="@{/user/update/{dni}(dni=${user.dni})}" class="btn btn-warning" role="button">Edita</a></td>
+                <td><a th:href="@{/user/delete/{dni}(dni=${user.dni})}" class="btn btn-danger" role="button">Borrar</a></td>
+
+            </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+    <a href="/user/add" class="btn btn-primary" role="button" >Añadir ciudadano</a>
+    <a href="/" class="btn btn-primary" role="button" >Volver</a>
+    <br><br>
+    <br><br>
+</div>
+
+</body>
+</html>

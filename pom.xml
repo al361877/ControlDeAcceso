@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>es.uji.ei1027</groupId>
-    <artifactId>ControlAcceso</artifactId>
+    <artifactId>ControlDeAcceso</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>ControlAcceso</name>
+    <name>ControlDeAcceso</name>
     <description>Demo project for Spring Boot</description>
 
     <parent>
@@ -72,6 +72,11 @@
             <artifactId>annotations</artifactId>
             <version>RELEASE</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+            <version>2.1.2.RELEASE</version>
         </dependency>
     </dependencies>
 
