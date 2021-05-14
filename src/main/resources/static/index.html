@@ -1,6 +1,7 @@
 
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.w3.org/1999/xhtml">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/navbar}">
 <head>
     <meta charset="UTF-8" />
     <title>Espacios naturales</title>
@@ -9,41 +10,83 @@
 <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
 <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
 <!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
-    <link rel="stylesheet" type="text/css" href="/css/estils.css"
-          th:href="@{/css/estils.css}"/>
-    <style>
-body {
-  background-color: lightgreen;
-}
+    <link rel="stylesheet" type="text/css"
 
-div {
-  background-color: white;
-}
+    />
+    <style>
+    html {
+      min-height: 100%;
+      position: relative;
+    }
+    body {
+      margin: auto;
+      margin-bottom: 40px;
+      width: 900px;
+    }
+    div.ex1 {
+
+      margin: auto;
+
+      height: 400px;
+      background-image: url("playa1.png");
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+
+      display: flex;
+      align-items: flex-start;
+
+    }
+    @font-face{
+        font-family:amatic;
+        font-style:normal;
+        font-weight:normal;
+        src: url("AmaticSC-Bold.ttf");
+    }
+    div.ex1-2{
+        margin:auto;
+        width: 50%;
+        height: 150px;
+        text-align:center;
+        opacity: 0.7;
+        background-color:#02e4a3;
+
+
+        align-self: center;
+        font-family:amatic;
+        font-size: 40px;
+    }
+
+  p.1{
+
+        padding: 40px;
+    }
+
+
 
 
 </style>
 </head>
 <body>
 <div  class="container">
-<!--<div style="padding: 25px 50px;background-color:#B0E0E6;"><h1 >Espacios naturales</h1></div>-->
+<!--<div style="padding: 25px 50px;background-color:#B0E0E6;">
+        <h1 >Espacios naturales</h1>
+
+    </div>
+ -->
 
 <br>
-<table style="margin:auto">
-    <tr>
-        <td><a class="boton_personalizado1" href="user/list" role="button">Usuarios</a></td>
-        <td></td>
-        <td><a class="boton_personalizado1" href="user/add" role="button">Registro</a></td>
-    <tr></tr>
-    <tr></tr>
-    <tr></tr>
-    <tr></tr>
-    <tr></tr>
-    <tr></tr>
-    <tr></tr>
-    <tr></tr>
-    </tr>
+    <div th:replace="fragments/nav"></div>
 
-</table>
+    <div class="ex1" >
+        <br>
+        <br>
+        <br>
+        <div class="ex1-2">
+            <p class="1">ESPACIOS NATURALES CV</p>
+
+        </div>
+
+     </div>
 
 
 
