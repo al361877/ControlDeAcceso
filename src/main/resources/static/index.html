@@ -14,28 +14,38 @@
 
     />
     <style>
-    html {
-      min-height: 100%;
-      position: relative;
-    }
+
     body {
       margin: auto;
       margin-bottom: 40px;
-      width: 900px;
+      width: 100%;
+    }
+    div.container{
+    width: 80%;
+    margin:auto;
+
     }
     div.ex1 {
 
       margin: auto;
 
-      height: 400px;
-      background-image: url("playa1.png");
+      height: 80%;
+      background-image: url("beach1.jpg");
       background-repeat: no-repeat;
       background-size: 100% 100%;
 
       display: flex;
       align-items: flex-start;
 
+
+
+
     }
+    @keyframes mymove1 {
+      from {top: 500px;}
+      to {top: 0px;}
+    }
+
     @font-face{
         font-family:amatic;
         font-style:normal;
@@ -45,23 +55,87 @@
     div.ex1-2{
         margin:auto;
         width: 50%;
-        height: 150px;
+        height: 40%;
         text-align:center;
         opacity: 0.7;
         background-color:#02e4a3;
 
-
-        align-self: center;
         font-family:amatic;
-        font-size: 40px;
+        font-size: 70px;
+
+      position: relative;
+      animation: mymove1 3s;
+      animation-fill-mode: forwards;
     }
 
-  p.1{
 
-        padding: 40px;
+    div.ex2{
+
+         margin: auto;
+
+         height: 80%;
+         background-color:#03647f;
+          display: flex;
+
+    }
+
+    @keyframes mymove2 {
+      from {left: 500px;}
+      to {left: 0px;}
+    }
+    div.ex2-1{
+
+        flex:1;
+        background-image: url("index2.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+
+        width:40%;
+
+        position: relative;
+        animation: mymove2 3s;
+        animation-fill-mode: forwards;
+        animation-delay: 3.5s;
+
+    }
+    div.ex2-2{
+
+        flex:2;
+
+        width:40%;
+
     }
 
 
+
+
+    p.h1{
+        font-family:amatic;
+        font-size: 60px;
+        text-align:center;
+
+
+    }
+
+    p.parrafo{
+       margin:auto;
+       font-size: 20px;
+       text-align:justify;
+       width:60%;
+       font-family:"Arial";
+
+
+    }
+
+      div.ex3{
+
+         margin: auto;
+
+         height: 80%;
+         background-color:#220f05;
+
+
+    }
 
 
 </style>
@@ -78,15 +152,37 @@
     <div th:replace="fragments/nav"></div>
 
     <div class="ex1" >
-        <br>
-        <br>
-        <br>
+
         <div class="ex1-2">
-            <p class="1">ESPACIOS NATURALES CV</p>
+            <p >ESPACIOS NATURALES <br>
+            CV
+            </p>
 
         </div>
 
      </div>
+    <div class="ex2">
+
+        <div class="ex2-1"><!--foto--></div>
+
+        <div class="ex2-2">
+            <p class="h1" style="color:white;"> CONTROL DE ACCESO</p>
+            <br><br><br>
+            <p class="parrafo" style="color:white;">
+                La comunidad valenciana dispone de numerosos espacios naturales a lo largo de los municipios,
+                como playas, ríos, montañas... La consejería de Medio Ambiente de la Generelatit Valenciana,
+                la cual quiere impulsar el uso adecuado de las intalaciones y sercivicos disponibles, controla
+                la ocupación para evitar aglomeraciones.
+
+            </p>
+        </div>
+
+
+
+    </div>
+    <div class="ex3">
+
+    </div>
 
 
 
