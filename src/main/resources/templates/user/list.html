@@ -2,28 +2,21 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragments/base}">
 <head>
-    <title>Gestionar ciudadanos</title>
+    <title>Control De Acceso</title>
     <meta charset=" UTF-8" />
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
-
-    <style>
-body {
-  background-color: lightgreen;
-}
-
-div {
-  background-color: white;
-}
+    <link rel="stylesheet" type="text/css"
+          href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
 
 
-</style>
 </head>
 <body>
 
 
 <div  layout:fragment="content" >
-    <h1>Llista de ciudadanos</h1>
+    <h1>Lista de ciudadanos</h1>
     <div align="center">
         <table  class="table table-striped">
             <thead>
@@ -48,7 +41,7 @@ div {
 
 
     </div>
-    <a href="/user/add" class="btn btn-primary" role="button" >Añadir ciudadano</a>
+
     <a href="/" class="btn btn-primary" role="button" >Volver</a>
     <br><br>
     <br><br>

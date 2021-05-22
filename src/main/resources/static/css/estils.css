@@ -4,7 +4,7 @@
 
 colores indice -->  verde=#02e4a3
                     azul=#03647f
-                    marron=#220f05
+                    marron=#1f1611
 
 
 */
@@ -14,29 +14,35 @@ body {
    font-family: Verdana, Arial, sans-serif;
    background-color: white;
 }
+ @font-face{
+        font-family:amatic;
+        font-style:normal;
+        font-weight:normal;
+        src: url("./AmaticSC-Bold.ttf");
+    }
 
 /* Capçalera de nivell 1 */
 h1 {
 
    color: black;
-   font-family:rondalo;
+   font-family:amatic;
    font-size:48pt;
    font-weight:bold;
    text-align:center;
 
 }
-
-/* Capçalera de nivell 2 */
 h2 {
-   font-family:rondalo;
+    text-align:center;
+   font-family:amatic;
    font-size: large;
-   color: #4169E1;
-
+   color:black;
    font-size:40pt;
 
 }
+/* Capçalera de nivell 2 */
+
 h4 {
-   font-family:rondalo;
+   font-family:amatic;
    font-size: large;
    color: #000000;
 
@@ -130,7 +136,6 @@ h4 {
       color: gray;
       text-align: right;
   }
-
 
 
 

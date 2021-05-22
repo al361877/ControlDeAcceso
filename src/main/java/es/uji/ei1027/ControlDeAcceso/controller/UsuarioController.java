@@ -30,7 +30,7 @@ public class UsuarioController {
 
         List<Usuario> lista = userDao.getCiudadanos();
 
-        model.addAttribute("usuarios", userDao.getCiudadanos());
+        model.addAttribute("usuarios", lista);
 
         return "user/list.html";
     }

@@ -5,13 +5,12 @@
 <head>
 
     <style>
-    html {
-      min-height: 100%;
-      position: relative;
+    body{
+        width: 100%;
     }
-    body {
-      margin: 0;
-      margin-bottom: 40px;
+    div.cont{
+     width: 80%;
+     margin:auto;
     }
     footer {
       background-color: #220f05;
@@ -21,6 +20,7 @@
       height: 40px;
       color: white;
     }
+
     </style>
     <meta charset="UTF-8"/>
     <meta name="viewport"
@@ -38,19 +38,20 @@
     <title layout:title-pattern="$CONTENT_TITLE">Control Acceso</title>
 </head>
 
-<body style="background-image:url(/images/1811433.jpg)">
+<!--<body style="background-image:url(/images/1811433.jpg)">-->
+<body style="background-color:#cccccc">
 <div th:replace="fragments/nav"></div>
-
-    <div class="container" style="background: rgba(255, 255, 255, 0.2">
+<!--    primer container-->
+    <div class="cont" style="background: rgba(255, 255, 255, 0.2);border-radius:50px;">
         <br>
-
-            <div class="container" style="background: rgba(255, 255, 255, 0.3">
+<!--            segundo container-->
+            <div  style="background: rgba(255, 255, 255, 0.3);border-radius:50px;">
 
                 <br>
-                <!--<header class="page-header">-->
-                <!--</header>-->
-
-            <div layout:fragment="content"></div>
+<!--            container interior-->
+            <div layout:fragment="content" style="border-radius:50px;">
+                <br>
+            </div>
     </div>
 </div>
 <br><br>
@@ -88,10 +89,10 @@
             </tr>
         </table>
         <table align="center" border="0">
-            <td><a href="https://www.facebook.com/" target="_blank"><img src="https://image.flaticon.com/icons/svg/145/145802.svg" width="40" height="40"></a></td><td>&nbsp;Facebook&nbsp;&nbsp;</td>
-            <td><a href="https://twitter.com/" target="_blank"><img src="https://image.flaticon.com/icons/svg/145/145812.svg" width="40" height="40"></a></td><td>&nbsp;Twitter&nbsp;&nbsp;</td>
-            <td><a href="https://www.instagram.com/" target="_blank"><img src="https://image.flaticon.com/icons/svg/185/185985.svg" width="40" height="40"></a></td><td>&nbsp;Instagram&nbsp;&nbsp;</td>
-            <td><a href="https://www.youtube.es/" target="_blank"  style="color:white;"><img src="https://image.flaticon.com/icons/svg/185/185983.svg" width="40" height="40">&nbsp;Youtube&nbsp;&nbsp;</a></td><td></td>
+            <td><a href="https://www.facebook.com/" target="_blank"><img src="https://image.flaticon.com/icons/svg/145/145802.svg" width="40" height="40"></a></td><td style="color:white">&nbsp;Facebook&nbsp;&nbsp;</td>
+            <td><a href="https://twitter.com/" target="_blank"><img src="https://image.flaticon.com/icons/svg/145/145812.svg" width="40" height="40"></a></td><td style="color:white">&nbsp;Twitter&nbsp;&nbsp;</td>
+            <td><a href="https://www.instagram.com/" target="_blank"><img src="https://image.flaticon.com/icons/svg/185/185985.svg" width="40" height="40"></a></td><td style="color:white">&nbsp;Instagram&nbsp;&nbsp;</td>
+            <td><a href="https://www.youtube.es/" target="_blank"  ><img src="https://image.flaticon.com/icons/svg/185/185983.svg" width="40" height="40"></a></td><td style="color:white" >&nbsp;Youtube&nbsp;&nbsp; </td>
         </table>
         <br>
     </div>
