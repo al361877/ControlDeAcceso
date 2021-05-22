@@ -1,7 +1,7 @@
 
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{fragments/navbar}">
+
+   >
 <head>
     <meta charset="UTF-8" />
     <title>Espacios naturales</title>
@@ -19,6 +19,7 @@
       margin: auto;
       margin-bottom: 40px;
       width: 100%;
+      background-color:black;
     }
     div.container{
     width: 80%;
@@ -55,17 +56,17 @@
     div.ex1-2{
         margin:auto;
         width: 50%;
-        height: 40%;
+        height: 45%;
         text-align:center;
         opacity: 0.7;
         background-color:#02e4a3;
 
         font-family:amatic;
-        font-size: 70px;
+        font-size: 65px;
 
-      position: relative;
-      animation: mymove1 3s;
-      animation-fill-mode: forwards;
+          position: relative;
+          animation: mymove1 3s;
+          animation-fill-mode: forwards;
     }
 
 
@@ -80,7 +81,7 @@
     }
 
     @keyframes mymove2 {
-      from {left: 500px;}
+      from {left: 900px;}
       to {left: 0px;}
     }
     div.ex2-1{
@@ -95,7 +96,7 @@
         position: relative;
         animation: mymove2 3s;
         animation-fill-mode: forwards;
-        animation-delay: 3.5s;
+        animation-delay: 3s;
 
     }
     div.ex2-2{
@@ -116,37 +117,78 @@
 
 
     }
+      p.h2{
+        font-family:amatic;
+        font-size: 40px;
+        text-align:center;
+
+
+    }
 
     p.parrafo{
-       margin:auto;
        font-size: 20px;
        text-align:justify;
-       width:60%;
-       font-family:"Arial";
+       width:80%;
+       font-family:"Calibri";
 
 
     }
 
-      div.ex3{
+  div.ex3{
 
-         margin: auto;
+     margin: auto;
 
-         height: 80%;
-         background-color:#220f05;
+     height: 80%;
+     background-color:#220f05;
+               display: flex;
 
 
-    }
+
+}
+ div.ex3-1{
+       flex:1;
+       width:10%;
+    background-image: url("plantita1(sinFondo).png");
+      background-repeat: no-repeat;
+      background-size: 35%;
+       background-position: top left;
+
+
+}
+div.ex3-2{
+       flex:3;
+
+
+
+}
+div.ex3-3{
+       flex:1;
+        width:25%;
+      background-image: url("plantita2(sinFondo).png");
+      background-repeat: no-repeat;
+      background-size: 40%;
+      background-position: bottom right;
+
+}
+
+
+table, th, td {
+  border: 3px solid white;
+  border-collapse: collapse;
+}
+
+.imgRedonda {
+    width:300px;
+    height:300px;
+    border-radius:150px;
+}
 
 
 </style>
 </head>
 <body>
 <div  class="container">
-<!--<div style="padding: 25px 50px;background-color:#B0E0E6;">
-        <h1 >Espacios naturales</h1>
 
-    </div>
- -->
 
 <br>
     <div th:replace="fragments/nav"></div>
@@ -154,9 +196,10 @@
     <div class="ex1" >
 
         <div class="ex1-2">
-            <p >ESPACIOS NATURALES <br>
-            CV
-            </p>
+            <p>ESPACIOS NATURALES <br>
+                CV</p>
+
+
 
         </div>
 
@@ -168,7 +211,7 @@
         <div class="ex2-2">
             <p class="h1" style="color:white;"> CONTROL DE ACCESO</p>
             <br><br><br>
-            <p class="parrafo" style="color:white;">
+            <p class="parrafo" style="color:white; margin:auto;">
                 La comunidad valenciana dispone de numerosos espacios naturales a lo largo de los municipios,
                 como playas, ríos, montañas... La consejería de Medio Ambiente de la Generelatit Valenciana,
                 la cual quiere impulsar el uso adecuado de las intalaciones y sercivicos disponibles, controla
@@ -181,6 +224,71 @@
 
     </div>
     <div class="ex3">
+       <div class="ex3-1"></div>
+        <div class="ex3-2 ">
+<!--            <table>-->
+<!--                <tr>-->
+<!--                    <td> <p class="parrafo" style="color:white">imagen</p></td>-->
+<!--                    <td><p class="h1" style="color:white">CONSULTAR ESPACIO</p>-->
+<!--                        <p class="parrafo" style="color:white">Echar un vistazo a los espacios públicos</p>-->
+<!--                        </td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td> <p class="parrafo" style="color:white">imagen</p></td>-->
+<!--                    <td><p class="h1" style="color:white">REGISTRARSE</p>-->
+<!--                        <p class="parrafo" style="color:white">Echar un vistazo a los espacios públicos</p>-->
+<!--                    </td>-->
+<!--                </tr>  <tr>-->
+<!--                <td> <p class="parrafo" style="color:white">imagen</p></td>-->
+<!--                <td><p class="h1" style="color:white">SOLICITAR INFORMACION</p>-->
+<!--                    <p class="parrafo" style="color:white">Echar un vistazo a los espacios públicos</p>-->
+<!--                </td>-->
+<!--            </tr>-->
+
+<!--            </table>-->
+
+            <div>
+
+                <div  style="float:left;width: 25%;  background-color:blue">
+
+                    <p class="h2" style="color:white ; line-height: 10%; text-align:right">IMAGEN </p>
+                </div>
+                <div  style="float:left;width: 75%; background-color:red">
+                    <p class="h2" style="color:white ; line-height: 5%; text-align:left;margin-left:50px; " >CONSULTAR ESPACIO</p>
+                    <p class="parrafo" style="color:white; text-align:left;">Echar un vistazo a los espacios públicos</p>
+                </div>
+            </div>
+            <div>
+
+                <div  style="float:left;width: 25%;  background-color:blue">
+
+                    <p class="h2" style="color:white ; line-height: 10%; text-align:right">IMAGEN </p>
+                </div>
+                <div  style="float:left;width: 75%; background-color:red">
+                    <p class="h2" style="color:white ; line-height: 5%; text-align:left;margin-left:50px; " >CONSULTAR ESPACIO</p>
+                    <p class="parrafo" style="color:white; text-align:left ">Echar un vistazo a los espacios públicos</p>
+                </div>
+            </div>
+
+            <div>
+
+                <div  style="float:left;width: 25%;  background-color:blue">
+
+                    <p class="h2" style="color:white ; line-height: 10%; text-align:right">IMAGEN </p>
+                </div>
+                <div  style="float:left;width: 75%; background-color:red">
+                    <p class="h2" style="color:white ; line-height: 5%; text-align:left;margin-left:50px; " >CONSULTAR ESPACIO</p>
+                    <p class="parrafo" style="color:white; text-align:left; ">Echar un vistazo a los espacios públicos</p>
+                </div>
+            </div>
+
+
+
+
+
+
+        </div>
+        <div class="ex3-3"></div>
 
     </div>
 
