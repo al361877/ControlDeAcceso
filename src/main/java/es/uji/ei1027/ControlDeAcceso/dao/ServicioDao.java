@@ -35,7 +35,7 @@ public class ServicioDao {
     //Datos servicio
     public List<Reserva> getServicios (){
         try{
-            return jdbcTemplate.query("SELECT * FROM servicio ", new ReservarRowMapper());
+            return jdbcTemplate.query("SELECT * FROM servicio ", new ReservaRowMapper());
         }
         catch (EmptyResultDataAccessException e){
             return null;
