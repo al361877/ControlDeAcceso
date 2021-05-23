@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
-public final class ReservarRowMapper implements RowMapper<Reserva> {
+public final class ReservaRowMapper implements RowMapper<Reserva> {
     public Reserva mapRow(ResultSet rs, int RowNum) throws SQLException{
         Reserva reserva = new Reserva();
         reserva.setId(rs.getString("id"));

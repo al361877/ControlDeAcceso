@@ -34,14 +34,21 @@ public class ReservaDao {
     //Datos reserva
     public List<Reserva> getReservas (){
         try{
-            return jdbcTemplate.query("SELECT * FROM rerserva ", new ReservarRowMapper());
+            return jdbcTemplate.query("SELECT * FROM rerserva ", new ReservaRowMapper());
         }
         catch (EmptyResultDataAccessException e){
             return null;
         }
     }
 
-
+    public Reserva getReservaId (String id){
+        try{
+            return jdbcTemplate.queryForObject("SELECT * FROM reserva WHERE id=?", new ReservaRowMapper(), id);
+        }
+        catch (EmptyResultDataAccessException e){
+            return null;
+        }
+    }
     
     //ACTUALIZAMOS reserva
     public void updateReserva(Reserva reserva) {
@@ -53,7 +60,11 @@ public class ReservaDao {
     }
 
 
+    /*
+    public void deleteReserva(String id){
 
-
+        jdbcTemplate.delete()
+    }
+ */
 
 }
