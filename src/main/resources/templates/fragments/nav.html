@@ -29,12 +29,20 @@
 
                 <td style="text-align:left; background-color:#02e4a3;">
                     <div style="text-align:center; background-color:#02e4a3;">
-                        <div style=" background-color:#02e4a3;"class="collapse navbar-collapse" id="collapsibleNavbar">
+                        <div style=" background-color:#02e4a3; display:flex;"class="collapse navbar-collapse" id="collapsibleNavbar" >
                             <ul class="navbar-nav mr-auto" style="text-align:center;">
-                                <li style="font-size:20px;"  role="presentation"><a role="menuitem" tabindex="-1"  th:href="@{/user/list}">Usuarios</a></li>
+
+                                    <button type="button" class="botones_nav"  style=" font-size:30px;flex:1 "  onclick="location.href='/'">Pagina principal<span class="sr-only">(current)</span></button>
+
+                                    <button type="button" class="botones_nav"  style=" font-size:30px; margin-right:5px;flex:1"  onclick="location.href='/user/add'">Registrarse<span class="sr-only">(current)</span></button>
+
+
 
                             </ul>
+
+
                         </div>
+
                     </div>
                 </td>
 

@@ -13,6 +13,10 @@ colores indice -->  verde=#02e4a3
 body {
    font-family: Verdana, Arial, sans-serif;
    background-color: white;
+
+}
+p.parrafo{
+    font-size:20pt;
 }
  @font-face{
         font-family:amatic;
@@ -23,7 +27,6 @@ body {
 
 /* Capçalera de nivell 1 */
 h1 {
-
    color: black;
    font-family:amatic;
    font-size:48pt;
@@ -32,7 +35,7 @@ h1 {
 
 }
 h2 {
-    text-align:center;
+   text-align:center;
    font-family:amatic;
    font-size: large;
    color:black;
@@ -78,6 +81,7 @@ h4 {
     background-color: #4169E1;
     border-radius: 6px;
     border: 2px solid #0016b0;
+
   }
   .boton_personalizado1:hover{
     color: #4169E1;
@@ -133,9 +137,22 @@ h4 {
 
   }
   .botones_nav{
-      color: gray;
+      color: black;
       text-align: right;
-  }
+      background-color:#02e4a3;
+      font-family:amatic;
+      border-radius: 6px;
+      border: 0px ;
 
+  }
+   .botones_nav:hover{
+       font-family:amatic;
+       color: #02e4a3;
+       text-align: right;
+       background-color:#000000;
+       border-radius: 6px;
+       border: 0px ;
+
+   }
 
 
