@@ -27,7 +27,7 @@ public class ReservaController {
         this.resDao = resDao;
     }
 
-    @RequestMapping("/list")
+    @RequestMapping("/list/{dni}")
     public String listReserva( Model model) {
 
         List<Reserva> lista = resDao.getReservas();
@@ -37,7 +37,7 @@ public class ReservaController {
         return "reservas/listarReservas.html";
     }
 
-    @RequestMapping(value="/add")
+    @RequestMapping(value="/add/{dni}")
     public String addReserva(Model model) {
         model.addAttribute("res", new Reserva());
 
@@ -60,12 +60,23 @@ public class ReservaController {
         return "user/reserva/update";
     }
 */
+
+    //Para que los controladores puedan ven las reservas de los ciudadanos
     @RequestMapping(value="/busca/{id}", method = RequestMethod.GET)
     public String buscaReservaId(Model model, @PathVariable String id) {
 
         model.addAttribute("res", resDao.getReservaId(id));
-        return "user/reserva/busca";
+        return "reserva/busca";
     }
+
+    //Un ciudadano solo puede ver sus reservas
+    @RequestMapping(value="/busca/{dni}", method = RequestMethod.GET)
+    public String buscaReservaDni(Model model, @PathVariable String dni, @PathVariable String id) {
+
+        model.addAttribute("res", resDao.getReservaId(id));
+        return "reserva/busca";
+    }
+
 
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public String processUpdateSubmit(@ModelAttribute("res") Reserva res,
