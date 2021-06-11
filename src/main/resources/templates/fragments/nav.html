@@ -13,6 +13,7 @@
 
           .barra_verde{
             background-color:#02e4a3;
+            display:flex;
     }
 
     </style>
@@ -23,25 +24,27 @@
 <div style="background: #30180b; ">
     <table style="width:100%;"><tr><td style="text-align: left;"><a href="https://www.uji.es/"><img src="http://imgfz.com/i/7wYrtfZ.png" width="160" height="30" align="left" ></a></td><td style="text-align: right;"><p style="font-size:70%; color:white;">Idioma: Español | ei102720gpr&nbsp;&nbsp;&nbsp;</p></td></tr></table>
 
-    <nav class="navbar navbar-inverse barra_verde">
-        <table style="width:100%;">
-            <tr>
+    <div class=" barra_verde">
 
-                <td style="text-align:left; background-color:#02e4a3;">
-                    <div style="text-align:center; background-color:#02e4a3;">
-                        <div style=" background-color:#02e4a3;"class="collapse navbar-collapse" id="collapsibleNavbar">
-                            <ul class="navbar-nav mr-auto" style="text-align:center;">
-                                <li style="font-size:20px;"  role="presentation"><a role="menuitem" tabindex="-1"  th:href="@{/user/list}">Usuarios</a></li>
 
-                            </ul>
-                        </div>
-                    </div>
-                </td>
+        <div style="flex:1;">
 
-            </tr>
+            <button type="button" class="botones_nav"  style=" font-size:30px; "  onclick="location.href='/'">Pagina principal<span class="sr-only">(current)</span></button>
 
-        </table>
-    </nav>
+
+            <button type="button" class="botones_nav"  style=" font-size:30px;"  onclick="location.href='/espacios/list'">Espacios naturales<span class="sr-only">(current)</span></button>
+        </div>
+        <div style="flex:2;">
+            <div style="text-align:right;">
+                <button type="button" class="botones_nav"  style=" font-size:30px; "  onclick="location.href='/user/add'">Registrarse<span class="sr-only">(current)</span></button>
+                <button type="button" class="botones_nav"  style=" font-size:30px;position:right;"  onclick="location.href='/user/add'">Iniciar sesión<span class="sr-only">(current)</span></button>
+
+            </div>
+        </div>
+
+
+
+    </div>
 </div>
 
 </body>

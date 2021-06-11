@@ -14,7 +14,7 @@
 
     <link rel="stylesheet" type="text/css" href="/css/estils.css"
           th:href="@{/css/estils.css}"/>
-    />
+
     <style>
 
     body {
@@ -183,6 +183,7 @@ div.ex3-3{
 img:hover{
     opacity:0.5;
 }
+a{ text-decoration: none;}
 
 </style>
 </head>
@@ -247,40 +248,45 @@ img:hover{
 
             <!--            </table>-->
             <div style="margin:auto; ">
+                <a href="espacios/list" >
+                    <div style="display:flex;">
+
+                        <div  style="flex:1;width: 25%; margin:auto;">
+
+                           <img src="espacio_icon.jpg" class="imgRedonda" alt="Smiley face" style="margin:auto;width:100px;height:100px;">
+                        </div>
+                        <div  style="flex:2;width: 75%;">
+                            <p class="h2" style="color:white ; line-height: 5%; text-align:left; " >CONSULTAR ESPACIOS</p>
+                            <p class="parrafo" style="color:white; text-align:left ">Echar un vistazo a los espacios públicos</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="user/add">
                 <div style="display:flex;">
 
                     <div  style="flex:1;width: 25%; margin:auto;">
 
-                        <a href="user/add" ><img src="espacio_icon.jpg" class="imgRedonda" alt="Smiley face" style="margin:auto;width:100px;height:100px;"></a>
-                    </div>
-                    <div  style="flex:2;width: 75%;">
-                        <p class="h2" style="color:white ; line-height: 5%; text-align:left; " >CONSULTAR ESPACIOS</p>
-                        <p class="parrafo" style="color:white; text-align:left ">Echar un vistazo a los espacios públicos</p>
-                    </div>
-                </div>
-                <div style="display:flex;">
-
-                    <div  style="flex:1;width: 25%; margin:auto;">
-
-                        <a href="user/add"> <img src="user_icon.png" alt="Smiley face" style="margin:auto;width:100px;height:100px;"></a>
+                        <img src="user_icon.png" alt="Smiley face" style="margin:auto;width:100px;height:100px;">
                     </div>
                     <div  style="flex:2;width: 75%;">
                         <p class="h2" style="color:white ; line-height: 5%; text-align:left; " >REGISTRARSE</p>
                         <p class="parrafo" style="color:white; text-align:left ">Registrate para poder reservar un espacio</p>
                     </div>
                 </div>
-
+                </a>
+                <a href="user/add">
                 <div style="display:flex;">
 
                     <div  style="flex:1;width: 25%; margin:auto;">
 
-                        <a href="user/add"> <img src="info_icon.png" alt="Smiley face" style="margin:auto;width:100px;height:100px;"></a>
+                        <img src="info_icon.png" alt="Smiley face" style="margin:auto;width:100px;height:100px;">
                     </div>
                     <div  style="flex:2;width: 75%;">
                         <p class="h2" style="color:white ; line-height: 5%; text-align:left; " >SOLICITAR AYUDA</p>
                         <p class="parrafo" style="color:white; text-align:left ">Contácta con nosotros si<br>necesita más información </p>
                     </div>
                 </div>
+                </a>
 
             </div>
 

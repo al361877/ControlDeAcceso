@@ -40,6 +40,15 @@ public class EspacioPublicoDao {
             return null;
         }
     }
+    public EspacioPublico getEspacio (String espacio ){
+        try{
+            return jdbcTemplate.queryForObject("SELECT * FROM espaciopublico WHERE id=?", new EspacioRowMapper(), espacio);
+        }
+        catch (EmptyResultDataAccessException e){
+            return null;
+        }
+    }
+
 
 
 
