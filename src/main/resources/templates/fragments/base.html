@@ -12,10 +12,10 @@
      width: 80%;
      margin:auto;
     }
-    footer {
+    div.footer {
       background-color: #220f05;
-      position: absolute;
-      bottom: 0;
+      text-align:bottom;
+
       width: 100%;
       height: 40px;
       color: white;
@@ -40,7 +40,7 @@
 
 <!--<body style="background-image:url(/images/1811433.jpg)">-->
 <body style="background-color:#cccccc">
-<div th:replace="fragments/nav"></div>
+<nav th:replace="fragments/nav"></nav>
 <!--    primer container-->
     <div class="cont" style="background: rgba(255, 255, 255, 0.2);border-radius:50px;">
         <br>
@@ -55,9 +55,8 @@
     </div>
 </div>
 <br><br>
-
-<footer>
-
+<br>
+<div class="footer"  >
     <div style="width:100%;background-color:#30180b;color:white;"><p class="body">
         <div style="background: rgba(21, 14, 5, 0.3"><h6 class="mb-0"><br><br></h6></div>
         <br>
@@ -96,6 +95,6 @@
         </table>
         <br>
     </div>
-</footer>
+</div>
 </body>
 </html>
