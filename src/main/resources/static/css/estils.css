@@ -16,7 +16,11 @@ body {
 
 }
 p.parrafo{
-    font-size:20pt;
+  font-size: 20px;
+  text-align:justify;
+  width:80%;
+  font-family:"Calibri";
+
 }
  @font-face{
         font-family:amatic;
@@ -71,5 +75,181 @@ h4 {
     margin-right: 10pt;
 }
 
+.boton_verde{
+      color: black;
+      text-align: right;
+      background-color:#02e4a3;
+      font-family:amatic;
+      border: 0px ;
 
+       border-radius:5px;
+        padding: 10px;
+         font-weight: 600;
+         font-size: 20px;
 
+  }
+   .boton_verde:hover{
+       font-family:amatic;
+       color: #02e4a3;
+       text-align: right;
+       background-color:#000000;
+       border: 0px ;
+
+        border-radius:5px;
+        padding: 10px;
+         font-weight: 600;
+         font-size: 20px;
+
+   }
+   .boton_azul{
+         color: white;
+         text-align: right;
+         background-color:#03647f;
+         font-family:amatic;
+         border: 0px ;
+         border-radius:5px;
+             padding: 10px;
+              font-weight: 600;
+              font-size: 20px;
+
+     }
+      .boton_azul:hover{
+          font-family:amatic;
+          color: #03647f;
+          text-align: right;
+          background-color:#ffffff;
+          border: 0px ;
+          border-radius:5px;
+          padding: 10px;
+         font-weight: 600;
+         font-size: 20px;
+      }
+      a{ text-decoration: none;}
+
+     /* Dropdown Button */
+    .dropbtn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+    }
+
+    /* The container <div> - needed to position the dropdown content */
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    }
+
+    /* Links inside the dropdown */
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    /* Change color of dropdown links on hover */
+    .dropdown-content a:hover {background-color: #f1f1f1}
+
+    /* Show the dropdown menu on hover */
+    .dropdown:hover .dropdown-content {
+        display: block;
+
+    }
+
+    .boton_perfil{
+          width:180px;
+          color: black;
+          text-align: left;
+          background-color:#02e4a3;
+          font-family:amatic;
+          border: 0px ;
+
+      }
+       .boton_perfil:hover{
+            width:180px;
+           font-family:amatic;
+           color: #02e4a3;
+           text-align: left;
+           background-color:#000000;
+           border: 0px ;
+
+       }
+    /* Change the background color of the dropdown button when the dropdown content is shown */
+    .dropdown:hover .dropbtn {
+        background-color: #3e8e41;
+    }
+     .botones_navVerde{
+          color: black;
+          text-align: center;
+          background-color:#02e4a3;
+          font-family:amatic;
+          border: 0px ;
+
+      }
+       .botones_navVerde:hover{
+           font-family:amatic;
+           color: #02e4a3;
+           text-align: center;
+           background-color:#000000;
+           border: 0px ;
+
+       }
+
+       .botones_navAzul{
+             color: black;
+             text-align: right;
+             background-color:#03647f;
+             font-family:amatic;
+             border: 0px ;
+
+         }
+          .botones_navAzul:hover{
+              font-family:amatic;
+              color: #03647f;
+              text-align: right;
+              background-color:#000000;
+              border: 0px ;
+
+          }
+
+          .botones_navMarron{
+                color: white;
+                text-align: right;
+                background-color:#1f1611;
+                font-family:amatic;
+                border: 0px ;
+
+            }
+             .botones_navMarron:hover{
+                 font-family:amatic;
+                 color: #1f1611;
+                 text-align: right;
+                 background-color:#ffffff;
+                 border: 0px ;
+
+             }
+
+         .barra_verde{
+                background-color:#02e4a3;
+                display:flex;
+        }
+         .barra_azul{
+                background-color:#03647f;
+                display:flex;
+        }
+         .barra_marron{
+                background-color:#1f1611;
+                display:flex;
+        }
