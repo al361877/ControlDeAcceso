@@ -115,7 +115,7 @@ public class UsuarioDao {
         }
         public Usuario getUsuario (String usuario ){
             try{
-                return jdbcTemplate.queryForObject("SELECT * FROM usuario WHERE usuario=?", new UsuarioRowMapper(), usuario);
+                return jdbcTemplate.queryForObject("SELECT * FROM usuario WHERE nombre_usuario=?", new UsuarioRowMapper(), usuario);
             }
             catch (EmptyResultDataAccessException e){
                 return null;

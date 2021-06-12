@@ -52,25 +52,7 @@
 
 <div layout:fragment="content">
     <br>
-    <h1 >Espacios naturales</h1>
-
-    <div >
-        <div th:each="lista: ${matrizEspacios}" class="principal">
-            <div th:each="espacio: ${lista}" class="p2">
-                <div class="p3" >
-                    <a th:href="@{./prereserva/{espacio}(espacio=${espacio.id})}" >
-                        <img th:src="@{/images/espacios/espacio-{espacio}.jpg(espacio=${espacio.id})}" class="imgRedonda">
-                    <!--                    <img src="/images/espacios/espacio-des4.jpg" class="imgRedonda">-->
-                    </a>
-                    <a th:href="@{./prereserva/{espacio}(espacio=${espacio.id})}" style=" margin-top: 10px;" class="btn btn-primary" role="button" >Más info</a>
-                </div>
-
-            </div>
-            <br>
-        </div>
-        <br>
-
-    </div>
+    <h1 >CIUDADANO</h1>
 
 
 </div>

@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
-@RequestMapping("user")
-public class UsuarioController {
+@RequestMapping("ciudadano")
+public class CiudadanoController {
     private UsuarioDao userDao;
 
 
@@ -26,20 +27,30 @@ public class UsuarioController {
     }
 
     @RequestMapping("/list")
-    public String listUusarios( Model model) {
+    public String listUusarios( HttpSession session, Model model) {
+        Usuario user= (Usuario) session.getAttribute("user");
+        try{
+            if(user.getTipoUsuario().equals("Gestor")) {
 
-        List<Usuario> lista = userDao.getCiudadanos();
+                List<Usuario> lista = userDao.getCiudadanos();
 
-        model.addAttribute("usuarios", lista);
+                model.addAttribute("usuarios", lista);
 
-        return "user/list.html";
+                return "ciudadano/list.html";
+            }
+        } catch (Exception e){
+            return "error/error";
+        }
+        return "error/error";
     }
+
+
 
     @RequestMapping(value="/add")
     public String addCiudadano(Model model) {
         model.addAttribute("user", new Usuario());
 
-        return "user/add";
+        return "ciudadano/add";
     }
 
     //add ciudadano
@@ -55,14 +66,14 @@ public class UsuarioController {
     public String editUsuario(Model model, @PathVariable String dni) {
 
         model.addAttribute("user", userDao.getUsuarioDni(dni));
-        return "user/update";
+        return "ciudadano/update";
     }
 
     @RequestMapping(value="/busca/{dni}", method = RequestMethod.GET)
     public String buscaUsuario(Model model, @PathVariable String dni) {
 
         model.addAttribute("usuario", userDao.getUsuarioDni(dni));
-        return "user/busca";
+        return "ciudadano/busca";
     }
 
     @RequestMapping(value="/update", method = RequestMethod.POST)
@@ -70,7 +81,7 @@ public class UsuarioController {
             BindingResult bindingResult) {
 
         if (bindingResult.hasErrors())
-            return "user/update";
+            return "ciudadano/update";
         userDao.updateUsuario(usuario);
         return "redirect:list";
     }
@@ -80,5 +91,20 @@ public class UsuarioController {
         userDao.deleteUsuario(dni);
         return "redirect:../list";
     }
+
+    @RequestMapping(value = "/index")
+    public String index(HttpSession session, Model model) {
+        Usuario user= (Usuario) session.getAttribute("user");
+        try{
+            if(user.getTipoUsuario().equals("Ciudadano")) {
+                model.addAttribute("perfil", userDao.getUsuario(user.getUsuario()));
+                return "ciudadano/index";
+            }
+        } catch (Exception e){
+            return "error/error";
+        }
+        return "error/error";
+    }
+
 }
 

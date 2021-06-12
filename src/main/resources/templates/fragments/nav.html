@@ -8,36 +8,162 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/estils.css"
           th:href="@{/css/estils.css}"/>
+<style>
+    .botones_navVerde{
+      color: black;
+      text-align: right;
+      background-color:#02e4a3;
+      font-family:amatic;
+      border: 0px ;
 
-    <style>
+  }
+   .botones_navVerde:hover{
+       font-family:amatic;
+       color: #02e4a3;
+       text-align: right;
+       background-color:#000000;
+       border: 0px ;
 
-          .barra_verde{
+   }
+
+   .botones_navAzul{
+         color: black;
+         text-align: right;
+         background-color:#03647f;
+         font-family:amatic;
+         border: 0px ;
+
+     }
+      .botones_navAzul:hover{
+          font-family:amatic;
+          color: #03647f;
+          text-align: right;
+          background-color:#000000;
+          border: 0px ;
+
+      }
+
+      .botones_navMarron{
+            color: white;
+            text-align: right;
+            background-color:#1f1611;
+            font-family:amatic;
+            border: 0px ;
+
+        }
+         .botones_navMarron:hover{
+             font-family:amatic;
+             color: #1f1611;
+             text-align: right;
+             background-color:#ffffff;
+             border: 0px ;
+
+         }
+
+     .barra_verde{
             background-color:#02e4a3;
             display:flex;
     }
+     .barra_azul{
+            background-color:#03647f;
+            display:flex;
+    }
+     .barra_marron{
+            background-color:#1f1611;
+            display:flex;
+    }
 
-    </style>
+</style>
+
 </head>
 <body>
 <!--<div style="background: rgba(63, 72, 204, 1);"><h6 class="mb-0"></h6>-->
 <!--<div style="background: #3f48cc"><h6 class="mb-0"></h6></div>-->
-<div style="background: #30180b; ">
+<div  th:object="${session}" style="background: #30180b; ">
     <table style="width:100%;"><tr><td style="text-align: left;"><a href="https://www.uji.es/"><img src="http://imgfz.com/i/7wYrtfZ.png" width="160" height="30" align="left" ></a></td><td style="text-align: right;"><p style="font-size:70%; color:white;">Idioma: Español | ei102720gpr&nbsp;&nbsp;&nbsp;</p></td></tr></table>
 
-    <div class=" barra_verde">
+    <div th:if="*{tipo=='Ciudadano'}" class=" barra_verde">
 
 
         <div style="flex:1;">
 
-            <button type="button" class="botones_nav"  style=" font-size:30px; "  onclick="location.href='/'">Pagina principal<span class="sr-only">(current)</span></button>
+            <button type="button" class="botones_navVerde"  style=" font-size:30px; "  onclick="location.href='/ciudadano/index'">Inicio<span class="sr-only">(current)</span></button>
 
 
-            <button type="button" class="botones_nav"  style=" font-size:30px;"  onclick="location.href='/espacios/list'">Espacios naturales<span class="sr-only">(current)</span></button>
+            <button type="button" class="botones_navVerde"  style=" font-size:30px;"  onclick="location.href='/espacios/list'">Espacios naturales<span class="sr-only">(current)</span></button>
+            <button type="button" class="botones_navVerde"  style=" font-size:30px;"  onclick="location.href='/espacios/list'">Lista Reservas<span class="sr-only">(current)</span></button>
         </div>
         <div style="flex:2;">
             <div style="text-align:right;">
-                <button type="button" class="botones_nav"  style=" font-size:30px; "  onclick="location.href='/user/add'">Registrarse<span class="sr-only">(current)</span></button>
-                <button type="button" class="botones_nav"  style=" font-size:30px;position:right;"  onclick="location.href='/user/add'">Iniciar sesión<span class="sr-only">(current)</span></button>
+                <button type="button" class="botones_navVerde"  style=" font-size:30px; "  onclick="location.href='/ciudadano/add'">Perfil<span class="sr-only">(current)</span></button>
+
+
+            </div>
+        </div>
+
+
+    </div>
+    <div th:unless="*{user}" class=" barra_verde">
+
+
+        <div style="flex:1;">
+
+            <button type="button" class="botones_navVerde"  style=" font-size:30px; "  onclick="location.href='/'">Inicio<span class="sr-only">(current)</span></button>
+
+
+            <button type="button" class="botones_navVerde"  style=" font-size:30px;"  onclick="location.href='/espacios/list'">Espacios naturales<span class="sr-only">(current)</span></button>
+
+        </div>
+        <div style="flex:2;">
+            <div style="text-align:right;">
+                <button type="button" class="botones_navVerde"  style=" font-size:30px; "   onclick="location.href='/ciudadano/add'">Registrarse<span class="sr-only">(current)</span></button>
+                <button type="button" class="botones_navVerde"  style=" font-size:30px;position:right;"   onclick="location.href='/login'">Iniciar sesión<span class="sr-only">(current)</span></button>
+
+            </div>
+        </div>
+
+
+    </div>
+
+    <div th:if="*{tipo=='Gestor'}" class=" barra_azul">
+
+
+        <div style="flex:1;">
+
+            <button type="button" class="botones_navAzul"  style=" font-size:30px; "  onclick="location.href='/'">Inicio<span class="sr-only">(current)</span></button>
+
+
+            <button type="button" class="botones_navAzul"  style=" font-size:30px;"  onclick="location.href='/espacios/list'">Espacios naturales<span class="sr-only">(current)</span></button>
+            <button type="button" class="botones_navAzul"  style=" font-size:30px;"  onclick="location.href='/espacios/list'">Lista Reservas<span class="sr-only">(current)</span></button>
+        </div>
+        <div style="flex:2;">
+            <div style="text-align:right;">
+                <button type="button" class="botones_navAzul"  style=" font-size:30px; "  onclick="location.href='/gestor/perfil'">Perfil<span class="sr-only">(current)</span></button>
+
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+    <div th:if="*{tipo=='Controlador'}" class=" barra_marron">
+
+
+        <div style="flex:1;">
+
+            <button type="button" class="botones_navMarron"  style=" font-size:30px; "  onclick="location.href='/'">Inicio<span class="sr-only">(current)</span></button>
+
+
+            <button type="button" class="botones_navMarron"  style=" font-size:30px;"  onclick="location.href='/espacios/list'">Espacios naturales<span class="sr-only">(current)</span></button>
+            <button type="button" class="botones_navMarron"  style=" font-size:30px;"  onclick="location.href='/espacios/list'">Lista Reservas<span class="sr-only">(current)</span></button>
+        </div>
+        <div style="flex:2;">
+            <div style="text-align:right;">
+                <button type="button" class="botones_navMarron"  style=" font-size:30px; "  onclick="location.href='/controlador/perfil'">Perfil<span class="sr-only">(current)</span></button>
+
 
             </div>
         </div>

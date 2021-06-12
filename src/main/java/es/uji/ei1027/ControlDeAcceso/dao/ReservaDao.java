@@ -49,7 +49,7 @@ public class ReservaDao {
             return null;
         }
     }
-    
+
     //ACTUALIZAMOS reserva
     public void updateReserva(Reserva reserva) {
         jdbcTemplate.update("UPDATE reserva SET dni_ciudadano=?,franja_espacio=?,espacio_publico=?,estado_reserva=?,zona=? WHERE id=?",
@@ -58,6 +58,7 @@ public class ReservaDao {
                 reserva.getZona(),reserva.getId());
 
     }
+
 
 
     /*

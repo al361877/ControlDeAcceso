@@ -16,33 +16,33 @@
 <div layout:fragment="content">
     <br>
     <h1 >Registrarse</h1>
-    <div align="center" >
+    <div align="center" style="height: 600px;" >
         <form action="#" th:action="@{/user/add}"
               th:object="${user}" method="post">
             <table>
                 <tr>
                     <td><label>Dni</label></td>
-                    <td><input type="text" th:field="*{dni}" /></td>
+                    <td><input type="text" class="form-control" th:field="*{dni}" /></td>
                 </tr>
                 <tr>
                     <td><label>Usuario</label></td>
-                    <td><input type="text" th:field="*{usuario}" /></td>
+                    <td><input type="text" class="form-control" th:field="*{usuario}" /></td>
                 </tr>
                 <tr>
                     <td><label>Nombre y apellidos</label></td>
-                    <td><input type="text" th:field="*{nombre}" /></td>
+                    <td><input type="text" class="form-control" th:field="*{nombre}" /></td>
                 </tr>
                 <tr>
                     <td><label>Telefono </label></td>
-                    <td><input type="text" th:field="*{telefono}" /></td>
+                    <td><input type="text" class="form-control" th:field="*{telefono}" /></td>
                 </tr>
                 <tr>
                     <td><label>Email</label></td>
-                    <td><input type="text" th:field="*{email}" /></td>
+                    <td><input type="text" class="form-control" th:field="*{email}" /></td>
                 </tr>
                 <tr>
                     <td><label>Contraseña</label></td>
-                    <td><input type="password" th:field="*{contraseña}" /></td>
+                    <td><input type="password" class="form-control" th:field="*{contraseña}" /></td>
                 </tr>
                 <tr>
                     <td><label>Año nacimiento</label></td>
@@ -50,15 +50,15 @@
                 </tr>
                 <tr>
                     <td><label>Ciudad</label></td>
-                    <td><input type="text" th:field="*{ciudad}" /></td>
+                    <td><input type="text" class="form-control" th:field="*{ciudad}" /></td>
                 </tr>
                 <tr>
                     <td><label>Calle</label></td>
-                    <td><input type="text" th:field="*{calle}" /></td>
+                    <td><input type="text" class="form-control" th:field="*{calle}" /></td>
                 </tr>
                 <tr>
                     <td><label>Código postal</label></td>
-                    <td><input type="text" th:field="*{cp}" /></td>
+                    <td><input type="text" class="form-control" th:field="*{cp}" /></td>
                 </tr>
                 <tr>
                     <td colspan="2"><input type="submit" role="button" class="btn btn-success"  value="Aceptar" /></td>
