@@ -79,10 +79,19 @@ public class LoginController {
         // Comprova que el login siga correcte
         // intentant carregar les dades de l'usuari
         user = usuarioDao.getUsuario(user.getUsuario());
+
         if (user == null) {
-            bindingResult.rejectValue("incorrecto", "obligatori", "Contrañase o nombre de usuario incorrecto");
+            bindingResult.rejectValue("contraseña", "obligatorio", "Contraseña  o nombre de usuario incorrecto");
             return "login";
         }
+
+
+        // String contraseña = user.getContraseña();
+        // hacer select de la bbdd de ciudadanos para comprobar la contraseña, pero donde?
+        // y con eso, se enseña el mensaje de error de contraseña incorrecta, si no, nunca saltara...
+
+
+
         // Autenticats correctament.
         // Guardem les dades de l'usuari autenticat a la sessió
         session.setAttribute("user", user);
