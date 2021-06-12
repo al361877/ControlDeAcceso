@@ -1,0 +1,51 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <title>Reservas</title>
+    <meta charset=" UTF-8" />
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+
+</head>
+<body>
+
+
+<div  layout:fragment="content" >
+    <h1>Tus reservas</h1>
+    <div align="center">
+        <table  class="table table-striped">
+            <thead>
+            <tr>
+                <th >Código de Reserva</th>
+                <th >Franja Espacio</th>
+                <th >Espacio Público</th>
+                <th >Zona</th>
+                <th >Estado de la Reserva</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="res: ${reservas}">
+                <td  th:text="${res.id}"></td>
+                <td  th:text="${res.franjaEspacio}"></td>
+                <td th:text="${res.espacio_publico}"></td>
+                <td th:text="${res.zona}"></td>
+                <td th:text="${res.estado_reserva}"></td>
+
+
+            </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+    <a href="/user/add" class="btn btn-primary" role="button" >Hacer otra reserva</a>
+    <a href="/" class="btn btn-primary" role="button" >Volver</a>
+    <br><br>
+    <br><br>
+</div>
+
+</body>
+</html>

@@ -50,6 +50,22 @@ public class ReservaDao {
         }
     }
 
+    public List<Reserva> getReservasByDni(String dni){
+        try{
+            System.out.println("Estas en la Lista de reservas");
+            List<Reserva> lista =
+                    (List<Reserva>) jdbcTemplate.query("SELECT * FROM reserva WHERE dni_ciudadano=?", new ReservaRowMapper(),dni);
+            for(Reserva res:lista){
+                System.out.println(res.toString());
+            }
+
+            return lista;
+        }catch (EmptyResultDataAccessException e){
+            return null;
+        }
+
+    }
+
     //ACTUALIZAMOS reserva
     public void updateReserva(Reserva reserva) {
         jdbcTemplate.update("UPDATE reserva SET dni_ciudadano=?,franja_espacio=?,espacio_publico=?,estado_reserva=?,zona=? WHERE id=?",

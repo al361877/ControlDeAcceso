@@ -12,7 +12,7 @@ public final class ReservaRowMapper implements RowMapper<Reserva> {
     public Reserva mapRow(ResultSet rs, int RowNum) throws SQLException{
         Reserva reserva = new Reserva();
         reserva.setId(rs.getString("id"));
-        reserva.setDniCiudadano(rs.getString("dniCiudadano"));
+        reserva.setDniCiudadano(rs.getString("dni_ciudadano"));
         reserva.setFranjaEspacio(rs.getString("franja_espacio"));
         reserva.setEspacio_publico(rs.getString("espacio_publico"));
         reserva.setEstado_reserva(rs.getString("estado_reserva"));

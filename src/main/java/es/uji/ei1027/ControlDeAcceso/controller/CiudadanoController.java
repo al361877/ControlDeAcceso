@@ -27,7 +27,7 @@ public class CiudadanoController {
     }
 
     @RequestMapping("/list")
-    public String listUusarios( HttpSession session, Model model) {
+    public String listUsuarios( HttpSession session, Model model) {
         Usuario user= (Usuario) session.getAttribute("user");
         try{
             if(user.getTipoUsuario().equals("Gestor")) {
