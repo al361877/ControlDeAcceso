@@ -57,6 +57,11 @@ public class CiudadanoController {
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddCiudadanoSubmit(@ModelAttribute("user") Usuario user,BindingResult bindingResult) {
 
+        RegisterValidator validator = new RegisterValidator();
+        validator.validate(user, bindingResult);
+        if (bindingResult.hasErrors())
+            return "ciudadano/add";
+
         userDao.addUsuario(user);
         userDao.addCiudadano(user.getDni());
         return "redirect:list";

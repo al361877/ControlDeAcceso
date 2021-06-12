@@ -1,0 +1,75 @@
+
+/*
+
+
+colores indice -->  verde=#02e4a3
+                    azul=#03647f
+                    marron=#1f1611
+
+
+*/
+
+/* Estil aplicat al cos de la pàgina */
+body {
+   font-family: Verdana, Arial, sans-serif;
+   background-color: white;
+
+}
+p.parrafo{
+    font-size:20pt;
+}
+ @font-face{
+        font-family:amatic;
+        font-style:normal;
+        font-weight:normal;
+        src: url("./AmaticSC-Bold.ttf");
+    }
+
+/* Capçalera de nivell 1 */
+h1 {
+   color: black;
+   font-family:amatic;
+   font-size:48pt;
+   font-weight:bold;
+   text-align:center;
+
+}
+h2 {
+   text-align:center;
+   font-family:amatic;
+   font-size: large;
+   color:black;
+   font-size:40pt;
+
+}
+/* Capçalera de nivell 2 */
+
+h4 {
+   font-family:amatic;
+   font-size: large;
+   color: #000000;
+
+   font-size:28pt;
+
+}
+
+/* Classe CSS error */
+.error {
+     color: red;
+     font-size:80%
+}
+
+/* Classe CSS per atributs erronis */
+.needcorrection {
+     color: red;
+     background-color:yellow;
+}
+
+.loggeduser {
+    color: gray;
+    text-align: right;
+    margin-right: 10pt;
+}
+
+
+

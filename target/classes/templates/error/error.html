@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <link rel="stylesheet" type="text/css"
+          href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+
+    <meta charset="UTF-8"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
+    <title>Usuario incorrecto</title>
+
+</head>
+<body>
+<div  layout:fragment="content" >
+    <img src="https://image.flaticon.com/icons/svg/753/753345.svg" width="180" height="180">
+    <table>
+        <tr><td><h1>No tienes permise para acceder a está página.</h1></td></tr>
+        <tr><td><h1>Inicia sesión con el usuario correcto</h1></td></tr>
+    </table>
+    <br>
+    <br>
+    <br>
+    <a onClick="history.back()" class="btn btn-success" role="button" ><img src="https://image.flaticon.com/icons/svg/929/929730.svg" width="50"  alt="x"></a>
+    &nbsp;&nbsp;<a th:href="@{/}" class="btn btn-success" role="button" >Inicio</a>
+    <br>
+    <br>
+</div>
+</body>
+</html>

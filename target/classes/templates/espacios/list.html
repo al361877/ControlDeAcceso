@@ -1,0 +1,81 @@
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <title>Control De Acceso</title>
+    <meta charset=" UTF-8" />
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+
+
+    <style>
+
+        div.principal{
+            display: flex;
+
+        }
+
+        div.p2{
+
+            margin:auto;
+            flex:1;
+            padding: 50px;
+            border-radius:20px;
+
+
+        }
+        div.p3{
+
+            margin:auto;
+            text-align:center;
+
+
+        }
+        .imgRedonda {
+            width:80%;
+            border-radius:10px;
+        }
+        img:hover{
+            opacity:0.5;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+<div layout:fragment="content">
+    <br>
+    <h1 >Espacios naturales</h1>
+
+    <div >
+        <div th:each="lista: ${matrizEspacios}" class="principal">
+            <div th:each="espacio: ${lista}" class="p2">
+                <div class="p3" >
+                    <a th:href="@{./prereserva/{espacio}(espacio=${espacio.id})}" >
+                        <img th:src="@{/images/espacios/espacio-{espacio}.jpg(espacio=${espacio.id})}" class="imgRedonda">
+                    <!--                    <img src="/images/espacios/espacio-des4.jpg" class="imgRedonda">-->
+                    </a>
+                    <a th:href="@{./prereserva/{espacio}(espacio=${espacio.id})}" style=" margin-top: 10px;" class="btn btn-primary" role="button" >Más info</a>
+                </div>
+
+            </div>
+            <br>
+        </div>
+        <br>
+
+    </div>
+
+
+</div>
+
+
+<br>
+</body>
+</html>

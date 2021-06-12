@@ -1,0 +1,66 @@
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <title>Control De Acceso</title>
+    <meta charset=" UTF-8" />
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+    <style>
+
+
+    </style>
+</head>
+
+<body>
+
+
+<div layout:fragment="content">
+    <h1 >Login</h1>
+    <div style="height: 600px; width:400px; text-align:center; margin: auto;">
+    <br>
+
+    <form action="#" th:action="@{/login}" th:object="${user}" method="post">
+
+        <table style="text-align:center; width:100%;">
+
+            <tr>
+                <td><label>Usuario</label></td>
+            </tr>
+            <tr>
+                <td><input class="form-control" type="text" th:field="*{usuario}" /></td>
+
+            </tr>
+            <tr>
+                <td  class="error" th:if="${#fields.hasErrors('usuario')}" th:errors="*{usuario}" style="font-size:15px"></td>
+            </tr>
+            <tr >
+                <td><label>Contraseña</label></td>
+            </tr>
+            <tr>
+                <td><input class="form-control" type="password" th:field="*{contraseña}" /></td>
+
+            </tr>
+            <tr>
+                <td class="error" th:if="${#fields.hasErrors('contraseña')}" th:errors="*{contraseña}" style="font-size:15px"></td>
+            </tr>
+<!--            <tr>-->
+<!--                <td  class="error" th:if="${#fields.hasErrors('usuario')}" th:errors="*{incorrecto}" style="font-size:15px"></td>-->
+<!--            </tr>-->
+
+            <tr>
+                <td colspan="2"><input type="submit" role="button" class="btn btn-success"  value="Aceptar" /></td>
+
+            </tr>
+        </table>
+
+    </form>
+    </div>
+</div>
+
+</body>
+</html>

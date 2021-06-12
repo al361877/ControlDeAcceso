@@ -1,0 +1,132 @@
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <title>Control De Acceso</title>
+    <meta charset=" UTF-8" />
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+
+<body>
+
+<div layout:fragment="content">
+    <br>
+    <h1 >Registrarse</h1>
+    <div align="center" style="height: 600px;" >
+        <form action="#" th:action="@{/ciudadano/add}"
+              th:object="${user}" method="post">
+            <table>
+                <tr>
+                    <td><label>Dni</label></td>
+                    <td><input type="text" class="form-control" th:field="*{dni}" /></td>
+                </tr>
+                <tr>
+                    <td  class="error" th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}" style="font-size:15px"></td>
+                </tr>
+
+
+
+                <tr>
+                    <td><label>Usuario</label></td>
+                    <td><input type="text" class="form-control" th:field="*{usuario}" /></td>
+                </tr>
+                <tr>
+                    <td class="error" th:if="${#fields.hasErrors('usuario')}" th:errors="*{usuario}" style="font-size:15px"></td>
+                </tr>
+
+
+
+                <tr>
+                    <td><label>Nombre y apellidos</label></td>
+                    <td><input type="text" class="form-control" th:field="*{nombre}" /></td>
+                </tr>
+                <tr>
+                    <td class="error" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" style="font-size:15px"></td>
+                </tr>
+
+
+
+                <tr>
+                    <td><label>Telefono </label></td>
+                    <td><input type="text" class="form-control" th:field="*{telefono}" /></td>
+                </tr>
+                <tr>
+                    <td class="error" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}" style="font-size:15px"></td>
+                </tr>
+
+
+
+                <tr>
+                    <td><label>Email</label></td>
+                    <td><input type="text" class="form-control" th:field="*{email}" /></td>
+                </tr>
+                <tr>
+                    <td class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="font-size:15px"></td>
+                </tr>
+
+
+
+                <tr>
+                    <td><label>Contraseña</label></td>
+                    <td><input type="password" class="form-control" th:field="*{contraseña}" /></td>
+                </tr>
+                <tr>
+                    <td class="error" th:if="${#fields.hasErrors('contraseña')}" th:errors="*{contraseña}" style="font-size:15px"></td>
+                </tr>
+
+
+
+                <tr>
+                    <td><label>Año nacimiento</label></td>
+                    <td><input type="date" placeholder="dd/MM/yyyy"  th:field="*{nacimientoString}" /></td>
+                </tr>
+                <tr>
+                    <td class="error" th:if="${#fields.hasErrors('nacimientoString')}" th:errors="*{nacimientoString}" style="font-size:15px"></td>
+                </tr>
+
+
+                <tr>
+                    <td><label>Ciudad</label></td>
+                    <td><input type="text" class="form-control" th:field="*{ciudad}" /></td>
+                </tr>
+                <tr>
+                    <td class="error" th:if="${#fields.hasErrors('ciudad')}" th:errors="*{ciudad}" style="font-size:15px"></td>
+                </tr>
+
+                <tr>
+                    <td><label>Calle</label></td>
+                    <td><input type="text" class="form-control" th:field="*{calle}" /></td>
+                </tr>
+                <tr>
+                    <td class="error" th:if="${#fields.hasErrors('calle')}" th:errors="*{calle}" style="font-size:15px"></td>
+                </tr>
+
+
+                <tr>
+                    <td><label>Código postal</label></td>
+                    <td><input type="text" class="form-control" th:field="*{cp}" /></td>
+                </tr>
+                <tr>
+                    <td class="error" th:if="${#fields.hasErrors('cp')}" th:errors="*{cp}" style="font-size:15px"></td>
+                </tr>
+
+
+                <tr>
+                    <td colspan="2"><input type="submit" role="button" class="btn btn-success"  value="Aceptar" /></td>
+
+                </tr>
+            </table>
+
+        </form>
+    </div>
+    <a href="/" class="btn btn-primary" role="button" >Volver</a>
+</div>
+
+
+
+</body>
+</html>

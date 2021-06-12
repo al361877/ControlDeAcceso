@@ -1,0 +1,63 @@
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <title>Control De Acceso</title>
+    <meta charset=" UTF-8" />
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+
+
+    <style>
+
+        div.principal{
+            display: flex;
+
+        }
+
+        div.p2{
+
+            margin:auto;
+            flex:1;
+            padding: 50px;
+            border-radius:20px;
+
+
+        }
+        div.p3{
+
+            margin:auto;
+            text-align:center;
+
+
+        }
+        .imgRedonda {
+            width:80%;
+            border-radius:10px;
+        }
+        img:hover{
+            opacity:0.5;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+<div layout:fragment="content">
+    <br>
+    <h1 >CIUDADANO</h1>
+
+
+</div>
+
+
+<br>
+</body>
+</html>
