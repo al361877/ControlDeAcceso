@@ -52,6 +52,18 @@ public class Reserva {
         return zona;
     }
 
+    @Override
+    public String toString() {
+        return "Reserva{" +
+                "id='" + id + '\'' +
+                ", dniCiudadano='" + dniCiudadano + '\'' +
+                ", franjaEspacio='" + franjaEspacio + '\'' +
+                ", espacio_publico='" + espacio_publico + '\'' +
+                ", estado_reserva='" + estado_reserva + '\'' +
+                ", zona='" + zona + '\'' +
+                '}';
+    }
+
     public void setZona(String zona) {
         this.zona = zona;
     }

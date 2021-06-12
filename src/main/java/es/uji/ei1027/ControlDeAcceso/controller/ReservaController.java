@@ -2,7 +2,9 @@ package es.uji.ei1027.ControlDeAcceso.controller;
 
 import es.uji.ei1027.ControlDeAcceso.dao.ReservaDao;
 import es.uji.ei1027.ControlDeAcceso.model.Reserva;
+import es.uji.ei1027.ControlDeAcceso.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.trace.http.HttpTrace;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -27,17 +30,37 @@ public class ReservaController {
         this.resDao = resDao;
     }
 
-    @RequestMapping("/list/{dni}")
-    public String listReserva( Model model) {
+    @RequestMapping("/list")
+    public String listReserva(HttpSession session, Model model) {
+        Usuario user = (Usuario) session.getAttribute("user");
 
-        List<Reserva> lista = resDao.getReservas();
+        try{
+            if(user.getTipoUsuario().equals("Ciudadano")){
 
-        model.addAttribute("reservas", resDao.getReservas());
 
-        return "reservas/listarReservas.html";
+
+                List<Reserva> lista = resDao.getReservasByDni(user.getDni());
+
+                model.addAttribute("reservas", lista);
+
+
+                return "reservas/list";
+            }/*else if(user.getTipoUsuario().equals("Controlador")){
+                List<Reserva> lista = resDao.getReservasByDni(user.getDni());
+
+                model.addAttribute("reservas", resDao.getReservas());
+
+                return "reservas/listarReservas.html";
+            }*/
+        }catch (Exception e){
+            System.out.println("Estás en el catch");
+            return "error/error";
+        }
+        System.out.println("Estás fuera del try");
+        return "error/error";
     }
 
-    @RequestMapping(value="/add/{dni}")
+    @RequestMapping(value="/add")
     public String addReserva(Model model) {
         model.addAttribute("res", new Reserva());
 
@@ -87,6 +110,8 @@ public class ReservaController {
         resDao.updateReserva(res);
         return "redirect:list";
     }
+
+
 /*
     @RequestMapping(value="/delete/{dni}")
     public String processDelete(@PathVariable String dni) {

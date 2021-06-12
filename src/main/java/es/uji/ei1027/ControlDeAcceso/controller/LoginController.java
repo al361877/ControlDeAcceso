@@ -78,10 +78,12 @@ public class LoginController {
         System.out.println(user.getUsuario());
         // Comprova que el login siga correcte
         // intentant carregar les dades de l'usuari
+
         user = usuarioDao.getUsuario(user.getUsuario());
 
         if (user == null) {
             bindingResult.rejectValue("contraseña", "obligatorio", "Contraseña  o nombre de usuario incorrecto");
+
             return "login";
         }
 

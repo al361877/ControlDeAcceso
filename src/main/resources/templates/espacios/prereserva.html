@@ -56,12 +56,13 @@
 
         <div class="p2" >
             <img th:src="@{/images/espacios/espacio-{espacio}.jpg(espacio=${espacio.id})}" class="imgRedonda">
-            <!--                    <img src="/images/espacios/espacio-des4.jpg" class="imgRedonda">-->
+
 
         </div>
         <div class="p3" >
             <h2 style="text-align:left;">Tipo de espacio</h2>
             <p th:text="${espacio.tipo_espacio}" class="parrafo"></p>
+            <a th:href="@{./prereserva/{espacio}(espacio=${espacio.id})}" style=" margin-top: 10px;" class="btn boton_verde" role="button" >Reservar espacio</a>
 
         </div>
 
