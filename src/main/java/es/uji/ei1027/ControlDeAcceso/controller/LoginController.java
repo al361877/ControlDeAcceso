@@ -78,9 +78,9 @@ public class LoginController {
         System.out.println(user.getUsuario());
         // Comprova que el login siga correcte
         // intentant carregar les dades de l'usuari
-        user = usuarioDao.getUsuario(user.getUsuario());
+        user = usuarioDao.getUsuarioConPass(user.getUsuario(),user.getContraseña());
         if (user == null) {
-            bindingResult.rejectValue("incorrecto", "obligatori", "Contrañase o nombre de usuario incorrecto");
+            bindingResult.rejectValue("contraseña", "obligatori", "Contrañase o nombre de usuario incorrecto");
             return "login";
         }
         // Autenticats correctament.

@@ -121,6 +121,14 @@ public class UsuarioDao {
                 return null;
             }
         }
+    public Usuario getUsuarioConPass (String usuario,String pass ){
+        try{
+            return jdbcTemplate.queryForObject("SELECT * FROM usuario WHERE nombre_usuario=? and contraseña=?", new UsuarioRowMapper(), usuario,pass);
+        }
+        catch (EmptyResultDataAccessException e){
+            return null;
+        }
+    }
         public Usuario getUsuarioDni (String dni ){
             try{
                 return jdbcTemplate.queryForObject("SELECT * FROM usuario WHERE dni=?", new UsuarioRowMapper(), dni);
