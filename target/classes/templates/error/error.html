@@ -11,19 +11,19 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
     <title>Usuario incorrecto</title>
 
+
 </head>
 <body>
-<div  layout:fragment="content" >
+<div  layout:fragment="content"  th:object="${session}" style="height: 700px; width:400px; text-align:center; margin: auto;">
     <img src="https://image.flaticon.com/icons/svg/753/753345.svg" width="180" height="180">
     <table>
-        <tr><td><h1>No tienes permise para acceder a está página.</h1></td></tr>
-        <tr><td><h1>Inicia sesión con el usuario correcto</h1></td></tr>
+        <tr><td><h2>No tienes permise para acceder a está página.</h2></td></tr>
+        <tr><td><h3>Inicia sesión con el usuario correcto</h3></td></tr>
     </table>
     <br>
     <br>
     <br>
-    <a onClick="history.back()" class="btn btn-success" role="button" ><img src="https://image.flaticon.com/icons/svg/929/929730.svg" width="50"  alt="x"></a>
-    &nbsp;&nbsp;<a th:href="@{/}" class="btn btn-success" role="button" >Inicio</a>
+    <button onClick="history.back()" class=" btn boton_azul"  ><img src="https://image.flaticon.com/icons/svg/929/929730.svg" width="20"  alt="x"> Volver</button>
     <br>
     <br>
 </div>

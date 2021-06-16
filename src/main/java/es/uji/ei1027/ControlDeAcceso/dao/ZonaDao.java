@@ -22,8 +22,8 @@ public class ZonaDao {
     //AÑADIMOS zona
     public void addZona(Zona zona) {
         try {
-            jdbcTemplate.update("INSERT INTO zona VALUES (?,?,?,?,?,?)",
-                    zona.getId(),zona.getNombre(),zona.getEspacio_publico(),zona.getCp(),zona.getTipo_suelo(),zona.getTipo_acceso());
+            jdbcTemplate.update("INSERT INTO zona VALUES (?,?,?,?,?,?,?,?)",
+                    zona.getId(),zona.getNombre(),zona.getEspacio_publico(),zona.getCp(),zona.getTipo_suelo(),zona.getTipo_acceso(),zona.getAforo_actual(), zona.getAforo_maximo());
         } catch (EmptyResultDataAccessException e){
             return;
         }
@@ -38,10 +38,19 @@ public class ZonaDao {
             return null;
         }
     }
+    //Datos zona
+    public List<Zona> getZonasDisponibles (){
+        try{
+            return jdbcTemplate.query("SELECT * FROM zona where tipoacceso ", new ZonaRowMapper());
+        }
+        catch (EmptyResultDataAccessException e){
+            return null;
+        }
+    }
 
     public Zona getZonaId (String id){
         try{
-            return jdbcTemplate.queryForObject("SELECT * FROM zona WHERE id=?", new ZonaRowMapper(), id);
+            return jdbcTemplate.queryForObject("SELECT * FROM zona WHERE id_zona=?", new ZonaRowMapper(), id);
         }
         catch (EmptyResultDataAccessException e){
             return null;
@@ -50,7 +59,7 @@ public class ZonaDao {
 
     //ACTUALIZAMOS zona
     public void updateZona(Zona zona) {
-        jdbcTemplate.update("UPDATE zona SET nombre=?,espacio_publico=?,cp=?,tipo_suelo=?,tipo_acceso=? WHERE id=?",
+        jdbcTemplate.update("UPDATE zona SET nombre=?,espacio_publico=?,cp=?,tipo_suelo=?,tipo_acceso=? WHERE id_zona=?",
                 zona.getNombre(),zona.getEspacio_publico(),
                 zona.getCp(),zona.getTipo_suelo(),
                 zona.getTipo_acceso(),zona.getId());

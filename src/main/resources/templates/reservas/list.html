@@ -20,20 +20,22 @@
             <thead>
             <tr>
                 <th >Código de Reserva</th>
-                <th >Franja Espacio</th>
-                <th >Espacio Público</th>
                 <th >Zona</th>
                 <th >Estado de la Reserva</th>
+                <th> Fecha </th>
+                <th> Hora de la reserva</th>
+                <th> Fin de la reserva</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="res: ${reservas}">
                 <td  th:text="${res.id}"></td>
-                <td  th:text="${res.franjaEspacio}"></td>
-                <td th:text="${res.espacio_publico}"></td>
                 <td th:text="${res.zona}"></td>
                 <td th:text="${res.estado_reserva}"></td>
-
+                <td th:text="${#temporals.format(res.fechaIni,'dd MMMM yyyy')}"></td>
+                <td th:text="${res.horaIni}"></td>
+                <td th:text="${res.horaFin}"></td>
+                <td><a th:href="@{/espacios/prereserva/{id}(id=${res.espacio_publico})}" >Ir a espacio</a></td>
 
             </tr>
             </tbody>
@@ -41,8 +43,7 @@
 
 
     </div>
-    <a href="/user/add" class="btn btn-primary" role="button" >Hacer otra reserva</a>
-    <a href="/" class="btn btn-primary" role="button" >Volver</a>
+
     <br><br>
     <br><br>
 </div>

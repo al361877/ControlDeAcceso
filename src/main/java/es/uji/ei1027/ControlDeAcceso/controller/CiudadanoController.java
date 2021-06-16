@@ -2,6 +2,7 @@ package es.uji.ei1027.ControlDeAcceso.controller;
 
 
 import es.uji.ei1027.ControlDeAcceso.dao.UsuarioDao;
+import es.uji.ei1027.ControlDeAcceso.model.Reserva;
 import es.uji.ei1027.ControlDeAcceso.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -55,7 +56,7 @@ public class CiudadanoController {
 
     //add ciudadano
     @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddCiudadanoSubmit(@ModelAttribute("user") Usuario user,BindingResult bindingResult) {
+    public String processAddCiudadanoSubmit(@ModelAttribute("user") Usuario user, HttpSession session,BindingResult bindingResult) {
 
         RegisterValidator validator = new RegisterValidator();
         validator.validate(user, bindingResult);
@@ -64,31 +65,45 @@ public class CiudadanoController {
 
         userDao.addUsuario(user);
         userDao.addCiudadano(user.getDni());
-        return "redirect:list";
+        user.setTipoUsuario("Ciudadano");
+        session.setAttribute("user", user);
+
+        session.setAttribute("tipo",user.getTipoUsuario());
+
+        return "ciudadano/index";
     }
 
     @RequestMapping(value="/update/{dni}", method = RequestMethod.GET)
-    public String editUsuario(Model model, @PathVariable String dni) {
+    public String editUsuario(Model model, @PathVariable String dni,HttpSession session) {
+        Usuario user = (Usuario) session.getAttribute("user");
+        System.out.println("dni de la sesion-> "+user.getDni()+" dni del get-> "+dni);
+        try{
+            if(user.getTipoUsuario().equals("Gestor") || user.getDni().equals(dni)){
 
-        model.addAttribute("user", userDao.getUsuarioDni(dni));
-        return "ciudadano/update";
+                model.addAttribute("user", userDao.getUsuarioDni(dni));
+                return "ciudadano/update";
+            }
+        }catch (Exception e){
+
+            return "error/error";
+        }
+
+        return "error/error";
+
+
     }
 
-    @RequestMapping(value="/busca/{dni}", method = RequestMethod.GET)
-    public String buscaUsuario(Model model, @PathVariable String dni) {
-
-        model.addAttribute("usuario", userDao.getUsuarioDni(dni));
-        return "ciudadano/busca";
-    }
 
     @RequestMapping(value="/update", method = RequestMethod.POST)
-    public String processUpdateSubmit(@ModelAttribute("user") Usuario usuario,
-            BindingResult bindingResult) {
+    public String processUpdateSubmit(@ModelAttribute("user") Usuario user, BindingResult bindingResult,HttpSession session) {
+        System.out.println("before update "+user.getNombre());
+
 
         if (bindingResult.hasErrors())
-            return "ciudadano/update";
-        userDao.updateUsuario(usuario);
-        return "redirect:list";
+            return "ciudadano/update/"+user.getDni();
+
+        userDao.updateUsuario(user);
+        return "ciudadano/updateConfirm";
     }
 
     @RequestMapping(value="/delete/{dni}")

@@ -31,10 +31,20 @@ public class EspacioPublicoDao {
     }
 
 
+
     //Datos espacios
     public List<EspacioPublico> getEspacios (){
         try{
-            return jdbcTemplate.query("SELECT * FROM espaciopublico ", new EspacioRowMapper());
+            return jdbcTemplate.query("select * from espaciopublico;", new EspacioRowMapper());
+        }
+        catch (EmptyResultDataAccessException e){
+            return null;
+        }
+    }
+    //Datos espacios por municipio
+    public List<EspacioPublico> getEspaciosPorMunicipio (String municipio){
+        try{
+            return jdbcTemplate.query("select * from espaciopublico where n_municipio=?;", new EspacioRowMapper(),municipio);
         }
         catch (EmptyResultDataAccessException e){
             return null;
@@ -42,7 +52,7 @@ public class EspacioPublicoDao {
     }
     public EspacioPublico getEspacio (String espacio ){
         try{
-            return jdbcTemplate.queryForObject("SELECT * FROM espaciopublico WHERE id=?", new EspacioRowMapper(), espacio);
+            return jdbcTemplate.queryForObject("SELECT * FROM espaciopublico WHERE id_espacio=?", new EspacioRowMapper(), espacio);
         }
         catch (EmptyResultDataAccessException e){
             return null;
@@ -55,7 +65,7 @@ public class EspacioPublicoDao {
 
     //ACTUALIZAMOS espacio
     public void updateEspacio(EspacioPublico espacioPublico) {
-        jdbcTemplate.update("UPDATE espaciopublico SET municipio=?,tipo_espacio=? WHERE id=?",
+        jdbcTemplate.update("UPDATE espaciopublico SET municipio=?,tipo_espacio=? WHERE id_espacio=?",
                 espacioPublico.getMunicipio(),espacioPublico.getTipo_espacio(),espacioPublico.getId());
 
     }

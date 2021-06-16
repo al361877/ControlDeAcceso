@@ -38,11 +38,13 @@ public class ReservaController {
             if(user.getTipoUsuario().equals("Ciudadano")){
 
 
-
-                List<Reserva> lista = resDao.getReservasByDni(user.getDni());
+                List<Reserva> lista = resDao.getReservasPendientesByDni(user.getDni());
 
                 model.addAttribute("reservas", lista);
-
+                System.out.println(lista.isEmpty());
+                if(lista.isEmpty()){
+                    return "reservas/unlist";
+                }
 
                 return "reservas/list";
             }/*else if(user.getTipoUsuario().equals("Controlador")){
@@ -60,11 +62,28 @@ public class ReservaController {
         return "error/error";
     }
 
-    @RequestMapping(value="/add")
-    public String addReserva(Model model) {
-        model.addAttribute("res", new Reserva());
 
-        return "reservas/add";
+
+    @RequestMapping(value="/add/{id}", method = RequestMethod.GET)
+    public String addReserva(Model model,HttpSession session,@PathVariable String id) {
+
+        Usuario user = (Usuario) session.getAttribute("user");
+
+        try{
+            if(user.getTipoUsuario().equals("Ciudadano")){
+
+                model.addAttribute("res", new Reserva());
+                System.out.println("HOLA");
+                return "reservas/add/"+id;
+            }
+        }catch (Exception e){
+            System.out.println("salto al login");
+            return "redirect:/login";
+        }
+
+         return "redirect:/login";
+
+
     }
 
     //add reserva

@@ -23,8 +23,8 @@ public class ReservaDao {
     //AÑADIMOS reserva
     public void addReserva(Reserva reserva) {
         try {
-            jdbcTemplate.update("INSERT INTO reserva VALUES (?,?,?,?,?,?)",
-                   reserva.getId(),reserva.getDniCiudadano(),reserva.getFranjaEspacio(),reserva.getEspacio_publico(),reserva.getEstado_reserva(),reserva.getZona());
+            jdbcTemplate.update("INSERT INTO reserva VALUES (?,?,?,?,?,?,?,?,?)",
+                   reserva.getId(),reserva.getDniCiudadano(),reserva.getEspacio_publico(),reserva.getEstado_reserva(),reserva.getZona(),reserva.getFechaIni(),reserva.getFechaFin(),reserva.getHoraIni(),reserva.getHoraFin());
         } catch (EmptyResultDataAccessException e){
             return;
         }
@@ -55,9 +55,24 @@ public class ReservaDao {
             System.out.println("Estas en la Lista de reservas");
             List<Reserva> lista =
                     (List<Reserva>) jdbcTemplate.query("SELECT * FROM reserva WHERE dni_ciudadano=?", new ReservaRowMapper(),dni);
+
             for(Reserva res:lista){
                 System.out.println(res.toString());
             }
+
+            return lista;
+        }catch (EmptyResultDataAccessException e){
+            return null;
+        }
+
+    }
+    public List<Reserva> getReservasPendientesByDni(String dni){
+        try{
+
+            List<Reserva> lista =
+                    (List<Reserva>) jdbcTemplate.query("SELECT * FROM reserva WHERE dni_ciudadano=? and estado_reserva='pendienteDeUso'", new ReservaRowMapper(),dni);
+
+
 
             return lista;
         }catch (EmptyResultDataAccessException e){
@@ -69,7 +84,7 @@ public class ReservaDao {
     //ACTUALIZAMOS reserva
     public void updateReserva(Reserva reserva) {
         jdbcTemplate.update("UPDATE reserva SET dni_ciudadano=?,franja_espacio=?,espacio_publico=?,estado_reserva=?,zona=? WHERE id=?",
-                reserva.getDniCiudadano(),reserva.getFranjaEspacio(),
+                reserva.getDniCiudadano(),
                 reserva.getEspacio_publico(),reserva.getEstado_reserva(),
                 reserva.getZona(),reserva.getId());
 
@@ -77,11 +92,24 @@ public class ReservaDao {
 
 
 
-    /*
-    public void deleteReserva(String id){
 
-        jdbcTemplate.delete()
+    public void canceladaPorUsuarioReserva(String id){
+
+
+            jdbcTemplate.update("UPDATE reserva SET estado_reserva=?,zona=? WHERE id=?","canceladaU",id);
+        }
+
+
+    public void canceladaPorControladorReserva(String id){
+
+
+        jdbcTemplate.update("UPDATE reserva SET estado_reserva=?,zona=? WHERE id=?","canceladaC",id);
     }
- */
+    public void finUsoReserva(String id){
+
+
+        jdbcTemplate.update("UPDATE reserva SET estado_reserva=?,zona=? WHERE id=?","finUso",id);
+    }
+
 
 }

@@ -1,7 +1,4 @@
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.w3.org/1999/xhtml"
-      layout:decorate="~{templates/fragments/base}"
-
+<html
 >
 <head>
     <meta charset="UTF-8" />
@@ -12,8 +9,6 @@
     <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>-->
     <!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
 
-    <link rel="stylesheet" type="text/css" href="/css/estils.css"
-          th:href="@{/css/estils.css}"/>
 
     <style>
 
@@ -125,8 +120,16 @@
 
     }
 
+    p.h3{
+        font-family:amatic;
+        font-size: 30px;
+        text-align:center;
+
+
+    }
+
     p.parrafo{
-       font-size: 20px;
+       font-size: 1.2em;
        text-align:justify;
        width:80%;
        font-family:"Calibri";
@@ -184,10 +187,52 @@ img:hover{
     opacity:0.5;
 }
 a{ text-decoration: none;}
+ .barra_verde{
+            background-color:#02e4a3;
+            display:flex;
+    }
+    .botones_navVerde{
+      color: black;
+      text-align: right;
+      background-color:#02e4a3;
+      font-family:amatic;
+      border: 0px ;
+
+  }
+   .botones_navVerde:hover{
+       font-family:amatic;
+       color: #02e4a3;
+       text-align: right;
+       background-color:#000000;
+       border: 0px ;
+
+   }
 
 </style>
 </head>
 <body>
+<table style="width:100%; background-color: #30180b;"><tr><td style="text-align: left;"><a href="https://www.uji.es/"><img src="http://imgfz.com/i/7wYrtfZ.png" width="160" height="30" align="left" ></a></td><td style="text-align: right;"><p style="font-size:70%; color:white;">Idioma: Español | ei102720gpr&nbsp;&nbsp;&nbsp;</p></td></tr></table>
+<div  class=" barra_verde">
+
+
+    <div style="flex:1;">
+
+        <button type="button" class="botones_navVerde"  style=" font-size:30px; "  onclick="location.href='/'">Inicio<span class="sr-only"></span></button>
+
+
+        <button type="button" class="botones_navVerde"  style=" font-size:30px;"  onclick="location.href='/espacios/list'">Espacios naturales<span class="sr-only"></span></button>
+
+    </div>
+    <div style="flex:2;">
+        <div style="text-align:right;">
+            <button type="button" class="botones_navVerde"  style=" font-size:30px; "   onclick="location.href='/ciudadano/add'">Registrarse<span class="sr-only"></span></button>
+            <button type="button" class="botones_navVerde"  style=" font-size:30px;position:right;"   onclick="location.href='/login'">Iniciar sesión<span class="sr-only"></span></button>
+
+        </div>
+    </div>
+
+
+</div>
 <div  class="container">
 
 
@@ -197,7 +242,7 @@ a{ text-decoration: none;}
     <div class="ex1" >
 
         <div class="ex1-2">
-            <p>ESPACIOS NATURALES <br>
+            <p >ESPACIOS NATURALES <br>
                 CV</p>
 
 
@@ -211,7 +256,7 @@ a{ text-decoration: none;}
 
         <div class="ex2-2">
             <p class="h1" style="color:white;"> CONTROL DE ACCESO</p>
-            <br><br><br>
+            <br>
             <p class="parrafo" style="color:white; margin:auto;">
                 La comunidad valenciana dispone de numerosos espacios naturales a lo largo de los municipios,
                 como playas, ríos, montañas... La consejería de Medio Ambiente de la Generelatit Valenciana,
@@ -227,24 +272,7 @@ a{ text-decoration: none;}
     <div class="ex3">
         <div class="ex3-1"></div>
         <div class="ex3-2 ">
-            <!--            <table>-->
-            <!--                <tr>-->
-            <!--                    <td> <p class="parrafo" style="color:white">imagen</p></td>-->
-            <!--                    <td><p class="h1" style="color:white">CONSULTAR ESPACIO</p>-->
-            <!--                        <p class="parrafo" style="color:white">Echar un vistazo a los espacios públicos</p>-->
-            <!--                        </td>-->
-            <!--                </tr>-->
-            <!--                <tr>-->
-            <!--                    <td> <p class="parrafo" style="color:white">imagen</p></td>-->
-            <!--                    <td><p class="h1" style="color:white">REGISTRARSE</p>-->
-            <!--                        <p class="parrafo" style="color:white">Echar un vistazo a los espacios públicos</p>-->
-            <!--                    </td>-->
-            <!--                </tr>  <tr>-->
-            <!--                <td> <p class="parrafo" style="color:white">imagen</p></td>-->
-            <!--                <td><p class="h1" style="color:white">SOLICITAR INFORMACION</p>-->
-            <!--                    <p class="parrafo" style="color:white">Echar un vistazo a los espacios públicos</p>-->
-            <!--                </td>-->
-            <!--            </tr>-->
+
 
             <!--            </table>-->
             <div style="margin:auto; ">
@@ -282,8 +310,8 @@ a{ text-decoration: none;}
                         <img src="info_icon.png" alt="Smiley face" style="margin:auto;width:100px;height:100px;">
                     </div>
                     <div  style="flex:2;width: 75%;">
-                        <p class="h2" style="color:white ; line-height: 5%; text-align:left; " >SOLICITAR AYUDA</p>
-                        <p class="parrafo" style="color:white; text-align:left ">Contácta con nosotros si<br>necesita más información </p>
+                        <p class="h2" style="color:white ; line-height: 5%; text-align:left; " >INFORMACIÓN DE INTERÉS</p>
+                        <p class="parrafo" style="color:white; text-align:left ">Consejos para el viaje<br>y contactacon nosotros<br>necesita más información </p>
                     </div>
                 </div>
                 </a>

@@ -4,6 +4,8 @@ import es.uji.ei1027.ControlDeAcceso.model.Usuario;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import java.time.LocalDate;
+
 public class RegisterValidator implements Validator {
     @Override
     public boolean supports(Class<?> cls) {
@@ -44,10 +46,15 @@ public class RegisterValidator implements Validator {
         if (usuario.getContraseña().length() > 30)
             errors.rejectValue("contraseña", "invalidStr","La contraseña no cumple los requisitos");
 
-        if (usuario.getNacimientoString().trim().equals(null) || usuario.getNacimientoString().trim().equals("") || usuario.getNacimientoString().trim().equals(" "))
+        if (usuario.getNacimientoString()==null || usuario.getNacimientoString().trim().equals("") || usuario.getNacimientoString().trim().equals(" "))
             errors.rejectValue("nacimientoString", "nonullobj","No se ha introducido ninguna fecha de nacimiento");
-        //if (usuario.getNacimientoString().length() > 100)
-        //    errors.rejectValue("nacimientoString", "invalidStr","ni idea de como validar esto");
+        else{
+            usuario.setNacimiento(usuario.getNacimientoString());
+            LocalDate today= LocalDate.now();
+            if(today.getDayOfYear()-usuario.getNacimiento().getDayOfYear()<18)
+                errors.rejectValue("nacimientoString", "invalidStr","Debe ser mayor de edad para ingresar en la plataforma");
+
+        }
 
         if (usuario.getCiudad().trim().equals(null) || usuario.getCiudad().trim().equals("") || usuario.getCiudad().trim().equals(" "))
             errors.rejectValue("ciudad", "nonullobj","No se ha introducido la ciudad");

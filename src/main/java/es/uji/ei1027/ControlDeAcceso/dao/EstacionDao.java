@@ -45,7 +45,7 @@ public class EstacionDao {
 
     //ACTUALIZAMOS estacion
     public void updateEstacion(Estacion estacion) {
-        jdbcTemplate.update("UPDATE estacion SET fechaini=?,fechafin=? WHERE id=?",
+        jdbcTemplate.update("UPDATE estacion SET fechaini=?,fechafin=? WHERE id_estacion=?",
                 estacion.getFechaIni(),estacion.getFechaFin(),
                 estacion.getId());
 

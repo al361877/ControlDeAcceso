@@ -1,77 +1,42 @@
 
-<html xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
 <head>
-    <title>Registrarse</title>
-    <meta charset="UTF-8" />
+    <title>Realizar una reserva</title>
+    <meta charset=" UTF-8" />
     <link rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
 </head>
-<style>
-body {
-  background-color: lightgreen;
-}
 
-div {
-  background-color: white;
-}
-
-
-</style>
 <body>
 
-<div class="container">
-    <h2>Registrarse </h2>
+<div layout:fragment="content">
+    <h2>Zonas disponibles </h2>
     <div align="center" >
-        <form action="#" th:action="@{/reservas/add}"
-              th:object="${reservas}" method="post">
-            <table>
-                <tr>
-                    <td><label>Dni</label></td>
-                    <td><input type="text" th:field="*{dni}" /></td>
-                </tr>
-                <tr>
-                    <td><label>Usuario</label></td>
-                    <td><input type="text" th:field="*{usuario}" /></td>
-                </tr>
-                <tr>
-                    <td><label>Nombre y apellidos</label></td>
-                    <td><input type="text" th:field="*{nombre}" /></td>
-                </tr>
-                <tr>
-                    <td><label>Telefono </label></td>
-                    <td><input type="text" th:field="*{telefono}" /></td>
-                </tr>
-                <tr>
-                    <td><label>Email</label></td>
-                    <td><input type="text" th:field="*{email}" /></td>
-                </tr>
-                <tr>
-                    <td><label>Contraseña</label></td>
-                    <td><input type="password" th:field="*{contraseña}" /></td>
-                </tr>
-                <tr>
-                    <td><label>Año nacimiento</label></td>
-                    <td><input type="date" placeholder="dd/MM/yyyy"  th:field="*{nacimientoString}" /></td>
-                </tr>
-                <tr>
-                    <td><label>Ciudad</label></td>
-                    <td><input type="text" th:field="*{ciudad}" /></td>
-                </tr>
-                <tr>
-                    <td><label>Calle</label></td>
-                    <td><input type="text" th:field="*{calle}" /></td>
-                </tr>
-                <tr>
-                    <td><label>Código postal</label></td>
-                    <td><input type="text" th:field="*{cp}" /></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><input type="submit" role="button" class="btn btn-success"  value="Aceptar" /></td>
+        <div >
+            <div th:each="lista: ${matrizEspacios}" class="principal">
+                <div th:each="espacio: ${lista}" class="p2">
+                    <div class="p3" >
+                        <b style="margin:0;display:inline">Municipio: </b><p style="margin-left:5px;display:inline" th:text="*{espacio.municipio}"></p>
+                        <a style="margin-top: 10px;" th:href="@{./prereserva/{espacio}(espacio=${espacio.id})}" >
+                            <img th:src="@{/images/espacios/espacio-{espacio}.jpg(espacio=${espacio.id})}" class="imgRedonda">
+                            <!--                    <img src="/images/espacios/espacio-des4.jpg" class="imgRedonda">-->
+                        </a>
+                        <br>
+                        <a th:href="@{./prereserva/{espacio}(espacio=${espacio.id})}" style=" margin:auto; margin-top: 10px;" class="btn boton_azul" role="button" >Más info</a>
+                    </div>
 
-                </tr>
-            </table>
+                </div>
+                <br>
+            </div>
+            <br>
 
-        </form>
+        </div>
+
     </div>
     <a href="./list" class="btn btn-primary" role="button" >Volver</a>
 </div>

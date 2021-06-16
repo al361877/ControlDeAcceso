@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public final class EstacionRowMapper implements RowMapper<Estacion> {
     public Estacion mapRow(ResultSet rs, int RowNum) throws SQLException{
         Estacion estacion = new Estacion();
-        estacion.setId(rs.getString("id"));
+        estacion.setId(rs.getString("id_estacion"));
         estacion.setFechaFin(rs.getDate("fechaini"));
         estacion.setFechaFin(rs.getDate("fechafin"));
         return estacion;

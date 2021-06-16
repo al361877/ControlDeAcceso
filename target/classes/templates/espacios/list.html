@@ -53,16 +53,29 @@
 <div layout:fragment="content">
     <br>
     <h1 >Espacios naturales</h1>
-
+    <form style="margin-left:50px" action="#" th:action="@{/espacios/listPorMunicipio}" th:object="${municipio}" method="post">
+        <label for="municipio">Filtrar por municipios:</label>
+        <select id="municipio" name="municipio">
+            <option value="Ninguno">Ninguno</option>
+            <option value="Castellón">Castellón</option>
+            <option value="Valencia">Valencia</option>
+            <option value="Alicante">Alicante</option>
+            <option value="Xativa">Xativa</option>
+            <option value="Náquera">Náquera</option>
+        </select>
+        <input type="submit">
+    </form>
     <div >
         <div th:each="lista: ${matrizEspacios}" class="principal">
             <div th:each="espacio: ${lista}" class="p2">
                 <div class="p3" >
-                    <a th:href="@{./prereserva/{espacio}(espacio=${espacio.id})}" >
+                    <b style="margin:0;display:inline">Municipio: </b><p style="margin-left:5px;display:inline" th:text="*{espacio.municipio}"></p>
+                    <a style="margin-top: 10px;" th:href="@{./prereserva/{espacio}(espacio=${espacio.id})}" >
                         <img th:src="@{/images/espacios/espacio-{espacio}.jpg(espacio=${espacio.id})}" class="imgRedonda">
                     <!--                    <img src="/images/espacios/espacio-des4.jpg" class="imgRedonda">-->
                     </a>
-                    <a th:href="@{./prereserva/{espacio}(espacio=${espacio.id})}" style=" margin-top: 10px;" class="btn btn-primary" role="button" >Más info</a>
+                    <br>
+                    <a th:href="@{./prereserva/{espacio}(espacio=${espacio.id})}" style=" margin:auto; margin-top: 10px;" class="btn boton_azul" role="button" >Más info</a>
                 </div>
 
             </div>

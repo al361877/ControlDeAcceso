@@ -38,4 +38,15 @@ public class EspacioPublico {
     public void setCp(int cp) {
         this.cp = cp;
     }
+
+    @Override
+    public String toString() {
+        return "EspacioPublico{" +
+                "id='" + id + '\'' +
+                ", municipio='" + municipio + '\'' +
+                ", tipo_espacio='" + tipo_espacio + '\'' +
+                ", cp=" + cp +
+
+                '}';
+    }
 }

@@ -48,13 +48,15 @@
             <tr>
                 <td class="error" th:if="${#fields.hasErrors('contraseña')}" th:errors="*{contraseña}" style="font-size:15px"></td>
             </tr>
-<!--            <tr>-->
-<!--                <td  class="error" th:if="${#fields.hasErrors('usuario')}" th:errors="*{incorrecto}" style="font-size:15px"></td>-->
-<!--            </tr>-->
 
             <tr>
-                <td colspan="2"><input type="submit" role="button" class="btn btn-success"  value="Aceptar" /></td>
+                <td colspan="2"><input type="submit" role="button" style="margin-top:10px;" class="btn boton_verde"  value="Aceptar" /></td>
 
+            </tr>
+            <tr><td><br></td></tr>
+            <tr>
+                <td> <button onClick="history.back()" class=" btn boton_azul"  ><img src="https://image.flaticon.com/icons/svg/929/929730.svg" width="20"  alt="x"> Volver</button>
+                </td>
             </tr>
         </table>
 

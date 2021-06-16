@@ -84,8 +84,8 @@ h4 {
 
        border-radius:5px;
         padding: 10px;
-         font-weight: 600;
-         font-size: 20px;
+     font-weight: 600;
+     font-size: 20px;
 
   }
    .boton_verde:hover{
@@ -108,9 +108,9 @@ h4 {
          font-family:amatic;
          border: 0px ;
          border-radius:5px;
-             padding: 10px;
-              font-weight: 600;
-              font-size: 20px;
+         padding: 10px;
+         font-weight: 600;
+         font-size: 20px;
 
      }
       .boton_azul:hover{
@@ -131,7 +131,7 @@ h4 {
         background-color: #4CAF50;
         color: white;
         padding: 16px;
-        font-size: 16px;
+        font-size: 20px;
         border: none;
         cursor: pointer;
     }
@@ -168,24 +168,66 @@ h4 {
 
     }
 
-    .boton_perfil{
+    .boton_perfilVerde{
           width:180px;
           color: black;
           text-align: left;
           background-color:#02e4a3;
           font-family:amatic;
           border: 0px ;
+          font-size: 20px;
 
       }
-       .boton_perfil:hover{
+       .boton_perfilVerde:hover{
             width:180px;
            font-family:amatic;
            color: #02e4a3;
            text-align: left;
            background-color:#000000;
            border: 0px ;
+           font-size: 20px;
 
        }
+       .boton_perfilAzul{
+             width:180px;
+             color: black;
+             text-align: left;
+             background-color:#03647f;
+             font-family:amatic;
+             border: 0px ;
+             font-size: 20px;
+
+             }
+             .boton_perfilAzul:hover{
+                  width:180px;
+                  font-family:amatic;
+                  color: #03647f;
+                  text-align: left;
+                  background-color:#000000;
+                  border: 0px ;
+                  font-size: 20px;
+
+              }
+              .boton_perfilMarron{
+                width:180px;
+                color: white;
+                text-align: left;
+                background-color:#1f1611;
+                font-family:amatic;
+                border: 0px ;
+                font-size: 20px;
+
+            }
+             .boton_perfilMarron:hover{
+                  width:180px;
+                 font-family:amatic;
+                 color: #1f1611;
+                 text-align: left;
+                 background-color:#ffffff;
+                 border: 0px ;
+                 font-size: 20px;
+
+             }
     /* Change the background color of the dropdown button when the dropdown content is shown */
     .dropdown:hover .dropbtn {
         background-color: #3e8e41;
@@ -196,6 +238,7 @@ h4 {
           background-color:#02e4a3;
           font-family:amatic;
           border: 0px ;
+          font-size: 20px;
 
       }
        .botones_navVerde:hover{
@@ -204,6 +247,7 @@ h4 {
            text-align: center;
            background-color:#000000;
            border: 0px ;
+           font-size: 20px;
 
        }
 
@@ -213,6 +257,7 @@ h4 {
              background-color:#03647f;
              font-family:amatic;
              border: 0px ;
+             font-size: 20px;
 
          }
           .botones_navAzul:hover{
@@ -221,6 +266,8 @@ h4 {
               text-align: right;
               background-color:#000000;
               border: 0px ;
+              font-size: 20px;
+
 
           }
 
@@ -230,6 +277,7 @@ h4 {
                 background-color:#1f1611;
                 font-family:amatic;
                 border: 0px ;
+                font-size: 20px;
 
             }
              .botones_navMarron:hover{
@@ -238,6 +286,7 @@ h4 {
                  text-align: right;
                  background-color:#ffffff;
                  border: 0px ;
+                 font-size: 20px;
 
              }
 

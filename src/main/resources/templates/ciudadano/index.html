@@ -4,8 +4,6 @@
 <head>
     <meta charset="UTF-8" />
     <title>Control De Acceso</title>
-    <link type="text/css" th:href="@{/css/estils.css}" href="/css/estils.css"
-          rel="stylesheet"/>
 
 
 
@@ -14,6 +12,7 @@
     body {
       margin: auto;
       width: 100%;
+      background-color:black;
 
     }
     div.container{
@@ -28,7 +27,7 @@
       background-image: url("../beach1.jpg");
       background-repeat: no-repeat;
       background-size: 100% 100%;
-
+    text-align:center;
       display: flex;
 
 
@@ -45,7 +44,7 @@
         font-family:amatic;
         font-style:normal;
         font-weight:normal;
-        src: url("AmaticSC-Bold.ttf");
+        src: url("../AmaticSC-Regular.ttf");
     }
     div.ex1-2{
         margin:auto;
@@ -185,10 +184,10 @@ a{ text-decoration: none;}
 
     <br>
 
-    <div class="ex1" >
+    <div class="ex1" style="text-align:center;" >
 
-        <div class="ex1-2">
-            <p>ESPACIOS NATURALES <br>
+        <div class="ex1-2" style="padding:50px">
+            <p style="margin:auto">ESPACIOS NATURALES <br>
                 CV</p>
 
 
@@ -232,7 +231,7 @@ a{ text-decoration: none;}
                         </div>
                         <br>
                         <div  style="flex:2;width: 75%;">
-                            <p class="h2"  style="color:white ; line-height: 10%; text-align:left; " >CONSULTAR ESPACIOS</p>
+                            <p class="h2"  style="color:white ; padding-bottom:10px; text-align:left; " >CONSULTAR ESPACIOS</p>
                             <p class="parrafo" style="color:white; text-align:left ">Echar un vistazo a los espacios públicos</p>
                         </div>
                     </div>
@@ -249,7 +248,7 @@ a{ text-decoration: none;}
 
 
                         <div  style="flex:2;width: 75%;">
-                            <p class="h2" style="color:white ; line-height: 10%; text-align:left; " >SOLICITAR AYUDA</p>
+                            <p class="h2" style="color:white ; padding-bottom:10px; text-align:left; " >SOLICITAR AYUDA</p>
                             <p class="parrafo" style="color:white; text-align:left ">Contácta con nosotros si<br>necesita más información </p>
                         </div>
                     </div>

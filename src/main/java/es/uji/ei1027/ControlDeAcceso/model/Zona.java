@@ -7,6 +7,24 @@ public class Zona {
     private int cp;
     private String tipo_suelo;
     private String tipo_acceso;
+    private int aforo_actual;
+    private int aforo_maximo;
+
+    public int getAforo_actual() {
+        return aforo_actual;
+    }
+
+    public void setAforo_actual(int aforo_actual) {
+        this.aforo_actual = aforo_actual;
+    }
+
+    public int getAforo_maximo() {
+        return aforo_maximo;
+    }
+
+    public void setAforo_maximo(int aforo_maximo) {
+        this.aforo_maximo = aforo_maximo;
+    }
 
 
 
@@ -57,5 +75,19 @@ public class Zona {
 
     public void setTipo_acceso(String tipo_acceso) {
         this.tipo_acceso = tipo_acceso;
+    }
+
+    @Override
+    public String toString() {
+        return "Zona{" +
+                "id='" + id + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", espacio_publico='" + espacio_publico + '\'' +
+                ", cp=" + cp +
+                ", tipo_suelo='" + tipo_suelo + '\'' +
+                ", tipo_acceso='" + tipo_acceso + '\'' +
+                ", aforo_actual=" + aforo_actual +
+                ", aforo_maximo=" + aforo_maximo +
+                '}';
     }
 }

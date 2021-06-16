@@ -13,8 +13,8 @@ public class Usuario {
     private String calle;
     private String tipoUsuario;
     private int cp;
-    private String nacimientoString;
 
+    private String nacimientoString;
 
     private LocalDate nacimientoDate;
 
@@ -60,6 +60,7 @@ public class Usuario {
 
 
     public String getNacimientoString(){
+
         return this.nacimientoString;
     }
 

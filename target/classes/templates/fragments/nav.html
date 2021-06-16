@@ -8,72 +8,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/css/estils.css"
           th:href="@{/css/estils.css}"/>
-<style>
-    .botones_navVerde{
-      color: black;
-      text-align: right;
-      background-color:#02e4a3;
-      font-family:amatic;
-      border: 0px ;
 
-  }
-   .botones_navVerde:hover{
-       font-family:amatic;
-       color: #02e4a3;
-       text-align: right;
-       background-color:#000000;
-       border: 0px ;
 
-   }
-
-   .botones_navAzul{
-         color: black;
-         text-align: right;
-         background-color:#03647f;
-         font-family:amatic;
-         border: 0px ;
-
-     }
-      .botones_navAzul:hover{
-          font-family:amatic;
-          color: #03647f;
-          text-align: right;
-          background-color:#000000;
-          border: 0px ;
-
-      }
-
-      .botones_navMarron{
-            color: white;
-            text-align: right;
-            background-color:#1f1611;
-            font-family:amatic;
-            border: 0px ;
-
-        }
-         .botones_navMarron:hover{
-             font-family:amatic;
-             color: #1f1611;
-             text-align: right;
-             background-color:#ffffff;
-             border: 0px ;
-
-         }
-
-     .barra_verde{
-            background-color:#02e4a3;
-            display:flex;
-    }
-     .barra_azul{
-            background-color:#03647f;
-            display:flex;
-    }
-     .barra_marron{
-            background-color:#1f1611;
-            display:flex;
-    }
-
-</style>
 
 </head>
 <body>
@@ -91,14 +27,21 @@
 
 
             <button type="button" class="botones_navVerde"  style=" font-size:30px;"  onclick="location.href='/espacios/list'">Espacios naturales<span class="sr-only">(current)</span></button>
-            <button type="button" class="botones_navVerde"  style=" font-size:30px;"  onclick="location.href='/espacios/list'">Lista Reservas<span class="sr-only">(current)</span></button>
+            <button type="button" class="botones_navVerde"  style=" font-size:30px;"  onclick="location.href='/reservas/list'">Lista Reservas<span class="sr-only">(current)</span></button>
         </div>
-        <div style="flex:2;">
-            <div style="text-align:right;">
-                <button type="button" class="botones_navVerde"  style=" font-size:30px; "  onclick="location.href='/ciudadano/add'">Perfil<span class="sr-only">(current)</span></button>
+        <div style="flex:2;text-align:right;" >
+            <div style="" class="dropdown">
+                <button class="boton_perfilVerde"  style="font-size:30px; " >
 
-
+                    <img src="https://image.flaticon.com/icons/svg/957/957284.svg"width="36" height="36" align="left">
+                    <p  >Perfil</p>
+                </button>
+                <div class="dropdown-content">
+                    <a style="text-align:left" th:href="@{/ciudadano/update/{dni}(dni=*{user.dni})}">Ajustes de la cuenta</a>
+                    <a style="text-align:left"  href="/logout" ><img src="/images/iconos/logout.svg" style="width:20px; height:20px; margin-right:5px;">Cerrar sesion</a>
+                </div>
             </div>
+
         </div>
 
 
@@ -136,12 +79,19 @@
             <button type="button" class="botones_navAzul"  style=" font-size:30px;"  onclick="location.href='/espacios/list'">Espacios naturales<span class="sr-only">(current)</span></button>
             <button type="button" class="botones_navAzul"  style=" font-size:30px;"  onclick="location.href='/espacios/list'">Lista Reservas<span class="sr-only">(current)</span></button>
         </div>
-        <div style="flex:2;">
-            <div style="text-align:right;">
-                <button type="button" class="botones_navAzul"  style=" font-size:30px; "  onclick="location.href='/gestor/perfil'">Perfil<span class="sr-only">(current)</span></button>
+        <div style="flex:2;text-align:right;" >
+            <div style="" class="dropdown">
+                <button class="boton_perfilAzul"  style="font-size:30px; " >
 
-
+                    <img src="https://image.flaticon.com/icons/svg/957/957284.svg"width="36" height="36" align="left">
+                    <p  >Perfil</p>
+                </button>
+                <div class="dropdown-content">
+                    <a href="/ciudadano/index">inicio</a>
+                    <a href="/logout">Cerrar sesion</a>
+                </div>
             </div>
+
         </div>
 
 
@@ -158,14 +108,21 @@
 
 
             <button type="button" class="botones_navMarron"  style=" font-size:30px;"  onclick="location.href='/espacios/list'">Espacios naturales<span class="sr-only">(current)</span></button>
-            <button type="button" class="botones_navMarron"  style=" font-size:30px;"  onclick="location.href='/espacios/list'">Lista Reservas<span class="sr-only">(current)</span></button>
+            <button type="button" class="botones_navMarron"  style=" font-size:30px;"  onclick="location.href='/ciudadano/list'">Lista Usuarios<span class="sr-only">(current)</span></button>
         </div>
-        <div style="flex:2;">
-            <div style="text-align:right;">
-                <button type="button" class="botones_navMarron"  style=" font-size:30px; "  onclick="location.href='/controlador/perfil'">Perfil<span class="sr-only">(current)</span></button>
+        <div style="flex:2;text-align:right;" >
+            <div style="" class="dropdown">
+                <button class="boton_perfilMarron"  style="font-size:30px; " >
 
-
+                    <img src="https://image.flaticon.com/icons/svg/957/957284.svg"width="36" height="36" align="left">
+                    <p  >Perfil</p>
+                </button>
+                <div class="dropdown-content">
+                    <a href="/ciudadano/index">inicio</a>
+                    <a href="/logout">Cerrar sesion</a>
+                </div>
             </div>
+
         </div>
 
 
