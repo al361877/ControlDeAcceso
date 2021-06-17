@@ -55,15 +55,13 @@
     <h1 >Espacios naturales</h1>
     <form style="margin-left:50px" action="#" th:action="@{/espacios/listPorMunicipio}" th:object="${municipio}" method="post">
         <label for="municipio">Filtrar por municipios:</label>
-        <select id="municipio" name="municipio">
-            <option value="Ninguno">Ninguno</option>
-            <option value="Castellón">Castellón</option>
-            <option value="Valencia">Valencia</option>
-            <option value="Alicante">Alicante</option>
-            <option value="Xativa">Xativa</option>
-            <option value="Náquera">Náquera</option>
+        <select id="municipio" name="municipio" >
+            <option th:each="mun:${municipios}" th:text="${mun}" th:value="${mun}">
+
+            </option>
+
         </select>
-        <input type="submit">
+        <input type="submit" value="Filtrar">
     </form>
     <div >
         <div th:each="lista: ${matrizEspacios}" class="principal">

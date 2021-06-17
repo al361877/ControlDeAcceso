@@ -15,7 +15,7 @@ body {
    background-color: white;
 
 }
-p.parrafo{
+.parrafo{
   font-size: 20px;
   text-align:justify;
   width:80%;
@@ -124,8 +124,8 @@ h4 {
          font-weight: 600;
          font-size: 20px;
       }
-      a{ text-decoration: none;}
 
+       a{ text-decoration: none;}
      /* Dropdown Button */
     .dropbtn {
         background-color: #4CAF50;
@@ -302,3 +302,4 @@ h4 {
                 background-color:#1f1611;
                 display:flex;
         }
+

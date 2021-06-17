@@ -1,8 +1,11 @@
 package es.uji.ei1027.ControlDeAcceso.controller;
 
 import es.uji.ei1027.ControlDeAcceso.dao.ReservaDao;
+import es.uji.ei1027.ControlDeAcceso.dao.ZonaDao;
+import es.uji.ei1027.ControlDeAcceso.model.EspacioPublico;
 import es.uji.ei1027.ControlDeAcceso.model.Reserva;
 import es.uji.ei1027.ControlDeAcceso.model.Usuario;
+import es.uji.ei1027.ControlDeAcceso.model.Zona;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.trace.http.HttpTrace;
 import org.springframework.stereotype.Controller;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -23,13 +27,19 @@ import java.util.List;
 
 public class ReservaController {
     private ReservaDao resDao;
+    private ZonaDao zonaDao;
 
 
     @Autowired
     public void setReserva(ReservaDao resDao) {
+
         this.resDao = resDao;
     }
+    @Autowired
+    public void setZona(ZonaDao zonaDao) {
 
+        this.zonaDao = zonaDao;
+    }
     @RequestMapping("/list")
     public String listReserva(HttpSession session, Model model) {
         Usuario user = (Usuario) session.getAttribute("user");
@@ -71,10 +81,44 @@ public class ReservaController {
 
         try{
             if(user.getTipoUsuario().equals("Ciudadano")){
-
-                model.addAttribute("res", new Reserva());
                 System.out.println("HOLA");
-                return "reservas/add/"+id;
+                List<Zona> lista = zonaDao.getZonasDisponiblesPorEspacio(id);
+                List<String> listaZonasString=new ArrayList<>();
+                for(Zona zona: lista){
+                    System.out.println(zona.toString());
+                    listaZonasString.add(zona.getId());
+                }
+                int cont=0;
+
+
+                List<Zona> listaInterior=new ArrayList<>();
+                List<List<Zona>> matriz=new ArrayList<>();
+                Zona zona;
+
+                for(int i=0;i<lista.size();i++) {
+                    zona=lista.get(i);
+
+                    if (cont < 3) {
+
+                        listaInterior.add(zona);
+                    }else{
+                        matriz.add(listaInterior);
+                        listaInterior=new ArrayList<>();
+                        listaInterior.add(zona);
+                        cont=-1;
+                    }
+
+                    if(i==lista.size()-1) {
+                        matriz.add(listaInterior);
+                        listaInterior=new ArrayList<>();
+                    }
+                    cont++;
+                }
+
+                model.addAttribute("zonasL",listaZonasString);
+                model.addAttribute("matrizZonas", matriz);
+
+                return "reservas/add";
             }
         }catch (Exception e){
             System.out.println("salto al login");
@@ -85,14 +129,19 @@ public class ReservaController {
 
 
     }
-
-    //add reserva
-    @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddReservaSubmit(@ModelAttribute("res") Reserva res,BindingResult bindingResult) {
-
-        resDao.addReserva(res);
-        return "redirect:list";
+    @RequestMapping(value="/add2/{zona}", method = RequestMethod.GET)
+    public String add2Reserva(Model model,HttpSession session,@PathVariable String zona) {
+        System.out.println(zona);
+        return "reservas/add2"+zona;
     }
+    //add reserva
+//    @RequestMapping(value="/add", method= RequestMethod.POST)
+//    public String processAddReservaSubmit(@ModelAttribute("reserva") String res) {
+//        System.out.println(res.toString());
+////        resDao.addReserva(res);
+//
+//        return "redirect:list";
+//    }
 
     /*
     @RequestMapping(value="/update/{id}", method = RequestMethod.GET)
@@ -103,21 +152,21 @@ public class ReservaController {
     }
 */
 
-    //Para que los controladores puedan ven las reservas de los ciudadanos
-    @RequestMapping(value="/busca/{id}", method = RequestMethod.GET)
-    public String buscaReservaId(Model model, @PathVariable String id) {
-
-        model.addAttribute("res", resDao.getReservaId(id));
-        return "reserva/busca";
-    }
+//    //Para que los controladores puedan ven las reservas de los ciudadanos
+//    @RequestMapping(value="/busca/{id}", method = RequestMethod.GET)
+//    public String buscaReservaId(Model model, @PathVariable String id) {
+//
+//        model.addAttribute("res", resDao.getReservaId(id));
+//        return "reserva/busca";
+//    }
 
     //Un ciudadano solo puede ver sus reservas
-    @RequestMapping(value="/busca/{dni}", method = RequestMethod.GET)
-    public String buscaReservaDni(Model model, @PathVariable String dni, @PathVariable String id) {
-
-        model.addAttribute("res", resDao.getReservaId(id));
-        return "reserva/busca";
-    }
+//    @RequestMapping(value="/busca/{dni}", method = RequestMethod.GET)
+//    public String buscaReservaDni(Model model, @PathVariable String dni, @PathVariable String id) {
+//
+//        model.addAttribute("res", resDao.getReservaId(id));
+//        return "reserva/busca";
+//    }
 
 
     @RequestMapping(value="/update", method = RequestMethod.POST)

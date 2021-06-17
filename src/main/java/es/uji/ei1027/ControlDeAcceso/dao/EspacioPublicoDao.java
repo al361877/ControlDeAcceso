@@ -1,6 +1,7 @@
 package es.uji.ei1027.ControlDeAcceso.dao;
 
 
+
 import es.uji.ei1027.ControlDeAcceso.model.EspacioPublico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.util.List;
+import java.util.spi.LocaleServiceProvider;
 
 @Repository  //En Spring los DAOs van anotados con @Repository
 public class EspacioPublicoDao {
@@ -42,9 +44,9 @@ public class EspacioPublicoDao {
         }
     }
     //Datos espacios por municipio
-    public List<EspacioPublico> getEspaciosPorMunicipio (String municipio){
+    public List<EspacioPublico> getEspaciosPorMunicipio(String municipio){
         try{
-            return jdbcTemplate.query("select * from espaciopublico where n_municipio=?;", new EspacioRowMapper(),municipio);
+            return jdbcTemplate.query("select * from espaciopublico where n_municipio=?", new EspacioRowMapper(),municipio);
         }
         catch (EmptyResultDataAccessException e){
             return null;

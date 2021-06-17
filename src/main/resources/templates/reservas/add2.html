@@ -25,7 +25,6 @@
             border-radius:20px;
 
 
-            height:200px;
         }
         div.p3{
 
@@ -33,25 +32,10 @@
             text-align:center;
             background-color:#65d9b8;
             border-radius:20px;
-            width:250px;
-            height:100px;
+
 
         }
-
-        @keyframes mymove2 {
-          from {width:250px;
-            height:100px;}
-          to {width:300px;
-            height:150px;}
-    }
         .p3:hover{
-            margin:auto;
-            text-align:center;
-            background-color:#65d9b8;
-            border-radius:20px;
-            animation: mymove2 0.3s;
-            animation-fill-mode: forwards;
-
 
         }
         .imgRedonda {
@@ -83,32 +67,10 @@
 <!--                </select>-->
 <!--                <input type="submit" role="button"  value="Reservar zona" />-->
 <!--            </form>-->
-            <div ></div>
-            <p style="text-align-center;">Estas son las zonas disponibles dentro del espacio natural. Selecciona una zona.</p>
-            <div th:each="lista: ${matrizZonas}"  class="principal" >
-                <div th:each="zona: ${lista}" class="p2">
-                    <a th:href="@{/reservas/add2/{zona}(zona=${zona.id})}">
-                    <div class="p3" >
-                        <b style="margin:0;display:inline">Zona </b><b style="margin-left:5px;display:inline" th:text="*{zona.id}"></b>
-                        <br>
-
-                        <div style="text-align:left;margin:auto; height:50px; width:200px;" >
-                            <p style="margin-left:20px;display:inline;" >Tipo suelo:</p><p style="margin-left:5px;display:inline" th:text="*{zona.tipo_suelo}"></p>
-                            <br>
-                            <p style="margin-left:20px;display:inline;" >Aforo actual:</p><p style="margin-left:5px;display:inline" th:text="*{zona.aforo_actual}"></p>
-                            <br>
-                            <p style="margin-left:20px;display:inline;" >Aforo maximo</p><p style="margin-left:5px;display:inline" th:text="*{zona.aforo_maximo}"></p>
-                        </div>
-
-
-                        <br>
-                    </div>
-                    </a>
-                </div>
-                <br>
-            </div>
+            <p>Has escogido la zona:</p>
 
             <br>
+            <p></p>
 
         </div>
         <button onClick="history.back()" class=" btn boton_azul"  ><img src="https://image.flaticon.com/icons/svg/929/929730.svg" width="20"  alt="x"> Volver</button>

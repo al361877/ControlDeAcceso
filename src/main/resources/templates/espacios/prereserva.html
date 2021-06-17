@@ -20,6 +20,16 @@
 
         div.p2{
 
+            margin:auto;
+            flex:1;
+            padding: 50px;
+            border-radius:20px;
+
+
+            height:300px;
+        }
+         div.p2Foto{
+
             margin-left:50px;
             flex:1;
             padding: 50px;
@@ -29,6 +39,19 @@
         }
         div.p3{
 
+            margin:auto;
+            text-align:center;
+            background-color:#65d9b8;
+            border-radius:20px;
+            width:250px;
+            height:150px;
+            color:black;
+             text-decoration: none;
+
+
+        }
+        div.p3Foto{
+
             flex:1;
             border-radius:20px;
             margin-left:10px;
@@ -36,10 +59,38 @@
             text-align:left;
         }
 
+        @keyframes mymove2 {
+          from {width:250px;
+            height:150px;}
+          to {width:300px;
+            height:200px;}
+    }
+        .p3:hover{
+            margin:auto;
+            text-align:center;
+            background-color:#65d9b8;
+            border-radius:20px;
+            animation: mymove2 0.3s;
+            animation-fill-mode: forwards;
+
+
+        }
         .imgRedonda {
-            width:100%;
+           width:100%;
             border-radius:10px;
         }
+
+        .informativo{
+                margin:auto;
+                color: black;
+                text-align: left;
+                border-radius:10px;
+                padding: 20px;
+                background-color:#649baa;
+                width:50%;
+        }
+
+
 
     </style>
 
@@ -54,20 +105,54 @@
 
     <div style="margin-bottom:20px;" class="principal" >
 
-        <div class="p2" >
+        <div class="p2Foto" >
             <img th:src="@{/images/espacios/espacio-{espacio}.jpg(espacio=${espacio.id})}" class="imgRedonda">
 
 
         </div>
-        <div class="p3" >
+        <div class="p3Foto" >
             <h2 style="text-align:left;">Tipo de espacio</h2>
             <p th:text="${espacio.tipo_espacio}" class="parrafo"></p>
-            <a th:href="@{~/reservas/add/{espacio}(espacio=${espacio.id})}" style=" margin-top: 10px;" class="btn boton_verde"  >Reservar espacio</a>
+
             <br><br>
             <button onClick="history.back()" class=" btn boton_azul"  ><img src="https://image.flaticon.com/icons/svg/929/929730.svg" width="20"  alt="x"> Volver</button>
 
+
         </div>
 
+    </div>
+    <br>
+    <div th:if="*{disponibilidad}">
+    <h2>Zonas disponibles </h2>
+    <div class="informativo">
+        <p class="parrafo" style="text-align-center;">Estas son las zonas disponibles dentro del espacio natural. Selecciona una zona para realizar la reserva.</p>
+    </div>
+
+    <div th:each="lista: ${matrizZonas}"  class="principal" >
+        <div th:each="zona: ${lista}" class="p2">
+            <a style="text-decoration: none;" th:href="@{/reservas/add2/{zona}(zona=${zona.id})}">
+                <div class="p3" >
+                    <b  class="parrafo" style="margin:0;display:inline">Zona </b><b  class="parrafo" style="margin-left:5px;display:inline" th:text="*{zona.id}"></b>
+                    <br>
+
+                    <div style="text-align:left;margin:auto; height:50px; width:200px;" >
+                        <p class="parrafo" style="margin-left:20px;display:inline;" >Tipo suelo:</p><p   class="parrafo" style="margin-left:5px;display:inline" th:text="*{zona.tipo_suelo}"></p>
+                        <br>
+                        <p class="parrafo" style="margin-left:20px;display:inline;" >Aforo actual:</p><p  class="parrafo" style="margin-left:5px;display:inline" th:text="*{zona.aforo_actual}"></p>
+                        <br>
+                        <p class="parrafo"style="margin-left:20px;display:inline;" >Aforo maximo:</p><p  class="parrafo" style="margin-left:5px;display:inline" th:text="*{zona.aforo_maximo}"></p>
+                    </div>
+
+
+                    <br>
+                </div>
+            </a>
+        </div>
+        <br>
+    </div>
+    </div>
+    <div th:unless="*{disponibilidad}" style="height:200px">
+        <h2 > No hay zonas disponibles </h2>
     </div>
 
 </div>

@@ -10,9 +10,9 @@ import java.sql.SQLException;
 public class ZonaRowMapper implements RowMapper<Zona> {
     public Zona mapRow(ResultSet rs, int RowNum) throws SQLException {
         Zona zona = new Zona();
-        zona.setId(rs.getString("id"));
+        zona.setId(rs.getString("id_zona"));
         zona.setNombre(rs.getString("nombre"));
-        zona.setEspacio_publico(rs.getString("espacio_publico"));
+        zona.setEspacio_publico(rs.getString("id_espacio"));
         zona.setCp(rs.getInt("cp"));
         zona.setTipo_suelo(rs.getString("tipo_suelo"));
         zona.setTipo_acceso(rs.getString("tipo_acceso"));
