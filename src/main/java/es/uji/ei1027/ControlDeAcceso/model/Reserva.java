@@ -14,6 +14,8 @@ public class Reserva {
 
     private Time horaIni;
     private Time horaFin;
+    private String horaIniString;
+    private String horaFinString;
     private int numPersonas;
 
     private LocalDate fechaIniDate;
@@ -41,8 +43,27 @@ public class Reserva {
     public String getFechaIniString() {
         return fechaIniString;
     }
+    public String getHoraIniString() {
+        return horaIniString;
+    }
+
+    public void setHoraIniString(String horaIniString) {
+
+
+        this.horaIniString = horaIniString;
+    }
+
+    public String getHoraFinString() {
+        return horaFinString;
+    }
+
+    public void setHoraFinString(String horaFinString) {
+
+        this.horaFinString = horaFinString;
+    }
 
     public void setFechaIniString(String fechaIniString) {
+
         this.fechaIniString = fechaIniString;
     }
 
@@ -77,12 +98,32 @@ public class Reserva {
     }
 
 
-    public void setHoraFin(Time horaFin) {
-        this.horaFin = horaFin;
+    public void setHoraFin(String horaFinS) {
+        this.horaFinString = horaFinS+":00";
+
+        this.horaFin=Time.valueOf(horaFinS+":00");
+
     }
 
-    public void setHoraIni(Time horaIni) {
-        this.horaIni = horaIni;
+    public void setHoraFinRow(Time horaFinS) {
+
+        this.horaFin=horaFinS;
+        this.horaFinString=horaFinS.toString();
+
+    }
+    public void setHoraIniRow(Time horaIniS) {
+
+        this.horaIni=horaIniS;
+        this.horaIniString=horaIniS.toString();
+
+    }
+    public void setHoraIni(String horaIniS) {
+
+        this.horaIniString = horaIniS+":00";
+
+        this.horaIni=Time.valueOf(horaIniS+":00");
+
+
     }
 
 
@@ -141,8 +182,8 @@ public class Reserva {
                 ", zona='" + zona + '\'' +
                 ", fechaIni=" + fechaIniString +
                 ", fechaFin=" + fechaFinString +
-                ", horaIni=" + horaIni +
-                ", horaFin=" + horaFin +
+                ", horaIni=" + horaIniString +
+                ", horaFin=" + horaFinString +
                 '}';
     }
 }

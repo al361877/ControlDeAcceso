@@ -2,7 +2,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragments/base}">
 <head>
-    <title>Control De Acceso</title>
+    <title>Espacio publico</title>
     <meta charset=" UTF-8" />
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
@@ -80,7 +80,8 @@
             border-radius:10px;
         }
 
-        .informativo{
+
+    div.informativo{
                 margin:auto;
                 color: black;
                 text-align: left;
@@ -89,7 +90,6 @@
                 background-color:#649baa;
                 width:50%;
         }
-
 
 
     </style>
@@ -127,29 +127,39 @@
     <div class="informativo">
         <p class="parrafo" style="text-align-center;">Estas son las zonas disponibles dentro del espacio natural. Selecciona una zona para realizar la reserva.</p>
     </div>
+        <form action="#" th:action="@{/reservas/add}" th:object="${zona}" method="post">
+
+
+
 
     <div th:each="lista: ${matrizZonas}"  class="principal" >
         <div th:each="zona: ${lista}" class="p2">
-            <a style="text-decoration: none;" th:href="@{/reservas/add2/{zona}(zona=${zona.id})}">
+            <input type="checkbox" th:field ="*{nombre}"  th:value="${zona.id}"/>
+            <label th:for="${#ids.prev('nombre')}" th:text ="${zona.id}" ></label>
                 <div class="p3" >
-                    <b  class="parrafo" style="margin:0;display:inline">Zona </b><b  class="parrafo" style="margin-left:5px;display:inline" th:text="*{zona.id}"></b>
+
+                    <b  class="parrafo" style="margin:0;display:inline">Zona </b><b  class="parrafo" style="margin-left:5px;display:inline" th:text="${zona.id}"></b>
                     <br>
 
                     <div style="text-align:left;margin:auto; height:50px; width:200px;" >
-                        <p class="parrafo" style="margin-left:20px;display:inline;" >Tipo suelo:</p><p   class="parrafo" style="margin-left:5px;display:inline" th:text="*{zona.tipo_suelo}"></p>
+                        <p class="parrafo" style="margin-left:20px;display:inline;" >Tipo suelo:</p><p   class="parrafo" style="margin-left:5px;display:inline" th:text="${zona.tipo_suelo}"></p>
                         <br>
-                        <p class="parrafo" style="margin-left:20px;display:inline;" >Aforo actual:</p><p  class="parrafo" style="margin-left:5px;display:inline" th:text="*{zona.aforo_actual}"></p>
+                        <p class="parrafo" style="margin-left:20px;display:inline;" >Aforo actual:</p><p  class="parrafo" style="margin-left:5px;display:inline" th:text="${zona.aforo_actual}"></p>
                         <br>
-                        <p class="parrafo"style="margin-left:20px;display:inline;" >Aforo maximo:</p><p  class="parrafo" style="margin-left:5px;display:inline" th:text="*{zona.aforo_maximo}"></p>
+                        <p class="parrafo"style="margin-left:20px;display:inline;" >Aforo maximo:</p><p  class="parrafo" style="margin-left:5px;display:inline" th:text="${zona.aforo_maximo}"></p>
                     </div>
 
 
                     <br>
                 </div>
-            </a>
+
         </div>
         <br>
+
     </div>
+                <input type="submit" value="Seleccionar zonas" class="boton_verde" style="margin:auto;">
+            </form>
+
     </div>
     <div th:unless="*{disponibilidad}" style="height:200px">
         <h2 > No hay zonas disponibles </h2>

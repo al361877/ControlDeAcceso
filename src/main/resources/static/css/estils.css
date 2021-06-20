@@ -57,6 +57,7 @@ h4 {
 
 }
 
+
 /* Classe CSS error */
 .error {
      color: red;
@@ -101,6 +102,32 @@ h4 {
          font-size: 20px;
 
    }
+   .boton_rojo{
+         color: black;
+         text-align: right;
+         background-color:#e40000;
+         font-family:amatic;
+         border: 0px ;
+
+          border-radius:5px;
+           padding: 10px;
+        font-weight: 600;
+        font-size: 20px;
+
+     }
+      .boton_rojo:hover{
+          font-family:amatic;
+          color: #e40000;
+          text-align: right;
+          background-color:#000000;
+          border: 0px ;
+
+           border-radius:5px;
+           padding: 10px;
+            font-weight: 600;
+            font-size: 20px;
+
+      }
    .boton_azul{
          color: white;
          text-align: right;

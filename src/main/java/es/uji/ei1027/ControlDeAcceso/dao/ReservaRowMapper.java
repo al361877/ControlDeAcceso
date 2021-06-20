@@ -18,8 +18,8 @@ public final class ReservaRowMapper implements RowMapper<Reserva> {
         reserva.setZona(rs.getString("id_zona"));
         reserva.setFechaIni(rs.getString("fechaini"));
         reserva.setFechaFin(rs.getString("fechafin"));
-        reserva.setHoraIni(rs.getTime("horaini"));
-        reserva.setHoraFin(rs.getTime("horafin"));
+        reserva.setHoraIniRow(rs.getTime("horaini"));
+        reserva.setHoraFinRow(rs.getTime("horafin"));
         reserva.setNumPersonas(rs.getInt("numpersonas"));
         return reserva;
 

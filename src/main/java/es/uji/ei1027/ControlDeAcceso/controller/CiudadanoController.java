@@ -118,7 +118,7 @@ public class CiudadanoController {
         try{
             if(user.getTipoUsuario().equals("Ciudadano")) {
                 model.addAttribute("perfil", userDao.getUsuario(user.getUsuario()));
-                return "ciudadano/index";
+                return "/ciudadano/index";
             }
         } catch (Exception e){
             return "error/error";

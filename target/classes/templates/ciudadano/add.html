@@ -17,8 +17,7 @@
     <br>
     <h1 >Registrarse</h1>
     <div align="center" style="height: 600px;" >
-        <form action="#" th:action="@{/ciudadano/add}"
-              th:object="${user}" method="post">
+        <form action="#" th:action="@{/ciudadano/add}" th:object="${user}" method="post">
             <table>
                 <tr>
                     <td><label>Dni</label></td>
@@ -114,16 +113,17 @@
                     <td class="error" th:if="${#fields.hasErrors('cp')}" th:errors="*{cp}" style="font-size:15px"></td>
                 </tr>
 
-
+                <tr><td><br></td></tr>
                 <tr>
-                    <td colspan="2"><input type="submit" role="button" class="btn btn-success"  value="Aceptar" /></td>
+                    <td>    <button onClick="history.back()" class=" btn boton_azul"  ><img src="https://image.flaticon.com/icons/svg/929/929730.svg" width="20"  alt="x"> Volver</button>
+                    </td>
+                    <td colspan="2"><input type="submit" role="button" class="btn boton_verde"  value="Aceptar" /></td>
 
                 </tr>
             </table>
 
         </form>
     </div>
-    <button onClick="history.back()" class=" btn boton_azul"  ><img src="https://image.flaticon.com/icons/svg/929/929730.svg" width="20"  alt="x"> Volver</button>
 
 </div>
 

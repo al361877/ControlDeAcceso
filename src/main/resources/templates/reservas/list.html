@@ -36,7 +36,7 @@
                 <td th:text="${res.horaIni}"></td>
                 <td th:text="${res.horaFin}"></td>
                 <td><a th:href="@{/espacios/prereserva/{id}(id=${res.espacio_publico})}" >Ir a espacio</a></td>
-
+                <td><a th:href="@{/reservas/canceladaU/{id}(id=${res.id})}" class="boton_rojo" >Borrar</a></td>
             </tr>
             </tbody>
         </table>

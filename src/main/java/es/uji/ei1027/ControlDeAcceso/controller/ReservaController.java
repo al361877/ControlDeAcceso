@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Controller
 @RequestMapping("reservas")
@@ -55,7 +57,9 @@ public class ReservaController {
                 if(lista.isEmpty()){
                     return "reservas/unlist";
                 }
-
+                for(Reserva res: lista){
+                    System.out.println(res.toString());
+                }
                 return "reservas/list";
             }/*else if(user.getTipoUsuario().equals("Controlador")){
                 List<Reserva> lista = resDao.getReservasByDni(user.getDni());
@@ -81,44 +85,54 @@ public class ReservaController {
 
         try{
             if(user.getTipoUsuario().equals("Ciudadano")){
-                System.out.println("HOLA");
+
+
                 List<Zona> lista = zonaDao.getZonasDisponiblesPorEspacio(id);
-                List<String> listaZonasString=new ArrayList<>();
-                for(Zona zona: lista){
-                    System.out.println(zona.toString());
-                    listaZonasString.add(zona.getId());
-                }
-                int cont=0;
+                List<String> listaZonasString = new ArrayList<>();
+                boolean disponibilidad;
 
 
-                List<Zona> listaInterior=new ArrayList<>();
-                List<List<Zona>> matriz=new ArrayList<>();
-                Zona zona;
 
-                for(int i=0;i<lista.size();i++) {
-                    zona=lista.get(i);
+                    for (Zona zona : lista) {
 
-                    if (cont < 3) {
-
-                        listaInterior.add(zona);
-                    }else{
-                        matriz.add(listaInterior);
-                        listaInterior=new ArrayList<>();
-                        listaInterior.add(zona);
-                        cont=-1;
+                        listaZonasString.add(zona.getId());
                     }
+                    int cont = 0;
+                disponibilidad = !listaZonasString.isEmpty();
+                if(disponibilidad) {
+                    List<Zona> listaInterior = new ArrayList<>();
+                    List<List<Zona>> matriz = new ArrayList<>();
+                    Zona zona;
 
-                    if(i==lista.size()-1) {
-                        matriz.add(listaInterior);
-                        listaInterior=new ArrayList<>();
+                    for (int i = 0; i < lista.size(); i++) {
+                        zona = lista.get(i);
+
+                        if (cont < 3) {
+
+                            listaInterior.add(zona);
+                        } else {
+                            matriz.add(listaInterior);
+                            listaInterior = new ArrayList<>();
+                            listaInterior.add(zona);
+                            cont = -1;
+                        }
+
+                        if (i == lista.size() - 1) {
+                            matriz.add(listaInterior);
+                            listaInterior = new ArrayList<>();
+                        }
+                        cont++;
                     }
-                    cont++;
+                    Reserva reserva= new Reserva();
+
+                    reserva.setEspacio_publico(id);
+                    model.addAttribute("zonasL", listaZonasString);
+                    model.addAttribute("matrizZonas", matriz);
+                    model.addAttribute("reserva",reserva);
+                    return "reservas/add";
+                }else{
+                    return "reservas/noHayZonas";
                 }
-
-                model.addAttribute("zonasL",listaZonasString);
-                model.addAttribute("matrizZonas", matriz);
-
-                return "reservas/add";
             }
         }catch (Exception e){
             System.out.println("salto al login");
@@ -129,44 +143,90 @@ public class ReservaController {
 
 
     }
-    @RequestMapping(value="/add2/{zona}", method = RequestMethod.GET)
-    public String add2Reserva(Model model,HttpSession session,@PathVariable String zona) {
-        System.out.println(zona);
-        return "reservas/add2"+zona;
+//
+//    @RequestMapping(value="/add", method = RequestMethod.POST)
+//    public String addReservaEspacio(HttpSession session,@ModelAttribute("zona") Zona zona) {
+//        Usuario user = (Usuario) session.getAttribute("user");
+//        System.out.println("ENTROOO");
+//
+//        try{
+//            if(user.getTipoUsuario().equals("Ciudadano")){
+//
+//                System.out.println("zona "+zona.toString());
+//                return "reservas/add";
+//
+//
+//            }
+//        }catch (Exception e){
+//            System.out.println("Estás en el catch");
+//            return "error/error";
+//        }
+//        System.out.println("Estás fuera del try");
+//        return "error/error";
+//
+//
+//    }
+
+    @RequestMapping(value="/canceladaU/{id}", method = RequestMethod.GET)
+    public String deleteReserva(Model model,HttpSession session,@PathVariable String id) {
+        Usuario user = (Usuario) session.getAttribute("user");
+        Reserva res=resDao.getReservaId(id);
+        try{
+            if(user.getTipoUsuario().equals("Ciudadano") && user.getDni().equals(res.getDniCiudadano())){
+
+                //FALTA quitar LAS PERSONAS de LA ZONAAAA
+                resDao.canceladaPorUsuarioReserva(id);
+
+                return "reservas/deleteConfirm";
+
+
+            }
+        }catch (Exception e){
+            System.out.println("Estás en el catch");
+            return "error/error";
+        }
+        System.out.println("Estás fuera del try");
+        return "error/error";
+
+
     }
-    //add reserva
-//    @RequestMapping(value="/add", method= RequestMethod.POST)
-//    public String processAddReservaSubmit(@ModelAttribute("reserva") String res) {
-//        System.out.println(res.toString());
-////        resDao.addReserva(res);
-//
-//        return "redirect:list";
-//    }
 
-    /*
-    @RequestMapping(value="/update/{id}", method = RequestMethod.GET)
-    public String editReserva(Model model, @PathVariable String id, String ) {
+    @RequestMapping(value="/add", method = RequestMethod.POST)
+    public String addReservaEspacioPost(Model model,HttpSession session,@ModelAttribute("reserva") Reserva res) {
+        Usuario user = (Usuario) session.getAttribute("user");
 
-        model.addAttribute("user", resDao.getReservaId(id));
-        return "user/reserva/update";
+        try{
+            if(user.getTipoUsuario().equals("Ciudadano")){
+
+
+                String fechaIni=res.getFechaIniString();
+                String horaIni=res.getHoraIniString();
+                String horaFin=res.getHoraFinString();
+
+                res.setHoraIni(horaIni);
+                res.setHoraFin(horaFin);
+                res.setFechaIni(fechaIni);
+                res.setFechaFin(fechaIni);
+
+                res.setId(aleatorio());
+                res.setDniCiudadano(user.getDni());
+                res.setEstado_reserva("pendienteDeUso");
+                System.out.println(res.toString());
+                resDao.addReserva(res);
+                //FALTA AÑADIR LAS PERSONAS A LA ZONAAAA
+                return "/reservas/addConfirm";
+
+
+            }
+        }catch (Exception e){
+            System.out.println("Estás en el catch");
+            return "error/error";
+        }
+        System.out.println("Estás fuera del try");
+        return "error/error";
+
+
     }
-*/
-
-//    //Para que los controladores puedan ven las reservas de los ciudadanos
-//    @RequestMapping(value="/busca/{id}", method = RequestMethod.GET)
-//    public String buscaReservaId(Model model, @PathVariable String id) {
-//
-//        model.addAttribute("res", resDao.getReservaId(id));
-//        return "reserva/busca";
-//    }
-
-    //Un ciudadano solo puede ver sus reservas
-//    @RequestMapping(value="/busca/{dni}", method = RequestMethod.GET)
-//    public String buscaReservaDni(Model model, @PathVariable String dni, @PathVariable String id) {
-//
-//        model.addAttribute("res", resDao.getReservaId(id));
-//        return "reserva/busca";
-//    }
 
 
     @RequestMapping(value="/update", method = RequestMethod.POST)
@@ -179,6 +239,17 @@ public class ReservaController {
         return "redirect:list";
     }
 
+    private String aleatorio(){
+        Random aleatorio = new Random();
+        String alfa = "ABCDEFGHIJKLMNOPQRSTVWXYZ";
+        String cadena = "";
+        int numero;
+        int forma;
+        forma=(int)(aleatorio.nextDouble() * alfa.length()-1+0);
+        numero=(int)(aleatorio.nextDouble() * 99+100);
+        cadena=cadena+alfa.charAt(forma)+numero;
+        return cadena;
+    }
 
 /*
     @RequestMapping(value="/delete/{dni}")

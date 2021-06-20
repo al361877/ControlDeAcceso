@@ -23,8 +23,9 @@ public class ReservaDao {
     //AÑADIMOS reserva
     public void addReserva(Reserva reserva) {
         try {
-            jdbcTemplate.update("INSERT INTO reserva VALUES (?,?,?,?,?,?,?,?,?)",
-                   reserva.getId(),reserva.getDniCiudadano(),reserva.getEspacio_publico(),reserva.getEstado_reserva(),reserva.getZona(),reserva.getFechaIni(),reserva.getFechaFin(),reserva.getHoraIni(),reserva.getHoraFin());
+            jdbcTemplate.update("INSERT INTO reserva VALUES (?,?,?,?,?,?,?,?,?,?)",
+                   reserva.getId(),reserva.getDniCiudadano(),reserva.getEspacio_publico(),reserva.getEstado_reserva(),reserva.getZona(),reserva.getFechaIni(),reserva.getFechaFin(),reserva.getHoraIni(),reserva.getHoraFin(),reserva.getNumPersonas()
+            );
         } catch (EmptyResultDataAccessException e){
             return;
         }
@@ -68,7 +69,7 @@ public class ReservaDao {
     }
     public List<Reserva> getReservasPendientesByDni(String dni){
         try{
-
+            System.out.println("aloooo");
             List<Reserva> lista =
                     (List<Reserva>) jdbcTemplate.query("SELECT * FROM reserva WHERE dni_ciudadano=? and estado_reserva='pendienteDeUso'", new ReservaRowMapper(),dni);
 
@@ -96,19 +97,19 @@ public class ReservaDao {
     public void canceladaPorUsuarioReserva(String id){
 
 
-            jdbcTemplate.update("UPDATE reserva SET estado_reserva=?,zona=? WHERE id=?","canceladaU",id);
+            jdbcTemplate.update("UPDATE reserva SET estado_reserva=? WHERE id=?","canceladaU",id);
         }
 
 
     public void canceladaPorControladorReserva(String id){
 
 
-        jdbcTemplate.update("UPDATE reserva SET estado_reserva=?,zona=? WHERE id=?","canceladaC",id);
+        jdbcTemplate.update("UPDATE reserva SET estado_reserva=? WHERE id=?","canceladaC",id);
     }
     public void finUsoReserva(String id){
 
 
-        jdbcTemplate.update("UPDATE reserva SET estado_reserva=?,zona=? WHERE id=?","finUso",id);
+        jdbcTemplate.update("UPDATE reserva SET estado_reserva=? WHERE id=?","finUso",id);
     }
 
 
