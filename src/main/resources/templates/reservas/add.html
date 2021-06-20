@@ -58,22 +58,8 @@
             text-align:left;
         }
 
-        @keyframes mymove2 {
-          from {width:250px;
-            height:150px;}
-          to {width:300px;
-            height:200px;}
-    }
-        .p3:hover{
-            margin:auto;
-            text-align:center;
-            background-color:#65d9b8;
-            border-radius:20px;
-            animation: mymove2 0.3s;
-            animation-fill-mode: forwards;
 
 
-        }
         .imgRedonda {
            width:100%;
             border-radius:10px;
@@ -105,11 +91,11 @@
 
         <div th:each="lista: ${matrizZonas}"  class="principal" >
             <div th:each="zona: ${lista}" class="p2">
-                <input type="checkbox" th:field ="*{zona}"  th:value="${zona.id}" style="margin:auto;text-align:center"/>
-                <label th:for="${#ids.prev('zona')}" th:text ="${zona.id}" ></label>
-                <div class="p3" >
 
-                    <b  class="parrafo" style="margin:0;display:inline">Zona </b><b  class="parrafo" style="margin-left:5px;display:inline" th:text="${zona.id}"></b>
+                <div class="p3" >
+                    <input type="checkbox" th:field ="*{zona}"  th:value="${zona.id}" style="margin:auto;text-align:center"/>
+                    <b  class="parrafo" style="margin:0;display:inline">Zona </b><label th:for="${#ids.prev('zona')}" th:text ="${zona.id}" ></label>
+
                     <br>
 
                     <div style="text-align:left;margin:auto; height:50px; width:200px;" >
@@ -153,7 +139,7 @@
                 <input class="form-control" type="text" th:field="*{estado_reserva}" hidden />
                 <input type="submit" role="button" class="boton_verde" value="Reservar zona" />
             <br>
-            <button onClick="history.back()" class=" btn boton_azul"  ><img src="https://image.flaticon.com/icons/svg/929/929730.svg" width="20"  alt="x"> Volver</button>
+            <button onClick="history.back()" class=" btn boton_azul" style="margin-top:10px;" ><img src="https://image.flaticon.com/icons/svg/929/929730.svg" width="20"  alt="x"> Volver</button>
 
 
 

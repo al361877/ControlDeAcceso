@@ -11,16 +11,16 @@ import java.sql.SQLException;
 public final class ReservaRowMapper implements RowMapper<Reserva> {
     public Reserva mapRow(ResultSet rs, int RowNum) throws SQLException{
         Reserva reserva = new Reserva();
-        reserva.setId(rs.getString("id"));
+        reserva.setId(rs.getString("id_reserva"));
         reserva.setDniCiudadano(rs.getString("dni_ciudadano"));
         reserva.setEspacio_publico(rs.getString("id_espacio"));
         reserva.setEstado_reserva(rs.getString("estado_reserva"));
-        reserva.setZona(rs.getString("id_zona"));
         reserva.setFechaIni(rs.getString("fechaini"));
         reserva.setFechaFin(rs.getString("fechafin"));
         reserva.setHoraIniRow(rs.getTime("horaini"));
         reserva.setHoraFinRow(rs.getTime("horafin"));
         reserva.setNumPersonas(rs.getInt("numpersonas"));
+
         return reserva;
 
     }

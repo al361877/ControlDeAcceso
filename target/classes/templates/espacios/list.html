@@ -36,7 +36,8 @@
 
         }
         .imgRedonda {
-            width:80%;
+            width:325px;
+            height:200px;
             border-radius:10px;
         }
         img:hover{
@@ -67,10 +68,11 @@
         <div th:each="lista: ${matrizEspacios}" class="principal">
             <div th:each="espacio: ${lista}" class="p2">
                 <div class="p3" >
-                    <b style="margin:0;display:inline">Municipio: </b><p style="margin-left:5px;display:inline" th:text="*{espacio.municipio}"></p>
+                    <div>
+                        <b style="margin:0;display:inline">Municipio: </b><p style="margin-left:5px;display:inline" th:text="*{espacio.municipio}"></p>
+                    </div>
                     <a style="margin-top: 10px;" th:href="@{./prereserva/{espacio}(espacio=${espacio.id})}" >
                         <img th:src="@{/images/espacios/espacio-{espacio}.jpg(espacio=${espacio.id})}" class="imgRedonda">
-                    <!--                    <img src="/images/espacios/espacio-des4.jpg" class="imgRedonda">-->
                     </a>
                     <br>
                     <a th:href="@{./prereserva/{espacio}(espacio=${espacio.id})}" style=" margin:auto; margin-top: 10px;" class="btn boton_azul" role="button" >Más info</a>

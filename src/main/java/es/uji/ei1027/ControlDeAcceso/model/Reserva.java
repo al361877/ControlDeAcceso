@@ -180,10 +180,15 @@ public class Reserva {
                 ", espacio_publico='" + espacio_publico + '\'' +
                 ", estado_reserva='" + estado_reserva + '\'' +
                 ", zona='" + zona + '\'' +
-                ", fechaIni=" + fechaIniString +
-                ", fechaFin=" + fechaFinString +
-                ", horaIni=" + horaIniString +
-                ", horaFin=" + horaFinString +
+                ", horaIni=" + horaIni +
+                ", horaFin=" + horaFin +
+                ", horaIniString='" + horaIniString + '\'' +
+                ", horaFinString='" + horaFinString + '\'' +
+                ", numPersonas=" + numPersonas +
+                ", fechaIniDate=" + fechaIniDate +
+                ", fechaFinDate=" + fechaFinDate +
+                ", fechaIniString='" + fechaIniString + '\'' +
+                ", fechaFinString='" + fechaFinString + '\'' +
                 '}';
     }
 }
