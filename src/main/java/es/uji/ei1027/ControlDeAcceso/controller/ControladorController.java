@@ -2,7 +2,6 @@ package es.uji.ei1027.ControlDeAcceso.controller;
 
 
 import es.uji.ei1027.ControlDeAcceso.dao.UsuarioDao;
-import es.uji.ei1027.ControlDeAcceso.model.Reserva;
 import es.uji.ei1027.ControlDeAcceso.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,8 +16,8 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
-@RequestMapping("ciudadano")
-public class CiudadanoController {
+@RequestMapping("controlador")
+public class ControladorController {
     private UsuarioDao userDao;
 
 
@@ -33,11 +32,11 @@ public class CiudadanoController {
         try{
             if(user.getTipoUsuario().equals("Gestor")) {
 
-                List<Usuario> lista = userDao.getCiudadanos();
+                List<Usuario> lista = userDao.getControladores();
 
                 model.addAttribute("usuarios", lista);
 
-                return "ciudadano/list.html";
+                return "controlador/list.html";
             }
         } catch (Exception e){
             return "error/error";
@@ -48,29 +47,29 @@ public class CiudadanoController {
 
 
     @RequestMapping(value="/add")
-    public String addCiudadano(Model model) {
+    public String addControlado(Model model) {
         model.addAttribute("user", new Usuario());
 
-        return "ciudadano/add";
+        return "controlador/add";
     }
 
     //add ciudadano
     @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddCiudadanoSubmit(@ModelAttribute("user") Usuario user, HttpSession session,BindingResult bindingResult) {
+    public String processAddControladorSubmit(@ModelAttribute("user") Usuario user, HttpSession session,BindingResult bindingResult) {
 
         RegisterValidator validator = new RegisterValidator();
         validator.validate(user, bindingResult);
         if (bindingResult.hasErrors())
-            return "ciudadano/add";
+            return "controlador/add";
 
-        userDao.addCiudadano(user);
-        userDao.addCiudadano(user.getDni());
-        user.setTipoUsuario("Ciudadano");
+        userDao.addControlador(user);
+        userDao.addControlador(user.getDni());
+        user.setTipoUsuario("Controlador");
         session.setAttribute("user", user);
 
         session.setAttribute("tipo",user.getTipoUsuario());
 
-        return "ciudadano/index";
+        return "controlador/index";
     }
 
     @RequestMapping(value="/update/{dni}", method = RequestMethod.GET)
@@ -81,7 +80,7 @@ public class CiudadanoController {
             if(user.getTipoUsuario().equals("Gestor") || user.getDni().equals(dni)){
 
                 model.addAttribute("user", userDao.getUsuarioDni(dni));
-                return "ciudadano/update";
+                return "controlador/update";
             }
         }catch (Exception e){
 

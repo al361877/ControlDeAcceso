@@ -21,8 +21,9 @@ public class UsuarioDao {
             jdbcTemplate=new JdbcTemplate(dataSource);
         }
 
-        //AÑADIMOS Usuario
-        public void addUsuario(Usuario usuario) {
+        //AÑADIMOS Ciudadano
+
+        public void addCiudadano(Usuario usuario) {
             System.out.println(usuario.toString());
             try {
 
@@ -40,10 +41,32 @@ public class UsuarioDao {
             jdbcTemplate.update("INSERT INTO Ciudadano VALUES (?)",dni);
         }
 
+
+    //AÑADIMOS Ciudadano
+
+    public void addControlador(Usuario usuario) {
+        System.out.println(usuario.toString());
+        try {
+
+            jdbcTemplate.update("INSERT INTO Usuario VALUES (?,?,?,?,?,?,?,?,?,?,?)",
+                    usuario.getDni(), usuario.getUsuario(),usuario.getNombre(), usuario.getTelefono(),
+                    usuario.getEmail(),usuario.getContraseña(), usuario.getNacimiento(),
+                    usuario.getCiudad(),usuario.getCalle(),usuario.getCp(), "Controlador");
+        } catch (EmptyResultDataAccessException e){
+            return;
+        }
+    }
+
+    //AÑADIMOS ciudadano
+    public void addControlador(String dni) {
+        jdbcTemplate.update("INSERT INTO Ciudadano VALUES (?)",dni);
+    }
+
+
         //Datos ciudadanos
         public List<Usuario> getCiudadanos (){
             try{
-                return jdbcTemplate.query("SELECT * FROM usuario WHERE tipo_usuario='Ciudadano'", new UsuarioRowMapper());
+                return jdbcTemplate.query("SELECT * FROM usuario WHERE tipo_usuario='Controlador'", new UsuarioRowMapper());
             }
             catch (EmptyResultDataAccessException e){
                 return null;

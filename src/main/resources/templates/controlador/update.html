@@ -1,0 +1,103 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <title>Ajustes de perfil</title>
+    <meta charset=" UTF-8" />
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+</head>
+<style>
+body {
+  background-color: lightgreen;
+}
+
+div {
+  background-color: white;
+}
+table, th {
+  border: 1px solid black;
+}
+td{
+    border: 1px solid black;
+    padding:5px;
+}
+</style>
+<body>
+
+<div   layout:fragment="content">
+    <div  style="height: 600px; width:400px; text-align:center; margin: auto;">
+    <h2>Editar perfil </h2>
+    <div align="center" >
+        <form action="#" th:action="@{/ciudadano/update}" th:object="${user}" method="post">
+            <table>
+                <tr>
+
+                    <td><input class="form-control" type="text" th:field="*{dni}" hidden/></td>
+                </tr>
+
+                <tr>
+
+                    <td><input class="form-control" type="text" th:field="*{usuario}" hidden /></td>
+                </tr>
+                <tr><td><br></td></tr>
+                <tr>
+                    <td><label>Nombre y apellidos</label></td>
+                    <td><input class="form-control" type="text" th:field="*{nombre}" /></td>
+                </tr>
+                <tr><td><br></td></tr>
+                <tr>
+
+                    <td><input class="form-control" type="text" th:field="*{telefono}" hidden/></td>
+                </tr>
+                <tr>
+
+                    <td><input class="form-control" type="text" th:field="*{email}" hidden /></td>
+                    <td><input class="form-control" type="text" th:field="*{tipoUsuario}" hidden /></td>
+                </tr>
+                <tr>
+
+                    <td><input class="form-control" type="password" th:field="*{contraseña}" hidden/></td>
+                </tr>
+                <tr>
+                    <td><label>Año nacimiento</label></td>
+                    <td ><input class="form-control" type="date"  th:field="*{nacimientoString}" /></td>
+
+                </tr>
+                <tr><td><br></td></tr>
+                <tr>
+                    <td><label>Ciudad</label></td>
+                    <td><input class="form-control" type="text" th:field="*{ciudad}" /></td>
+                </tr>
+                <tr><td><br></td></tr>
+                <tr>
+                    <td><label>Calle</label></td>
+                    <td><input class="form-control" type="text" th:field="*{calle}" /></td>
+                </tr>
+                <tr><td><br></td></tr>
+                <tr>
+                    <td><label>Código postal</label></td>
+                    <td><input class="form-control" type="text" th:field="*{cp}" /></td>
+                </tr>
+                <tr><td><br></td></tr>
+                <tr>
+                    <td>    <button onClick="history.back()" class=" btn boton_azul"  ><img src="https://image.flaticon.com/icons/svg/929/929730.svg" width="20"  alt="x"> Volver</button>
+                    </td>
+                    <td colspan="2"><input type="submit" role="button" class="btn boton_verde"  value="Aceptar" /></td>
+
+                </tr>
+
+            </table>
+
+        </form>
+    </div>
+    </div>
+</div>
+
+
+
+</body>
+</html>
