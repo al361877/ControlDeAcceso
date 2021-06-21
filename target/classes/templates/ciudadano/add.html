@@ -107,7 +107,7 @@
 
                 <tr>
                     <td><label>Código postal</label></td>
-                    <td><input type="text" class="form-control" th:field="*{cp}" /></td>
+                    <td><input type="number" class="form-control" th:field="*{cp}" /></td>
                 </tr>
                 <tr>
                     <td class="error" th:if="${#fields.hasErrors('cp')}" th:errors="*{cp}" style="font-size:15px"></td>

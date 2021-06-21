@@ -96,11 +96,13 @@ public class CiudadanoController {
 
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public String processUpdateSubmit(@ModelAttribute("user") Usuario user, BindingResult bindingResult,HttpSession session) {
-        System.out.println("before update "+user.getNombre());
 
 
-        if (bindingResult.hasErrors())
-            return "ciudadano/update/"+user.getDni();
+        UpdateValidator validator = new UpdateValidator();
+        validator.validate(user, bindingResult);
+        if (bindingResult.hasErrors()){
+            return "ciudadano/update";
+        }
 
         userDao.updateUsuario(user);
         return "ciudadano/updateConfirm";

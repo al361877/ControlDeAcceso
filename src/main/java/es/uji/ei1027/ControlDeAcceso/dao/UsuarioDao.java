@@ -126,6 +126,7 @@ public class UsuarioDao {
 
         //ACTUALIZAMOS Usuario
         public void updateUsuario(Usuario usuario){
+            System.out.println("entro en el update");
             usuario.setNacimiento(usuario.getNacimientoString());
             System.out.println(usuario.toString());
 

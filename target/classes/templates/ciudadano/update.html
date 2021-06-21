@@ -47,6 +47,10 @@ td{
                 <tr>
                     <td><label>Nombre y apellidos</label></td>
                     <td><input class="form-control" type="text" th:field="*{nombre}" /></td>
+
+                </tr>
+                <tr>
+                    <td class="error" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" style="font-size:15px"></td>
                 </tr>
                 <tr><td><br></td></tr>
                 <tr>
@@ -67,20 +71,32 @@ td{
                     <td ><input class="form-control" type="date"  th:field="*{nacimientoString}" /></td>
 
                 </tr>
+                <tr>
+                    <td class="error" th:if="${#fields.hasErrors('nacimientoString')}" th:errors="*{nacimientoString}" style="font-size:15px"></td>
+                </tr>
                 <tr><td><br></td></tr>
                 <tr>
                     <td><label>Ciudad</label></td>
                     <td><input class="form-control" type="text" th:field="*{ciudad}" /></td>
+                </tr>
+                <tr>
+                    <td class="error" th:if="${#fields.hasErrors('ciudad')}" th:errors="*{ciudad}" style="font-size:15px"></td>
                 </tr>
                 <tr><td><br></td></tr>
                 <tr>
                     <td><label>Calle</label></td>
                     <td><input class="form-control" type="text" th:field="*{calle}" /></td>
                 </tr>
+                <tr>
+                    <td class="error" th:if="${#fields.hasErrors('calle')}" th:errors="*{calle}" style="font-size:15px"></td>
+                </tr>
                 <tr><td><br></td></tr>
                 <tr>
                     <td><label>Código postal</label></td>
-                    <td><input class="form-control" type="text" th:field="*{cp}" /></td>
+                    <td><input class="form-control" type="number" th:field="*{cp}" /></td>
+                </tr>
+                <tr>
+                    <td class="error" th:if="${#fields.hasErrors('cp')}" th:errors="*{cp}" style="font-size:15px"></td>
                 </tr>
                 <tr><td><br></td></tr>
                 <tr>
