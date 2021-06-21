@@ -99,9 +99,9 @@ public class Reserva {
 
 
     public void setHoraFin(String horaFinS) {
-        this.horaFinString = horaFinS+":00";
+        this.horaFinString = horaFinS;
 
-        this.horaFin=Time.valueOf(horaFinS+":00");
+        this.horaFin=Time.valueOf(horaFinS);
 
     }
 
@@ -119,9 +119,9 @@ public class Reserva {
     }
     public void setHoraIni(String horaIniS) {
 
-        this.horaIniString = horaIniS+":00";
+        this.horaIniString = horaIniS;
 
-        this.horaIni=Time.valueOf(horaIniS+":00");
+        this.horaIni=Time.valueOf(horaIniS);
 
 
     }

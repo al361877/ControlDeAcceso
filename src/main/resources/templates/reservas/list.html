@@ -19,23 +19,26 @@
         <table  class="table table-striped">
             <thead>
             <tr>
-                <th >Código de Reserva</th>
-                <th >Zona</th>
+
+                <th >Zonas</th>
                 <th >Estado de la Reserva</th>
                 <th> Fecha </th>
                 <th> Hora de la reserva</th>
                 <th> Fin de la reserva</th>
+                <th> Número de asistentes</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="res: ${reservas}">
-                <td  th:text="${res.id}"></td>
+
                 <td th:text="${res.zona}"></td>
                 <td th:text="${res.estado_reserva}"></td>
                 <td th:text="${#temporals.format(res.fechaIni,'dd MMMM yyyy')}"></td>
                 <td th:text="${res.horaIni}"></td>
                 <td th:text="${res.horaFin}"></td>
-                <td><a th:href="@{/espacios/prereserva/{id}(id=${res.espacio_publico})}" >Ir a espacio</a></td>
+                <td th:text="${res.numPersonas}"></td>
+                <td><a th:href="@{/espacios/prereserva/{id}(id=${res.espacio_publico})} "  class="boton_azul" >Ir a espacio</a></td>
+                <td><a th:href="@{/reservas/update/{id}(id=${res.id})} " class="boton_verde">Modificar reserva</a></td>
                 <td><a th:href="@{/reservas/canceladaU/{id}(id=${res.id})}" class="boton_rojo" >Borrar</a></td>
             </tr>
             </tbody>

@@ -1,0 +1,158 @@
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <title>Reserva</title>
+    <meta charset=" UTF-8" />
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+    <style>
+
+        div.principal{
+            display: flex;
+
+        }
+
+        div.p2{
+
+            margin:auto;
+            flex:1;
+            padding: 50px;
+            border-radius:20px;
+
+
+            height:300px;
+        }
+         div.p2Foto{
+
+            margin-left:50px;
+            flex:1;
+            padding: 50px;
+            border-radius:20px;
+
+
+        }
+        div.p3{
+
+            margin:auto;
+            text-align:center;
+            background-color:#65d9b8;
+            border-radius:20px;
+            width:250px;
+            height:150px;
+            color:black;
+             text-decoration: none;
+
+
+        }
+        div.p3Foto{
+
+            flex:1;
+            border-radius:20px;
+            margin-left:10px;
+            margin-top:10px;
+            text-align:left;
+        }
+
+
+
+        .imgRedonda {
+           width:100%;
+            border-radius:10px;
+        }
+
+
+    div.informativo{
+                margin:auto;
+                color: black;
+                text-align: left;
+                border-radius:10px;
+                padding: 20px;
+                background-color:#649baa;
+                width:50%;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div layout:fragment="content">
+    <h2>Zonas disponibles </h2>
+    <div class="informativo">
+        <p class="parrafo" style="text-align-center;">Estas son las zonas disponibles dentro del espacio natural. Selecciona las zonas para realizar la reserva.</p>
+    </div>
+    <form style="margin-left:50px" action="#" th:action="@{/reservas/update}" th:object="${reserva}" method="post">
+
+
+        <div th:each="lista: ${matrizZonas}"  class="principal" >
+            <div th:each="zona: ${lista}" class="p2">
+
+                <div class="p3" >
+                    <input type="checkbox" th:field ="*{zona}"  th:value="${zona.id}" style="margin:auto;text-align:center"/>
+                    <b  class="parrafo" style="margin:0;display:inline">Zona </b><label th:for="${#ids.prev('zona')}" th:text ="${zona.id}" ></label>
+
+                    <br>
+
+                    <div style="text-align:left;margin:auto; height:50px; width:200px;" >
+                        <p class="parrafo" style="margin-left:20px;display:inline;" >Tipo suelo:</p><p   class="parrafo" style="margin-left:5px;display:inline" th:text="${zona.tipo_suelo}"></p>
+                        <br>
+                        <p class="parrafo" style="margin-left:20px;display:inline;" >Aforo actual:</p><p  class="parrafo" style="margin-left:5px;display:inline" th:text="${zona.aforo_actual}"></p>
+                        <br>
+                        <p class="parrafo"style="margin-left:20px;display:inline;" >Aforo maximo:</p><p  class="parrafo" style="margin-left:5px;display:inline" th:text="${zona.aforo_maximo}"></p>
+
+                    </div>
+
+
+                    <br>
+                </div>
+
+            </div>
+            <br>
+
+        </div>
+
+    <h2>Reservar zona</h2>
+    <div >
+        <div class="informativo">
+            <p class="parrafo" style="text-align-center;">Indica el día, la hora de la reserva, la hora hasta la que piensa estar en el espacio natural
+                y cuantas personas van a asistir al espacio natural.</p>
+        </div>
+        <div style="height: 600px; width:400px; text-align:center; margin: auto;">
+
+
+
+                <label style="margin:0;display:inline" >Fecha de la reserva</label><input type="date" class="form-control" th:field="*{fechaIniString}" />
+                <br>
+                <label style="margin:0;display:inline" >Hora de la reserva</label><input type="time" class="form-control" th:field="*{horaIniString}" />
+                <br>
+                <label style="margin:0;display:inline" >Hora final</label><input type="time" class="form-control" th:field="*{horaFinString}" />
+                <br>
+                <label style="margin:0;display:inline" >Numero de asistentes</label><input type="number" class="form-control" th:field="*{numPersonas}" />
+                <br>
+
+                <input class="form-control" type="text" th:field="*{espacio_publico}" hidden />
+                <input class="form-control" type="text" th:field="*{dniCiudadano}" hidden />
+                <input class="form-control" type="text" th:field="*{estado_reserva}" hidden />
+            <input class="form-control" type="text" th:field="*{id}" hidden />
+
+
+                <input type="submit" role="button" class="boton_verde" value="Reservar zona" />
+            <br>
+            <button onClick="history.back()" class=" btn boton_azul" style="margin-top:10px;" ><img src="https://image.flaticon.com/icons/svg/929/929730.svg" width="20"  alt="x"> Volver</button>
+
+
+
+        </div>
+    </div>
+    </form>
+</div>
+
+
+
+</body>
+</html>

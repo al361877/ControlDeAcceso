@@ -2,7 +2,6 @@ package es.uji.ei1027.ControlDeAcceso.controller;
 
 
 import es.uji.ei1027.ControlDeAcceso.dao.UsuarioDao;
-import es.uji.ei1027.ControlDeAcceso.model.Reserva;
 import es.uji.ei1027.ControlDeAcceso.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -65,6 +64,7 @@ public class CiudadanoController {
 
         userDao.addCiudadano(user);
         userDao.addCiudadano(user.getDni());
+
         user.setTipoUsuario("Ciudadano");
         session.setAttribute("user", user);
 

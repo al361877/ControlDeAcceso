@@ -1,5 +1,6 @@
 package es.uji.ei1027.ControlDeAcceso.controller;
 
+import com.sun.xml.internal.fastinfoset.tools.FI_DOM_Or_XML_DOM_SAX_SAXEvent;
 import es.uji.ei1027.ControlDeAcceso.dao.ReservaDao;
 import es.uji.ei1027.ControlDeAcceso.dao.ZonaDao;
 import es.uji.ei1027.ControlDeAcceso.model.EspacioPublico;
@@ -53,13 +54,10 @@ public class ReservaController {
                 List<Reserva> lista = resDao.getReservasPendientesByDni(user.getDni());
 
                 model.addAttribute("reservas", lista);
-                System.out.println(lista.isEmpty());
                 if(lista.isEmpty()){
                     return "reservas/unlist";
                 }
-                for(Reserva res: lista){
-                    System.out.println(res.toString());
-                }
+
                 return "reservas/list";
             }/*else if(user.getTipoUsuario().equals("Controlador")){
                 List<Reserva> lista = resDao.getReservasByDni(user.getDni());
@@ -129,6 +127,7 @@ public class ReservaController {
                     model.addAttribute("zonasL", listaZonasString);
                     model.addAttribute("matrizZonas", matriz);
                     model.addAttribute("reserva",reserva);
+
                     return "reservas/add";
                 }else{
                     return "reservas/noHayZonas";
@@ -203,15 +202,14 @@ public class ReservaController {
                 String horaIni=res.getHoraIniString();
                 String horaFin=res.getHoraFinString();
 
-                res.setHoraIni(horaIni);
-                res.setHoraFin(horaFin);
+                res.setHoraIni(horaIni+":00");
+                res.setHoraFin(horaFin+":00");
                 res.setFechaIni(fechaIni);
                 res.setFechaFin(fechaIni);
 
                 res.setId(aleatorio());
                 res.setDniCiudadano(user.getDni());
                 res.setEstado_reserva("pendienteDeUso");
-                System.out.println(res.toString());
                 resDao.addReserva(res);
                 //FALTA AÑADIR LAS PERSONAS A LA ZONAAAA
                 return "/reservas/addConfirm";
@@ -228,15 +226,111 @@ public class ReservaController {
 
     }
 
+    @RequestMapping(value="/update/{id}", method = RequestMethod.GET)
+    public String updateReserva(Model model,HttpSession session,@PathVariable String id) {
+
+        Usuario user = (Usuario) session.getAttribute("user");
+
+        try{
+            if(user.getTipoUsuario().equals("Ciudadano")){
+                Reserva reserva= resDao.getReservaId(id);
+                String idEspacio= reserva.getEspacio_publico();
+                List<Zona> lista = zonaDao.getZonasDisponiblesPorEspacio(idEspacio);
+
+
+                List<String> listaZonasString = new ArrayList<>();
+                boolean disponibilidad;
+
+
+                for (Zona zona : lista) {
+
+                    listaZonasString.add(zona.getId());
+                }
+                int cont = 0;
+                disponibilidad = !listaZonasString.isEmpty();
+                if(disponibilidad) {
+                    List<Zona> listaInterior = new ArrayList<>();
+                    List<List<Zona>> matriz = new ArrayList<>();
+                    Zona zona;
+
+                    for (int i = 0; i < lista.size(); i++) {
+                        zona = lista.get(i);
+
+                        if (cont < 3) {
+
+                            listaInterior.add(zona);
+                        } else {
+                            matriz.add(listaInterior);
+                            listaInterior = new ArrayList<>();
+                            listaInterior.add(zona);
+                            cont = -1;
+                        }
+
+                        if (i == lista.size() - 1) {
+                            matriz.add(listaInterior);
+                            listaInterior = new ArrayList<>();
+                        }
+                        cont++;
+                    }
+
+
+
+
+                    model.addAttribute("zonasL", listaZonasString);
+                    model.addAttribute("matrizZonas", matriz);
+                    model.addAttribute("reserva",reserva);
+                    return "reservas/update";
+                }else{
+                    return "reservas/noHayZonas";
+                }
+            }
+        }catch (Exception e){
+            System.out.println("salto al login");
+            return "error/error";
+        }
+
+        return "error/error";
+
+
+    }
 
     @RequestMapping(value="/update", method = RequestMethod.POST)
-    public String processUpdateSubmit(@ModelAttribute("res") Reserva res,
-                                      BindingResult bindingResult) {
+    public String processUpdateSubmit(@ModelAttribute("res") Reserva res, HttpSession session) {
 
-        if (bindingResult.hasErrors())
-            return "reserva/update";
-        resDao.updateReserva(res);
-        return "redirect:list";
+
+        Usuario user = (Usuario) session.getAttribute("user");
+        System.out.println("holaa");
+        try{
+            if(user.getTipoUsuario().equals("Ciudadano")){
+
+                System.out.println("reserva despues del update "+res.toString());
+                String fechaIni=res.getFechaIniString();
+                String horaIni=res.getHoraIniString();
+                String horaFin=res.getHoraFinString();
+                System.out.println("hola1");
+                res.setHoraIni(horaIni);
+                res.setHoraFin(horaFin);
+                System.out.println("hola2");
+                res.setFechaIni(fechaIni);
+                res.setFechaFin(fechaIni);
+                System.out.println("hola3");
+
+
+                //FALTA AÑADIR LAS PERSONAS A LA ZONAAAA
+                System.out.println("reserva antes del dao "+res.toString());
+                resDao.updateReserva(res);
+
+                return "/reservas/updateConfirm";
+
+
+            }
+        }catch (Exception e){
+            System.out.println("Estás en el catch");
+            return "error/error";
+        }
+        System.out.println("Estás fuera del try");
+        return "error/error";
+
     }
 
     private String aleatorio(){

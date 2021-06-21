@@ -41,9 +41,7 @@ public class ZonaDao {
     //Datos zona
     public List<Zona> getZonasDisponiblesPorEspacio (String espacio){
         try{
-
             List<Zona> lista =  jdbcTemplate.query("select z.* from espaciopublico as e right join zona as z using (id_espacio) where id_espacio=? and tipo_acceso='abierto'", new ZonaRowMapper(),espacio);
-
             return lista;
         }
         catch (EmptyResultDataAccessException e){
