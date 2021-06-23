@@ -348,7 +348,6 @@ public class ReservaController {
                     }
 
 
-                    reserva.setEspacio_publico(id);
                     model.addAttribute("zonasL", listaZonasString);
                     model.addAttribute("matrizZonas", matriz);
                     model.addAttribute("matrizFranja", matrizFranja);
