@@ -1,0 +1,311 @@
+
+<html xmlns:th="http://www.thymeleaf.org"
+   >
+<head>
+    <meta charset="UTF-8" />
+    <title>Control De Acceso</title>
+
+
+
+    <style>
+
+    body {
+      margin: auto;
+      width: 100%;
+      background-color:black;
+
+    }
+    div.container{
+        width: 80%;
+        margin:auto;
+    }
+    div.ex1 {
+
+      margin: auto;
+
+      height: 80%;
+      background-image: url("../beach1.jpg");
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+    text-align:center;
+      display: flex;
+
+
+
+
+
+    }
+    @keyframes mymove1 {
+      from {top: 500px;}
+      to {top: 0px;}
+    }
+
+    @font-face{
+        font-family:amatic;
+        font-style:normal;
+        font-weight:normal;
+        src: url("../AmaticSC-Regular.ttf");
+    }
+    div.ex1-2{
+        margin:auto;
+        width: 50%;
+        height: 45%;
+        text-align:center;
+        opacity: 0.7;
+        background-color:#02e4a3;
+
+        font-family:amatic;
+        font-size: 65px;
+
+          position: relative;
+          animation: mymove1 3s;
+          animation-fill-mode: forwards;
+    }
+
+
+    div.ex2{
+
+         margin: auto;
+
+         height: 80%;
+         background-color:#03647f;
+          display: flex;
+
+    }
+
+    @keyframes mymove2 {
+      from {left: 900px;}
+      to {left: 0px;}
+    }
+    div.ex2-1{
+
+        flex:1;
+        background-image: url("../index2.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+
+        width:40%;
+
+        position: relative;
+        animation: mymove2 3s;
+        animation-fill-mode: forwards;
+        animation-delay: 3s;
+
+    }
+    div.ex2-2{
+
+        flex:2;
+
+        width:40%;
+
+    }
+
+
+
+
+  div.ex3{
+
+     margin: auto;
+
+     height: 80%;
+     background-color:#1f1611;
+               display: flex;
+
+
+
+}
+ div.ex3-1{
+       flex:1;
+       width:10%;
+    background-image: url("../plantita1(sinFondo).png");
+      background-repeat: no-repeat;
+      background-size: 70%;
+       background-position: top left;
+
+
+}
+div.ex3-2{
+       flex:3;
+       display:flex;
+
+
+}
+div.ex3-3{
+       flex:1;
+        width:25%;
+      background-image: url("../plantita2(sinFondo).png");
+      background-repeat: no-repeat;
+      background-size: 70%;
+      background-position: bottom right;
+
+}
+
+
+.imgRedonda {
+    width:100px;
+    height:100px;
+    border-radius:50px;
+}
+
+img:hover{
+    opacity:0.5;
+}
+
+
+p.parrafo{
+  font-size: 20px;
+  text-align:justify;
+  width:80%;
+  font-family:"Calibri";
+
+}
+   p.h1{
+        font-family:amatic;
+        font-size: 60px;
+        text-align:center;
+
+
+    }
+ p.h2{
+        font-family:amatic;
+        font-size: 40px;
+        text-align:center;
+
+
+    }
+
+a{ text-decoration: none;}
+
+</style>
+</head>
+<body style=" background-color:black;">
+<nav th:replace="fragments/nav"></nav>
+<div  class="container">
+
+    <br>
+
+    <div class="ex1" style="text-align:center;" >
+
+        <div class="ex1-2" style="padding:50px">
+            <p style="margin:auto">ESPACIOS NATURALES <br>
+                CV</p>
+
+
+
+        </div>
+
+    </div>
+    <div class="ex2">
+
+        <div class="ex2-1"><!--foto--></div>
+
+        <div class="ex2-2">
+            <h1 style="color:white;"> CONTROL DE ACCESO</h1>
+            <br><br><br>
+            <p class="parrafo" style="color:white; margin:auto;">
+                La comunidad valenciana dispone de numerosos espacios naturales a lo largo de los municipios,
+                como playas, ríos, montañas... La consejería de Medio Ambiente de la Generelatit Valenciana,
+                la cual quiere impulsar el uso adecuado de las intalaciones y sercivicos disponibles, controla
+                la ocupación para evitar aglomeraciones.
+
+            </p>
+        </div>
+
+
+
+    </div>
+    <div class="ex3">
+        <div class="ex3-1"></div>
+        <div class="ex3-2 ">
+
+
+            <!--            </table>-->
+            <div style="margin:auto; ">
+                <a  style="text-decoration: none;" href="../espacios/add" >
+                    <div style="display:flex; ">
+
+                        <div  style="flex:1;width: 25%; margin:auto;">
+
+                            <img src="../espacio_icon.jpg" class="imgRedonda" alt="Smiley face" style="margin:auto;width:100px;height:100px;">
+                            <br>
+                        </div>
+                        <br>
+                        <div  style="flex:2;width: 75%;">
+                            <p class="h2"  style="color:white ; padding-bottom:10px; text-align:left; " >CONSULTAR ESPACIOS</p>
+                            <p class="parrafo" style="color:white; text-align:left ">Echar un vistazo a los espacios públicos</p>
+                        </div>
+                    </div>
+                </a>
+                <br>
+                <a style="text-decoration: none; " href="espacios/add">
+                    <div style="display:flex;">
+
+                        <div  style="flex:1;width: 25%; margin:auto; ">
+
+                            <img src="../info_icon.png" alt="Smiley face" style="margin:auto;width:100px;height:100px;">
+                            <br>
+                        </div>
+
+
+                        <div  style="flex:2;width: 75%;">
+                            <p class="h2" style="color:white ; padding-bottom:10px; text-align:left; " >SOLICITAR AYUDA</p>
+                            <p class="parrafo" style="color:white; text-align:left ">Consejos para el viaje<br>y contactacon nosotros si<br>necesita más información</p>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+
+
+
+
+
+
+        </div>
+        <div class="ex3-3">
+
+        </div>
+
+    </div>
+
+</div>
+<div style="width:100%;background-color:#30180b;color:white;">
+    <div style="background: rgba(21, 14, 5, 0.3"><h6 class="mb-0"><br><br></h6></div>
+    <br>
+    <table style="width:100%; ">
+        <tr>
+
+            <td style="text-align: center; color:#D8D8D8;">
+                ©Control Acceso. Copyright 2021. TODOS LOS DERECHOS RESERVADOS.  √ Usamos Cookies
+            </td>
+
+        </tr>
+        <tr>
+            <td style="text-align: center;">
+                <a style="color:#D8D8D8; font-size:16px; text-align: right;" > Telefono: 920 14 58 74</a>
+            </td>
+
+
+        </tr>
+        <tr style="text-align: center;">
+            <td>
+                <a style="color:#D8D8D8; font-size:14px;" href="mailto:al361877@uji.es">control-acceso@gva.es</a><br>
+            </td>
+            <td>
+                &nbsp;
+            </td>
+            <td>
+                &nbsp;
+            </td>
+        </tr>
+    </table>
+    <table align="center" border="0">
+        <td><a href="https://www.facebook.com/" target="_blank"><img src="https://image.flaticon.com/icons/svg/145/145802.svg" width="40" height="40"></a></td><td style="color:white">&nbsp;Facebook&nbsp;&nbsp;</td>
+        <td><a href="https://twitter.com/" target="_blank"><img src="https://image.flaticon.com/icons/svg/145/145812.svg" width="40" height="40"></a></td><td style="color:white">&nbsp;Twitter&nbsp;&nbsp;</td>
+        <td><a href="https://www.instagram.com/" target="_blank"><img src="https://image.flaticon.com/icons/svg/185/185985.svg" width="40" height="40"></a></td><td style="color:white">&nbsp;Instagram&nbsp;&nbsp;</td>
+        <td><a href="https://www.youtube.es/" target="_blank"  ><img src="https://image.flaticon.com/icons/svg/185/185983.svg" width="40" height="40"></a></td><td style="color:white" >&nbsp;Youtube&nbsp;&nbsp; </td>
+    </table>
+    <br>
+</div>
+</body>
+</html>
