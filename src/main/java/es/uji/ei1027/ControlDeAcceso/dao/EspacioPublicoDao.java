@@ -25,8 +25,8 @@ public class EspacioPublicoDao {
     //AÑADIMOS espacio publico
     public void addEspacio(EspacioPublico espacioPublico) {
         try {
-            jdbcTemplate.update("INSERT INTO EspacioPublico VALUES (?,?,?,?)",
-                    espacioPublico.getId(),espacioPublico.getMunicipio(),espacioPublico.getTipo_espacio(),espacioPublico.getCp());
+            jdbcTemplate.update("INSERT INTO EspacioPublico VALUES (?,?,?,?,?)",
+                    espacioPublico.getId(),espacioPublico.getMunicipio(),espacioPublico.getTipo_espacio(),espacioPublico.getCp(),espacioPublico.getNombre());
         } catch (EmptyResultDataAccessException e){
             return;
         }

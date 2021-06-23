@@ -60,8 +60,15 @@
 
         </div>
         <div class="p3" >
-            <h2 style="text-align:left;">Tipo de espacio</h2>
-            <p th:text="${espacio.tipo_espacio}" class="parrafo"></p>
+            <h2 style="text-align:left;">Información del espacio</h2>
+            <b style="margin:0;display:inline">Nombre: </b> <p style="margin:0;display:inline" th:text="${espacio.nombre}" class="parrafo"></p>
+            <br>
+            <b style="margin:0;display:inline">Municipio: </b> <p style="margin:0;display:inline" th:text="${espacio.municipio}" class="parrafo"></p>
+            <br>
+            <b style="margin:0;display:inline">Tipo espacio: </b> <p style="margin:0;display:inline" th:text="${espacio.tipo_espacio}" class="parrafo"></p>
+            <br>
+            <b style="margin:0;display:inline">Servicio: </b> <p style="margin:0;display:inline" th:text="${servicio}" class="parrafo"></p>
+            <br>
             <a th:href="@{~/reservas/add/{espacio}(espacio=${espacio.id})}" style=" margin-top: 10px;" class="btn boton_verde"  >Reservar espacio</a>
             <br><br>
             <button onClick="history.back()" class=" btn boton_azul"  ><img src="https://image.flaticon.com/icons/svg/929/929730.svg" width="20"  alt="x"> Volver</button>

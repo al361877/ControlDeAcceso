@@ -12,8 +12,8 @@ public final class EstacionRowMapper implements RowMapper<Estacion> {
     public Estacion mapRow(ResultSet rs, int RowNum) throws SQLException{
         Estacion estacion = new Estacion();
         estacion.setId(rs.getString("id_estacion"));
-        estacion.setFechaFin(rs.getDate("fechaini"));
-        estacion.setFechaFin(rs.getDate("fechafin"));
+        estacion.setFechaIni(rs.getString("fechaini"));
+        estacion.setFechaFin(rs.getString("fechafin"));
         return estacion;
 
     }

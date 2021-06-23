@@ -1,12 +1,10 @@
 package es.uji.ei1027.ControlDeAcceso.controller;
 
 import com.sun.xml.internal.fastinfoset.tools.FI_DOM_Or_XML_DOM_SAX_SAXEvent;
+import es.uji.ei1027.ControlDeAcceso.dao.FranjaDao;
 import es.uji.ei1027.ControlDeAcceso.dao.ReservaDao;
 import es.uji.ei1027.ControlDeAcceso.dao.ZonaDao;
-import es.uji.ei1027.ControlDeAcceso.model.EspacioPublico;
-import es.uji.ei1027.ControlDeAcceso.model.Reserva;
-import es.uji.ei1027.ControlDeAcceso.model.Usuario;
-import es.uji.ei1027.ControlDeAcceso.model.Zona;
+import es.uji.ei1027.ControlDeAcceso.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.trace.http.HttpTrace;
 import org.springframework.stereotype.Controller;
@@ -31,12 +29,17 @@ import java.util.Random;
 public class ReservaController {
     private ReservaDao resDao;
     private ZonaDao zonaDao;
-
+    private FranjaDao franjaDao;
 
     @Autowired
     public void setReserva(ReservaDao resDao) {
 
         this.resDao = resDao;
+    }
+    @Autowired
+    public void setFranjaDao(FranjaDao franjaDao) {
+
+        this.franjaDao= franjaDao;
     }
     @Autowired
     public void setZona(ZonaDao zonaDao) {
@@ -52,6 +55,13 @@ public class ReservaController {
 
 
                 List<Reserva> lista = resDao.getReservasPendientesByDni(user.getDni());
+                FranjaEspacio franjaEspacio;
+                for(Reserva res: lista){
+                    franjaEspacio=franjaDao.getFranja(res.getFranja());
+                    res.setHoraIniString(franjaEspacio.getHoraIniString());
+                    res.setHoraFinString(franjaEspacio.getHoraFinString());
+                    System.out.println(res.toString());
+                }
 
                 model.addAttribute("reservas", lista);
                 if(lista.isEmpty()){
@@ -102,6 +112,11 @@ public class ReservaController {
                     List<List<Zona>> matriz = new ArrayList<>();
                     Zona zona;
 
+                    List<FranjaEspacio> listaFranja=franjaDao.getFranjas();
+                    List<FranjaEspacio> listafranjaInterior = new ArrayList<>();
+                    List<List<FranjaEspacio>> matrizFranja = new ArrayList<>();
+                    FranjaEspacio franjaEspacio;
+
                     for (int i = 0; i < lista.size(); i++) {
                         zona = lista.get(i);
 
@@ -121,11 +136,34 @@ public class ReservaController {
                         }
                         cont++;
                     }
+
+                    cont=0;
+                    //matriz franjas
+                    for (int i = 0; i < listaFranja.size(); i++) {
+                        franjaEspacio = listaFranja.get(i);
+
+                        if (cont < 3) {
+
+                            listafranjaInterior.add(franjaEspacio);
+                        } else {
+                            matrizFranja.add(listafranjaInterior);
+                            listafranjaInterior = new ArrayList<>();
+                            listafranjaInterior.add(franjaEspacio);
+                            cont = 0;
+                        }
+
+                        if (i == listaFranja.size() - 1) {
+                            matrizFranja.add(listafranjaInterior);
+                            listafranjaInterior = new ArrayList<>();
+                        }
+                        cont++;
+                    }
                     Reserva reserva= new Reserva();
 
                     reserva.setEspacio_publico(id);
                     model.addAttribute("zonasL", listaZonasString);
                     model.addAttribute("matrizZonas", matriz);
+                    model.addAttribute("matrizFranja", matrizFranja);
                     model.addAttribute("reserva",reserva);
 
                     return "reservas/add";
@@ -191,25 +229,34 @@ public class ReservaController {
     }
 
     @RequestMapping(value="/add", method = RequestMethod.POST)
-    public String addReservaEspacioPost(Model model,HttpSession session,@ModelAttribute("reserva") Reserva res) {
+    public String addReservaEspacioPost(Model model,HttpSession session,@ModelAttribute("reserva") Reserva res,BindingResult bindingResult) {
         Usuario user = (Usuario) session.getAttribute("user");
 
         try{
             if(user.getTipoUsuario().equals("Ciudadano")){
 
+                ReservaValidator validator = new ReservaValidator();
+                System.out.println(res.toString());
+                validator.validate(res, bindingResult);
+                System.out.println(res.toString());
+                if (bindingResult.hasErrors()){
+                    System.out.println("ennntrooo");
+                    return "reservas/add";
 
+                }
                 String fechaIni=res.getFechaIniString();
-                String horaIni=res.getHoraIniString();
-                String horaFin=res.getHoraFinString();
-
-                res.setHoraIni(horaIni+":00");
-                res.setHoraFin(horaFin+":00");
                 res.setFechaIni(fechaIni);
-                res.setFechaFin(fechaIni);
 
                 res.setId(aleatorio());
                 res.setDniCiudadano(user.getDni());
                 res.setEstado_reserva("pendienteDeUso");
+                System.out.println(res.toString());
+
+                FranjaEspacio franjaEspacio=franjaDao.getFranja(res.getFranja());
+                res.setHoraIniString(franjaEspacio.getHoraIniString());
+                res.setHoraFinString(franjaEspacio.getHoraFinString());
+
+
                 resDao.addReserva(res);
                 //FALTA AÑADIR LAS PERSONAS A LA ZONAAAA
                 return "/reservas/addConfirm";
@@ -242,6 +289,10 @@ public class ReservaController {
                 boolean disponibilidad;
 
 
+                List<FranjaEspacio> listaFranja=franjaDao.getFranjas();
+                List<FranjaEspacio> listafranjaInterior = new ArrayList<>();
+                List<List<FranjaEspacio>> matrizFranja = new ArrayList<>();
+                FranjaEspacio franjaEspacio;
                 for (Zona zona : lista) {
 
                     listaZonasString.add(zona.getId());
@@ -274,11 +325,35 @@ public class ReservaController {
                     }
 
 
+                    cont=0;
+                    //matriz franjas
+                    for (int i = 0; i < listaFranja.size(); i++) {
+                        franjaEspacio = listaFranja.get(i);
+
+                        if (cont < 3) {
+
+                            listafranjaInterior.add(franjaEspacio);
+                        } else {
+                            matrizFranja.add(listafranjaInterior);
+                            listafranjaInterior = new ArrayList<>();
+                            listafranjaInterior.add(franjaEspacio);
+                            cont = 0;
+                        }
+
+                        if (i == listaFranja.size() - 1) {
+                            matrizFranja.add(listafranjaInterior);
+                            listafranjaInterior = new ArrayList<>();
+                        }
+                        cont++;
+                    }
 
 
+                    reserva.setEspacio_publico(id);
                     model.addAttribute("zonasL", listaZonasString);
                     model.addAttribute("matrizZonas", matriz);
+                    model.addAttribute("matrizFranja", matrizFranja);
                     model.addAttribute("reserva",reserva);
+
                     return "reservas/update";
                 }else{
                     return "reservas/noHayZonas";
@@ -303,21 +378,17 @@ public class ReservaController {
         try{
             if(user.getTipoUsuario().equals("Ciudadano")){
 
-                System.out.println("reserva despues del update "+res.toString());
+
                 String fechaIni=res.getFechaIniString();
-                String horaIni=res.getHoraIniString();
-                String horaFin=res.getHoraFinString();
-                System.out.println("hola1");
-                res.setHoraIni(horaIni);
-                res.setHoraFin(horaFin);
-                System.out.println("hola2");
+
+
                 res.setFechaIni(fechaIni);
-                res.setFechaFin(fechaIni);
-                System.out.println("hola3");
+
+
 
 
                 //FALTA AÑADIR LAS PERSONAS A LA ZONAAAA
-                System.out.println("reserva antes del dao "+res.toString());
+
                 resDao.updateReserva(res);
 
                 return "/reservas/updateConfirm";

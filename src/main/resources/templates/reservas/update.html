@@ -58,8 +58,28 @@
             text-align:left;
         }
 
+  div.p5{
+
+            margin:auto;
+            flex:1;
+            padding: 50px;
+            border-radius:20px;
 
 
+
+        }
+div.p4{
+
+            margin:auto;
+            text-align:center;
+            background-color:#65d9b8;
+            border-radius:20px;
+            width:200px;
+            height:100px;
+            color:black;
+
+
+        }
         .imgRedonda {
            width:100%;
             border-radius:10px;
@@ -122,15 +142,13 @@
             <p class="parrafo" style="text-align-center;">Indica el día, la hora de la reserva, la hora hasta la que piensa estar en el espacio natural
                 y cuantas personas van a asistir al espacio natural.</p>
         </div>
-        <div style="height: 600px; width:400px; text-align:center; margin: auto;">
+        <div style="width:400px; text-align:center; margin: auto;">
 
 
 
                 <label style="margin:0;display:inline" >Fecha de la reserva</label><input type="date" class="form-control" th:field="*{fechaIniString}" />
                 <br>
-                <label style="margin:0;display:inline" >Hora de la reserva</label><input type="time" class="form-control" th:field="*{horaIniString}" />
-                <br>
-                <label style="margin:0;display:inline" >Hora final</label><input type="time" class="form-control" th:field="*{horaFinString}" />
+
                 <br>
                 <label style="margin:0;display:inline" >Numero de asistentes</label><input type="number" class="form-control" th:field="*{numPersonas}" />
                 <br>
@@ -140,15 +158,43 @@
                 <input class="form-control" type="text" th:field="*{estado_reserva}" hidden />
             <input class="form-control" type="text" th:field="*{id}" hidden />
 
-
-                <input type="submit" role="button" class="boton_verde" value="Reservar zona" />
-            <br>
-            <button onClick="history.back()" class=" btn boton_azul" style="margin-top:10px;" ><img src="https://image.flaticon.com/icons/svg/929/929730.svg" width="20"  alt="x"> Volver</button>
+            <label style="margin:0;display:inline" >Escoge una franja horaria</label>
 
 
 
         </div>
     </div>
+        <div th:each="listaF: ${matrizFranja}"  class="principal" >
+            <div th:each="franja: ${listaF}" class="p5">
+
+                <div class="p4" >
+                    <input type="radio" th:field ="*{franja}"  th:value="${franja.id}" style="margin:auto;text-align:center"/>
+                    <b  class="parrafo" style="margin:0;display:inline">Franja </b><label th:for="${#ids.prev('franja')}" th:text ="${franja.id}" ></label>
+
+                    <br>
+
+                    <div style="text-align:left;margin:auto; height:50px; width:200px;" >
+                        <p class="parrafo" style="margin-left:20px;display:inline;" >Hora inicio:</p><p   class="parrafo" style="margin-left:5px;display:inline" th:text="${franja.horaIniString}"></p>
+                        <br>
+                        <p class="parrafo" style="margin-left:20px;display:inline;" >Hora fin:</p><p  class="parrafo" style="margin-left:5px;display:inline" th:text="${franja.horaFinString}"></p>
+                        <br>
+                    </div>
+
+
+                    <br>
+                </div>
+
+            </div>
+            <br>
+
+        </div>
+        <div style="text-align:center;margin:auto;">
+            <input type="submit" role="button" class="boton_verde" value="Reservar zona" />
+            <br>
+            <button onClick="history.back()" class=" btn boton_azul" style="margin-top:10px;" ><img src="https://image.flaticon.com/icons/svg/929/929730.svg" width="20"  alt="x"> Volver</button>
+            <br>
+        </div>
+
     </form>
 </div>
 

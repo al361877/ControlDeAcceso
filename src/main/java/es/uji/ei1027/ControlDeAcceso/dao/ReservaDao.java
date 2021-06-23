@@ -30,8 +30,8 @@ public class ReservaDao {
         try {
             System.out.println("add de reserva");
             String[] zonas=reserva.getZona().split(",");
-            jdbcTemplate.update("INSERT INTO reserva VALUES (?,?,?,?,?,?,?,?,?)",
-                    reserva.getId(),reserva.getDniCiudadano(),reserva.getEspacio_publico(),reserva.getEstado_reserva(),reserva.getFechaIni(),reserva.getFechaFin(),reserva.getHoraIni(),reserva.getHoraFin(),reserva.getNumPersonas()
+            jdbcTemplate.update("INSERT INTO reserva VALUES (?,?,?,?,?,?,?)",
+                    reserva.getId(),reserva.getDniCiudadano(),reserva.getFranja(),reserva.getEspacio_publico(),reserva.getEstado_reserva(),reserva.getFechaIni(),reserva.getNumPersonas()
             );
 
             for(String zona: zonas){
@@ -160,9 +160,9 @@ public class ReservaDao {
         System.out.println("update de reserva");
         String[] zonas=reserva.getZona().split(",");
 
-        jdbcTemplate.update("UPDATE reserva SET dni_ciudadano=?,id_espacio=?,estado_reserva=?,fechaini=?,fechafin=?, horaini=?, horafin=?, numpersonas=? WHERE id_reserva=?",
-                reserva.getDniCiudadano(),
-                reserva.getEspacio_publico(),reserva.getEstado_reserva(),reserva.getFechaIni(),reserva.getFechaFin(),reserva.getHoraIni(),reserva.getHoraFin(),reserva.getNumPersonas(),
+        jdbcTemplate.update("UPDATE reserva SET dni_ciudadano=?,id_franja=?,id_espacio=?,estado_reserva=?,fechaini=?, numpersonas=? WHERE id_reserva=?",
+                reserva.getDniCiudadano(),reserva.getFranja(),
+                reserva.getEspacio_publico(),reserva.getEstado_reserva(),reserva.getFechaIni(),reserva.getNumPersonas(),
                 reserva.getId());
 
         System.out.println("reserva hecha");

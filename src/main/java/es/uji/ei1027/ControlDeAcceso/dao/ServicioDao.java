@@ -24,8 +24,8 @@ public class ServicioDao {
     //AÑADIMOS servicio
     public void addServicio(Servicio servicio) {
         try {
-            jdbcTemplate.update("INSERT INTO servicio VALUES (?,?,?)",
-                    servicio.getId(),servicio.getTipo_servicio(),servicio.getEstacion());
+            jdbcTemplate.update("INSERT INTO servicio VALUES (?,?,?,?)",
+                    servicio.getId(),servicio.getTipo_servicio(),servicio.getEstacion(),servicio.getIdEspacio());
         } catch (EmptyResultDataAccessException e){
             return;
         }
@@ -33,15 +33,32 @@ public class ServicioDao {
 
 
     //Datos servicio
-    public List<Reserva> getServicios (){
+    public List<Servicio> getServicios (){
         try{
-            return jdbcTemplate.query("SELECT * FROM servicio ", new ReservaRowMapper());
+            return jdbcTemplate.query("SELECT * FROM servicio ", new ServicioRowMapper());
         }
         catch (EmptyResultDataAccessException e){
             return null;
         }
     }
-
+    //Datos servicio
+    public List<Servicio> getServiciosEspacio (String idEspacio){
+        try{
+            return jdbcTemplate.query("SELECT * FROM servicio where id_espacio=? ", new ServicioRowMapper(),idEspacio);
+        }
+        catch (EmptyResultDataAccessException e){
+            return null;
+        }
+    }
+    //Datos servicio
+    public Servicio getServicioEspacioEstacion (String idEspacio, String estacion){
+        try{
+            return jdbcTemplate.queryForObject("SELECT * FROM servicio where id_espacio=? and id_estacion=? ", new ServicioRowMapper(),idEspacio,estacion);
+        }
+        catch (EmptyResultDataAccessException e){
+            return null;
+        }
+    }
 
 
     //ACTUALIZAMOS servicio

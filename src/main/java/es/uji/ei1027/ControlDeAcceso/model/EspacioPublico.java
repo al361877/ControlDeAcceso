@@ -6,6 +6,26 @@ public class EspacioPublico {
     private String municipio;
     private String tipo_espacio;
     private int cp;
+    private String nombre;
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    @Override
+    public String toString() {
+        return "EspacioPublico{" +
+                "id='" + id + '\'' +
+                ", municipio='" + municipio + '\'' +
+                ", tipo_espacio='" + tipo_espacio + '\'' +
+                ", cp=" + cp +
+                ", nombre='" + nombre + '\'' +
+                '}';
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
     public String getId() {
         return id;
@@ -39,14 +59,5 @@ public class EspacioPublico {
         this.cp = cp;
     }
 
-    @Override
-    public String toString() {
-        return "EspacioPublico{" +
-                "id='" + id + '\'' +
-                ", municipio='" + municipio + '\'' +
-                ", tipo_espacio='" + tipo_espacio + '\'' +
-                ", cp=" + cp +
 
-                '}';
-    }
 }

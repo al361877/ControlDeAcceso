@@ -127,6 +127,11 @@ public class CiudadanoController {
         }
         return "error/error";
     }
+    @RequestMapping(value = "/info")
+    public String info(HttpSession session, Model model) {
+
+        return "info/info";
+    }
 
 }
 

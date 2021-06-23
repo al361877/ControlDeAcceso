@@ -15,6 +15,7 @@ public final class EspacioRowMapper implements RowMapper<EspacioPublico> {
         espacioPublico.setMunicipio(rs.getString("n_municipio"));
         espacioPublico.setTipo_espacio(rs.getString("tipo_espacio"));
         espacioPublico.setCp(rs.getInt("cp"));
+        espacioPublico.setNombre(rs.getString("nombre"));
 
         return espacioPublico;
 

@@ -7,49 +7,23 @@ import java.util.Date;
 public class Reserva {
     private String id;
     private String dniCiudadano;
-
+    private String franja;
     private String espacio_publico;
     private String estado_reserva;
     private String zona;
 
-    private Time horaIni;
-    private Time horaFin;
     private String horaIniString;
     private String horaFinString;
     private int numPersonas;
 
     private LocalDate fechaIniDate;
-    private LocalDate fechaFinDate;
-
     private String fechaIniString;
-    private String fechaFinString;
 
-    public int getNumPersonas() {
-        return numPersonas;
-    }
-
-    public void setNumPersonas(int numPersonas) {
-        this.numPersonas = numPersonas;
-    }
-    public LocalDate getFechaIni(){
-        fechaIniDate = LocalDate.parse(fechaIniString);
-        return this.fechaIniDate;
-    }
-    public LocalDate getFechaFin(){
-        fechaFinDate = LocalDate.parse(fechaFinString);
-        return this.fechaFinDate;
-    }
-
-    public String getFechaIniString() {
-        return fechaIniString;
-    }
     public String getHoraIniString() {
         return horaIniString;
     }
 
     public void setHoraIniString(String horaIniString) {
-
-
         this.horaIniString = horaIniString;
     }
 
@@ -58,30 +32,35 @@ public class Reserva {
     }
 
     public void setHoraFinString(String horaFinString) {
-
         this.horaFinString = horaFinString;
     }
+
+    public int getNumPersonas() {
+        return numPersonas;
+    }
+
+    public void setNumPersonas(int numPersonas) {
+        this.numPersonas = numPersonas;
+    }
+
+
+    public LocalDate getFechaIni(){
+        fechaIniDate = LocalDate.parse(fechaIniString);
+        return this.fechaIniDate;
+    }
+
+
+    public String getFechaIniString() {
+        return fechaIniString;
+    }
+
+
 
     public void setFechaIniString(String fechaIniString) {
 
         this.fechaIniString = fechaIniString;
     }
 
-    public String getFechaFinString() {
-        return fechaFinString;
-    }
-
-    public void setFechaFinString(String fechaFinString) {
-        this.fechaFinString = fechaFinString;
-    }
-
-    public Time getHoraFin() {
-        return horaFin;
-    }
-
-    public Time getHoraIni() {
-        return horaIni;
-    }
 
 
     public void setFechaIni(String fechaIni) {
@@ -90,45 +69,15 @@ public class Reserva {
         LocalDate localDate1 = LocalDate.parse(fechaIni);
         this.fechaIniDate = localDate1;
     }
-    public void setFechaFin(String fechaFin) {
 
-        this.fechaFinString=fechaFin;
-        LocalDate localDate1 = LocalDate.parse(fechaFin);
-        this.fechaFinDate = localDate1;
+
+    public String getFranja() {
+        return franja;
     }
 
-
-    public void setHoraFin(String horaFinS) {
-        this.horaFinString = horaFinS;
-
-        this.horaFin=Time.valueOf(horaFinS);
-
+    public void setFranja(String franja) {
+        this.franja = franja;
     }
-
-    public void setHoraFinRow(Time horaFinS) {
-
-        this.horaFin=horaFinS;
-        this.horaFinString=horaFinS.toString();
-
-    }
-    public void setHoraIniRow(Time horaIniS) {
-
-        this.horaIni=horaIniS;
-        this.horaIniString=horaIniS.toString();
-
-    }
-    public void setHoraIni(String horaIniS) {
-
-        this.horaIniString = horaIniS;
-
-        this.horaIni=Time.valueOf(horaIniS);
-
-
-    }
-
-
-
-
 
     public String getId() {
         return id;
@@ -177,18 +126,13 @@ public class Reserva {
         return "Reserva{" +
                 "id='" + id + '\'' +
                 ", dniCiudadano='" + dniCiudadano + '\'' +
+                ", franja='" + franja + '\'' +
                 ", espacio_publico='" + espacio_publico + '\'' +
                 ", estado_reserva='" + estado_reserva + '\'' +
                 ", zona='" + zona + '\'' +
-                ", horaIni=" + horaIni +
-                ", horaFin=" + horaFin +
-                ", horaIniString='" + horaIniString + '\'' +
-                ", horaFinString='" + horaFinString + '\'' +
                 ", numPersonas=" + numPersonas +
                 ", fechaIniDate=" + fechaIniDate +
-                ", fechaFinDate=" + fechaFinDate +
                 ", fechaIniString='" + fechaIniString + '\'' +
-                ", fechaFinString='" + fechaFinString + '\'' +
                 '}';
     }
 }

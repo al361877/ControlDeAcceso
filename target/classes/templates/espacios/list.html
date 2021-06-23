@@ -68,8 +68,11 @@
         <div th:each="lista: ${matrizEspacios}" class="principal">
             <div th:each="espacio: ${lista}" class="p2">
                 <div class="p3" >
-                    <div>
+                    <div style="text-align: center;  margin-bottom:10px;">
+                        <b style="margin:0;display:inline">Nombre: </b><p style="margin-left:5px;display:inline" th:text="*{espacio.nombre}"></p>
+                        <br>
                         <b style="margin:0;display:inline">Municipio: </b><p style="margin-left:5px;display:inline" th:text="*{espacio.municipio}"></p>
+
                     </div>
                     <a style="margin-top: 10px;" th:href="@{./prereserva/{espacio}(espacio=${espacio.id})}" >
                         <img th:src="@{/images/espacios/espacio-{espacio}.jpg(espacio=${espacio.id})}" class="imgRedonda">

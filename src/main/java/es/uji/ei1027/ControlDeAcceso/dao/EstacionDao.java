@@ -32,9 +32,19 @@ public class EstacionDao {
 
 
     //Datos estacion
-    public List<Estacion> getEstacion (){
+    public List<Estacion> getEstaciones(){
         try{
             return jdbcTemplate.query("SELECT * FROM estacion ", new EstacionRowMapper());
+        }
+        catch (EmptyResultDataAccessException e){
+            return null;
+        }
+    }
+
+    //Datos estacion
+    public Estacion getEstacionId (String id){
+        try{
+            return jdbcTemplate.queryForObject("SELECT * FROM estacion where id_estacion=? ", new EstacionRowMapper(),id);
         }
         catch (EmptyResultDataAccessException e){
             return null;

@@ -4,6 +4,15 @@ public class Servicio {
     private String id;
     private String tipo_servicio;
     private String estacion;
+    private String idEspacio;
+
+    public String getIdEspacio() {
+        return idEspacio;
+    }
+
+    public void setIdEspacio(String idEspacio) {
+        this.idEspacio = idEspacio;
+    }
 
     public String getId() {
         return id;
