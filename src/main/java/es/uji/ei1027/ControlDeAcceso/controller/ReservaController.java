@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
+import java.sql.Time;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -210,8 +212,7 @@ public class ReservaController {
         Reserva res=resDao.getReservaId(id);
         try{
             if(user.getTipoUsuario().equals("Ciudadano") && user.getDni().equals(res.getDniCiudadano())){
-
-                //FALTA quitar LAS PERSONAS de LA ZONAAAA
+                System.out.println("entro");
                 resDao.canceladaPorUsuarioReserva(id);
 
                 return "reservas/deleteConfirm";
@@ -244,8 +245,65 @@ public class ReservaController {
 //                    return "reservas/add";
 //
 //                }
-                String fechaIni=res.getFechaIniString();
-                res.setFechaIni(fechaIni);
+
+
+                //validar
+//                if (res.getZona()==null || res.getZona().trim().equals("")){
+//                    System.out.println("ejnogfos");
+//                    bindingResult.rejectValue("zona", "nonullobj","No se ha introducido ninguna zona");
+//                    return "reservas/add";
+//                }
+//
+//
+//                if (res.getFranja()==null || res.getFranja().trim().equals("")) {
+//                    System.out.println("etro");
+//                    bindingResult.rejectValue("franja", "nonullobj", "No se ha introducido ninguna franja horaria");
+//                    return "reservas/add";
+//                }else{
+//                    //compruebo que haya sido 1h antes de la hora de inicio
+//                    LocalDate today= LocalDate.now();
+//
+//                    int horaIni= Time.valueOf(res.getHoraIniString()).getHours();
+//                    int ahora=Time.valueOf(today.atStartOfDay().toString()).getHours();
+//
+//                    if(ahora>=horaIni+1){
+//                        bindingResult.rejectValue("franja", "invalidStr", "La reserva ha de hacerse con 1h de antelación");
+//                        return "reservas/add";
+//                    }
+//
+//                }
+//
+//
+//                if (res.getFechaIniString()==null || res.getFechaIniString().trim().equals("")) {
+//                    System.out.println("etro");
+//                    bindingResult.rejectValue("fechaIniString", "nonullobj", "No se ha introducido ninguna fecha de reserva");
+//                    return "reservas/add";
+//                }else{
+//                    String fechaIni=res.getFechaIniString();
+//                    res.setFechaIni(fechaIni);
+//                    //compruebo que haya sido con 2 dias de antelacion
+//                    LocalDate today= LocalDate.now();
+//                    LocalDate fechaini=res.getFechaIni();
+//                    int daysToday=today.getDayOfYear(), yearsToday= today.getYear();
+//
+//                    int daysFecha=fechaini.getDayOfYear(), yearsFecha=fechaini.getYear();
+//
+//                    if(daysFecha>=daysToday+2 && yearsFecha==yearsToday){
+//                        bindingResult.rejectValue("fechaIniString", "invalidStr", "La reserva se ha de hacer 2 días con antelación");
+//                        return "reservas/add";
+//                    }
+//
+//
+//                }
+//
+//                if (res.getNumPersonas()<=0 ){
+//                    System.out.println("etro");
+//                    bindingResult.rejectValue("numeropersonas", "invalidInt","El número de asistentes se ha introducido erroneamente");
+//                    return "reservas/add";
+//
+//                }
+
+
 
                 res.setId(aleatorio());
                 res.setDniCiudadano(user.getDni());

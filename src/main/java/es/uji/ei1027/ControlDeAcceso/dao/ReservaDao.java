@@ -5,6 +5,7 @@ import ch.qos.logback.core.joran.spi.ElementPath;
 //import com.sun.org.apache.regexp.internal.RE;
 import es.uji.ei1027.ControlDeAcceso.model.RelacionRZ;
 import es.uji.ei1027.ControlDeAcceso.model.Reserva;
+import es.uji.ei1027.ControlDeAcceso.model.Zona;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -18,7 +19,8 @@ import java.util.List;
 @Repository  //En Spring los DAOs van anotados con @Repository
 public class ReservaDao {
     private JdbcTemplate jdbcTemplate;
-
+    @Autowired
+    ZonaDao zonaDao;
     //Obtenermos el jbcTemplate a partir del Data Source
     @Autowired
     public void setDataSource(DataSource dataSource) {
@@ -39,7 +41,9 @@ public class ReservaDao {
                 System.out.println("relacion entre id_zona= "+zona+" e id_reserva= "+reserva.getId());
                //add de la relacion en la base de datos
                 jdbcTemplate.update("INSERT INTO relacionrz VALUES (?,?)",zona,reserva.getId());
-
+                Zona z=zonaDao.getZonaId(zona);
+                int aforo = z.getAforo_actual()+reserva.getNumPersonas();
+                jdbcTemplate.update("Update zona set aforo_actual=? where id_zona=?",aforo,zona);
             }
 
 
@@ -127,7 +131,7 @@ public class ReservaDao {
                     (List<Reserva>) jdbcTemplate.query("SELECT * FROM reserva WHERE dni_ciudadano=? and estado_reserva='pendienteDeUso'", new ReservaRowMapper(),dni);
             System.out.println("lista cogida");
             for(Reserva res:lista) {
-
+                System.out.println(res.toString());
                 //cojo todas las relaciones entre esta reserva y las zonas
                 List<RelacionRZ> listaRelaciones = jdbcTemplate.query("SELECT * FROM relacionrz WHERE id_reserva=?", new RelacionRZRowMapper(), res.getId());
                 System.out.println("relaciones cogidas");
@@ -174,6 +178,9 @@ public class ReservaDao {
             System.out.println("relacion entre id_zona= "+zona+" e id_reserva= "+reserva.getId());
             //add de la relacion en la base de datos
             jdbcTemplate.update("INSERT INTO relacionrz VALUES (?,?)",zona,reserva.getId());
+            Zona z=zonaDao.getZonaId(zona);
+            int aforo = z.getAforo_actual()+reserva.getNumPersonas();
+            jdbcTemplate.update("Update zona set aforo_actual=? where id_zona=?",aforo,zona);
 
         }
 
@@ -184,21 +191,46 @@ public class ReservaDao {
 
 
     public void canceladaPorUsuarioReserva(String id){
+            Reserva reserva= this.getReservaId(id);
+            String[] zonas=reserva.getZona().split(",");
+            for(String z: zonas){
+                Zona zon=zonaDao.getZonaId(z);
+                System.out.println("zona = "+zon.toString()+" reserva = "+reserva.toString());
+                int aforo = zon.getAforo_actual()-reserva.getNumPersonas();
+                jdbcTemplate.update("Update zona set aforo_actual=? where id_zona=?",aforo,zon.getId());
+
+            }
 
             jdbcTemplate.update("delete from relacionrz where id_reserva=?",id);
-            jdbcTemplate.update("UPDATE reserva SET estado_reserva=? WHERE id=?","canceladaU",id);
+            jdbcTemplate.update("UPDATE reserva SET estado_reserva=? WHERE id_reserva=?","canceladaU",id);
         }
 
 
     public void canceladaPorControladorReserva(String id){
+        Reserva reserva= this.getReservaId(id);
+        String[] zonas=reserva.getZona().split(",");
+        for(String z: zonas){
+            Zona zon=zonaDao.getZonaId(z);
+            System.out.println("zona = "+zon.toString()+" reserva = "+reserva.toString());
+            int aforo = zon.getAforo_actual()-reserva.getNumPersonas();
+            jdbcTemplate.update("Update zona set aforo_actual=? where id_zona=?",aforo,zon.getId());
 
+        }
         jdbcTemplate.update("delete from relacionrz where id_reserva=?",id);
-        jdbcTemplate.update("UPDATE reserva SET estado_reserva=? WHERE id=?","canceladaC",id);
+        jdbcTemplate.update("UPDATE reserva SET estado_reserva=? WHERE id_reserva=?","canceladaC",id);
     }
     public void finUsoReserva(String id){
+        Reserva reserva= this.getReservaId(id);
+        String[] zonas=reserva.getZona().split(",");
+        for(String z: zonas){
+            Zona zon=zonaDao.getZonaId(z);
+            System.out.println("zona = "+zon.toString()+" reserva = "+reserva.toString());
+            int aforo = zon.getAforo_actual()-reserva.getNumPersonas();
+            jdbcTemplate.update("Update zona set aforo_actual=? where id_zona=?",aforo,zon.getId());
 
+        }
         jdbcTemplate.update("delete from relacionrz where id_reserva=?",id);
-        jdbcTemplate.update("UPDATE reserva SET estado_reserva=? WHERE id=?","finUso",id);
+        jdbcTemplate.update("UPDATE reserva SET estado_reserva=? WHERE id_reserva=?","finUso",id);
     }
 
 

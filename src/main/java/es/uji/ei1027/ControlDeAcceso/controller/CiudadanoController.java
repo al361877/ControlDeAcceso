@@ -63,6 +63,18 @@ public class CiudadanoController {
         validator.validate(user, bindingResult);
         if (bindingResult.hasErrors())
             return "ciudadano/add";
+
+        Usuario usuariobbdd1=userDao.getUsuario(user.getUsuario());
+        if(usuariobbdd1!=null){
+            bindingResult.rejectValue("usuario", "invalidStr", "El nombre de usuario ya existe");
+            return "ciudadano/add";
+        }
+        Usuario usuariobbdd2=userDao.getUsuarioDni(user.getDni());
+        if(usuariobbdd2!=null){
+            bindingResult.rejectValue("dni", "invalidStr", "Ya existe un usuario con ese dni");
+            return "ciudadano/add";
+        }
+
         BasicPasswordEncryptor cifrar = new BasicPasswordEncryptor();
         String passCifrada=cifrar.encryptPassword(user.getContraseña());
         user.setContraseña(passCifrada);
