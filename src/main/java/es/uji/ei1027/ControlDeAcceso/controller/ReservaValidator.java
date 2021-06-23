@@ -16,7 +16,6 @@ public class ReservaValidator implements Validator {
     @Override
     public void validate(Object obj, Errors errors) {
         Reserva reserva = (Reserva) obj;
-        LocalDate today= LocalDate.now();
 
 
         if (reserva.getZona()==null || reserva.getZona().trim().equals("")){
@@ -30,6 +29,8 @@ public class ReservaValidator implements Validator {
             errors.rejectValue("franja", "nonullobj", "No se ha introducido ninguna franja horaria");
         }else{
             //compruebo que haya sido 1h antes de la hora de inicio
+            LocalDate today= LocalDate.now();
+
             int horaIni=Time.valueOf(reserva.getHoraIniString()).getHours();
             int ahora=Time.valueOf(today.atStartOfDay().toString()).getHours();
 
@@ -45,7 +46,7 @@ public class ReservaValidator implements Validator {
             errors.rejectValue("fechaIniString", "nonullobj", "No se ha introducido ninguna fecha de reserva");
         }else{
             //compruebo que haya sido con 2 dias de antelacion
-
+            LocalDate today= LocalDate.now();
             LocalDate fechaini=reserva.getFechaIni();
             int daysToday=today.getDayOfYear(), yearsToday= today.getYear();
 

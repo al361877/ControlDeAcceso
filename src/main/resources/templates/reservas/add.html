@@ -107,7 +107,7 @@
     <div class="informativo">
         <p class="parrafo" style="text-align-center;">Estas son las zonas disponibles dentro del espacio natural. Selecciona las zonas para realizar la reserva.</p>
     </div>
-    <form style="margin-left:50px" action="#" th:action="@{/reservas/update}" th:object="${reserva}" method="post">
+    <form style="margin-left:50px" action="#" th:action="@{/reservas/add}" th:object="${reserva}" method="post">
 
         <p class="error" th:if="${#fields.hasErrors('zona')}" th:errors="*{zona}" style="font-size:15px"></p>
         <div th:each="lista: ${matrizZonas}"  class="principal" >

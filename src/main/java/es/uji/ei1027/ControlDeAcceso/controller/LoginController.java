@@ -4,6 +4,7 @@ package es.uji.ei1027.ControlDeAcceso.controller;
 import es.uji.ei1027.ControlDeAcceso.dao.ReservaDao;
 import es.uji.ei1027.ControlDeAcceso.dao.UsuarioDao;
 import es.uji.ei1027.ControlDeAcceso.model.Usuario;
+import org.jasypt.util.password.BasicPasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -75,15 +76,27 @@ public class LoginController {
             return "login";
         }
 
-        System.out.println(user.getUsuario());
         // Comprova que el login siga correcte
         // intentant carregar les dades de l'usuari
 
-        user = usuarioDao.getUsuarioConPass(user.getUsuario(),user.getContraseña());
+        //cifrar todos los usuarios actuales en la base de datos
+//        List<Usuario> todosUsers=usuarioDao.getAllUsers();
+//        for(Usuario usuario: todosUsers){
+//            BasicPasswordEncryptor cifrar = new BasicPasswordEncryptor();
+//            String passCifrada=cifrar.encryptPassword(usuario.getContraseña());
+//            usuarioDao.cifrarPassword(usuario.getDni(),passCifrada);
+//        }
 
-        if (user == null) {
-            bindingResult.rejectValue("contraseña", "obligatorio", "Contraseña  o nombre de usuario incorrecto");
 
+        Usuario userbbdd = usuarioDao.getUsuario(user.getUsuario());
+        if(userbbdd==null){
+            bindingResult.rejectValue("usuario", "obligatorio", "Usuario  incorrecto");
+            return "login";
+        }
+        BasicPasswordEncryptor en = new BasicPasswordEncryptor();
+
+        if (!en.checkPassword(user.getContraseña(),userbbdd.getContraseña())) {
+            bindingResult.rejectValue("contraseña", "obligatorio", "Contraseña  incorrecta");
             return "login";
         }
 
@@ -96,15 +109,15 @@ public class LoginController {
 
         // Autenticats correctament.
         // Guardem les dades de l'usuari autenticat a la sessió
-        session.setAttribute("user", user);
+        session.setAttribute("user", userbbdd);
 
-        session.setAttribute("tipo",user.getTipoUsuario());
-
-
+        session.setAttribute("tipo",userbbdd.getTipoUsuario());
 
 
 
-        return "redirect:/"+user.getTipoUsuario().toLowerCase()+"/index";
+
+
+        return "redirect:/"+userbbdd.getTipoUsuario().toLowerCase()+"/index";
     }
 
 

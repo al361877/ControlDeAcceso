@@ -3,6 +3,7 @@ package es.uji.ei1027.ControlDeAcceso.controller;
 
 import es.uji.ei1027.ControlDeAcceso.dao.UsuarioDao;
 import es.uji.ei1027.ControlDeAcceso.model.Usuario;
+import org.jasypt.util.password.BasicPasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +24,7 @@ public class CiudadanoController {
 
     @Autowired
     public void setUsuario(UsuarioDao userDao) {
+
         this.userDao = userDao;
     }
 
@@ -61,6 +63,9 @@ public class CiudadanoController {
         validator.validate(user, bindingResult);
         if (bindingResult.hasErrors())
             return "ciudadano/add";
+        BasicPasswordEncryptor cifrar = new BasicPasswordEncryptor();
+        String passCifrada=cifrar.encryptPassword(user.getContraseña());
+        user.setContraseña(passCifrada);
 
         userDao.addCiudadano(user);
         userDao.addCiudadano(user.getDni());

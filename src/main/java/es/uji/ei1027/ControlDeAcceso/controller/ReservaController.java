@@ -127,7 +127,7 @@ public class ReservaController {
                             matriz.add(listaInterior);
                             listaInterior = new ArrayList<>();
                             listaInterior.add(zona);
-                            cont = -1;
+                            cont = 0;
                         }
 
                         if (i == lista.size() - 1) {
@@ -235,15 +235,15 @@ public class ReservaController {
         try{
             if(user.getTipoUsuario().equals("Ciudadano")){
 
-                ReservaValidator validator = new ReservaValidator();
-                System.out.println(res.toString());
-                validator.validate(res, bindingResult);
-                System.out.println(res.toString());
-                if (bindingResult.hasErrors()){
-                    System.out.println("ennntrooo");
-                    return "reservas/add";
-
-                }
+//                ReservaValidator validator = new ReservaValidator();
+//                System.out.println(res.toString());
+//                validator.validate(res, bindingResult);
+//                System.out.println(res.toString());
+//                if (bindingResult.hasErrors()){
+//                    System.out.println("ennntrooo");
+//                    return "reservas/add";
+//
+//                }
                 String fechaIni=res.getFechaIniString();
                 res.setFechaIni(fechaIni);
 

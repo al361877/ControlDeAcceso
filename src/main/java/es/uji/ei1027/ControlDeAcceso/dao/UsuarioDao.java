@@ -72,7 +72,15 @@ public class UsuarioDao {
                 return null;
             }
         }
-
+    //Datos ciudadanos
+    public List<Usuario> getAllUsers (){
+        try{
+            return jdbcTemplate.query("SELECT * FROM usuario ", new UsuarioRowMapper());
+        }
+        catch (EmptyResultDataAccessException e){
+            return null;
+        }
+    }
 
         //AÑADIMOS Controlador
         public void addControlador(String dni, String espacio_publico) {
@@ -86,6 +94,7 @@ public class UsuarioDao {
                     controlador.getEspacio_publico(), controlador.getDni());
 
         }
+
         //Datos controladores
         public List<Usuario> getControladores (){
             try{
@@ -116,11 +125,16 @@ public class UsuarioDao {
             }
         }
 
+    //OCULTAMOS Usuario
+    public void cifrarPassword(String dni,String pass) {
+        jdbcTemplate.update("UPDATE Usuario SET contraseña=? WHERE dni=?", pass, dni);
+    }
 
-        //OCULTAMOS Usuario
-        public void deleteUsuario(String dni) {
-            jdbcTemplate.update("UPDATE Usuario SET tipo_usuario='Borrado' WHERE dni=?", dni);
-        }
+
+    //OCULTAMOS Usuario
+    public void deleteUsuario(String dni) {
+        jdbcTemplate.update("UPDATE Usuario SET tipo_usuario='Borrado' WHERE dni=?", dni);
+    }
 
 
 
@@ -139,6 +153,7 @@ public class UsuarioDao {
         }
         public Usuario getUsuario (String usuario ){
             try{
+                System.out.println("entro con usuario = "+usuario);
                 return jdbcTemplate.queryForObject("SELECT * FROM usuario WHERE nombre_usuario=?", new UsuarioRowMapper(), usuario);
             }
             catch (EmptyResultDataAccessException e){
