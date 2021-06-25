@@ -24,8 +24,7 @@
             padding: 50px;
             border-radius:20px;
 
-
-            height:300px;
+            height:200px;
         }
          div.p2Foto{
 
@@ -40,8 +39,8 @@
 
             margin:auto;
             flex:1;
-            padding: 50px;
-            border-radius:20px;
+            padding: 10px;
+
 
 
 
@@ -109,7 +108,7 @@
     </div>
     <form style="margin-left:50px" action="#" th:action="@{/reservas/add}" th:object="${reserva}" method="post">
 
-        <p class="error" th:if="${#fields.hasErrors('zona')}" th:errors="*{zona}" style="font-size:15px"></p>
+        <p class="error" th:if="${#fields.hasErrors('zona')}" th:errors="*{zona}" style="font-size:15px; text-align:center;"></p>
         <div th:each="lista: ${matrizZonas}"  class="principal" >
             <div th:each="zona: ${lista}" class="p2">
 
@@ -139,8 +138,9 @@
     <h2>Reservar zona</h2>
     <div >
         <div class="informativo">
-            <p class="parrafo" style="text-align-center;">Indica el día, la hora de la reserva, la hora hasta la que piensa estar en el espacio natural
-                y cuantas personas van a asistir al espacio natural.</p>
+            <p class="parrafo" style="text-align-center;">Indica el día de la reserva, solo se puede hacer una reserva
+                 a dos días vista, el número de personas que van a asistir
+                y selecciona una franja de horas.</p>
         </div>
         <div style="width:400px; text-align:center; margin: auto;">
 
@@ -191,7 +191,7 @@
             <br>
 
         </div>
-        <div style="text-align:center;margin:auto;">
+        <div style="text-align:center; margin-top:10px;  margin:auto;">
             <input type="submit" role="button" class="boton_verde" value="Reservar zona" />
             <br>
             <button onClick="history.back()" class=" btn boton_azul" style="margin-top:10px;" ><img src="https://image.flaticon.com/icons/svg/929/929730.svg" width="20"  alt="x"> Volver</button>

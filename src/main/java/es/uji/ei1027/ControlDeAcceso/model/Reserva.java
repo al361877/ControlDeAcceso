@@ -11,7 +11,7 @@ public class Reserva {
     private String espacio_publico;
     private String estado_reserva;
     private String zona;
-
+    private String nombreEspacio;
     private String horaIniString;
     private String horaFinString;
     private int numPersonas;
@@ -43,6 +43,13 @@ public class Reserva {
         this.numPersonas = numPersonas;
     }
 
+    public String getNombreEspacio() {
+        return nombreEspacio;
+    }
+
+    public void setNombreEspacio(String nombreEspacio) {
+        this.nombreEspacio = nombreEspacio;
+    }
 
     public LocalDate getFechaIni(){
         fechaIniDate = LocalDate.parse(fechaIniString);

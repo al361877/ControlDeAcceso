@@ -8,7 +8,29 @@
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="/css/estils.css"
           th:href="@{/css/estils.css}"/>
+<style>
 
+
+      div.p2{
+
+            margin:auto;
+            display: flex;
+            padding: 20px;
+            background-color:#a4d7e5;
+            border-radius:10px;
+            height:200px;
+            width:1000px;
+        }
+  div.p3{
+
+            margin:auto;
+            text-align:left;
+
+            color:black;
+
+
+        }
+</style>
 </head>
 <body>
 
@@ -16,33 +38,79 @@
 <div  layout:fragment="content" >
     <h1>Tus reservas</h1>
     <div align="center">
-        <table  class="table table-striped">
-            <thead>
-            <tr>
 
-                <th >Zonas</th>
-                <th >Estado de la Reserva</th>
-                <th> Fecha </th>
-                <th> Hora de la reserva</th>
-                <th> Fin de la reserva</th>
-                <th> Número de asistentes</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="res: ${reservas}">
+    <div th:each="res: ${reservas}" style="padding:20px;" >
+        <div class="p2">
+<!--            <div style="text-align:"></div>-->
 
-                <td th:text="${res.zona}"></td>
-                <td th:text="${res.estado_reserva}"></td>
-                <td th:text="${#temporals.format(res.fechaIni,'dd MMMM yyyy')}"></td>
-                <td th:text="${res.horaIniString}"></td>
-                <td th:text="${res.horaFinString}"></td>
-                <td th:text="${res.numPersonas}"></td>
-                <td><a th:href="@{/espacios/prereserva/{id}(id=${res.espacio_publico})} "  class="boton_azul" >Ir a espacio</a></td>
-                <td><a th:href="@{/reservas/update/{id}(id=${res.id})} " class="boton_verde">Modificar reserva</a></td>
-                <td><a th:href="@{/reservas/canceladaU/{id}(id=${res.id})}" class="boton_rojo" >Borrar</a></td>
-            </tr>
-            </tbody>
-        </table>
+            <div class="p3">
+                <b style="margin:0;display:inline">Reserva en el espacio: </b> <p style="margin:0;display:inline" th:text="${res.nombreEspacio}" class="parrafo"></p>
+
+                <br>
+                <b style="margin:0;display:inline">Zonas: </b> <p style="margin:0;display:inline" th:text="${res.zona}" class="parrafo"></p>
+                <br>
+                <b style="margin:0;display:inline">Estado de la reserva: </b> <p style="margin:0;display:inline" th:text="${res.estado_reserva}" class="parrafo"></p>
+                <br>
+                <b style="margin:0;display:inline">Hora inicio: </b> <p style="margin:0;display:inline" th:text="${res.horaIniString}" class="parrafo"></p>
+                <br>
+                <div style="padding:10px;text-align:left">
+                    <a th:href="@{/espacios/prereserva/{id}(id=${res.espacio_publico})} "  class="boton_azul" >Ir a espacio</a>
+                </div>
+            </div>
+            <div class="p3">
+
+                <br>
+                <b style="margin:0;display:inline">Fecha de la reserva: </b> <p style="margin:0;display:inline" th:text="${#temporals.format(res.fechaIni,'dd MMMM yyyy')}" class="parrafo"></p>
+                <br>
+                <b style="margin:0;display:inline">Número de asistentes: </b> <p style="margin:0;display:inline" th:text="${res.numPersonas}" class="parrafo"></p>
+                <br>
+                <b style="margin:0;display:inline">Hora fin: </b><p style="margin:0;display:inline" th:text="${res.horaFinString}" class="parrafo"></p>
+                <br>
+                <div style="padding:10px;text-align:left">
+                    <a th:href="@{/reservas/update/{id}(id=${res.id})} " class="boton_verde">Modificar reserva</a>
+                </div>
+            </div>
+
+
+            <div style="  text-align:left">
+                <div style="padding:10px;">
+                    <a th:href="@{/reservas/canceladaU/{id}(id=${res.id})}" class="boton_rojo" >Eliminar reserva</a>
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+<!--        <table  class="table table-striped">-->
+<!--            <thead>-->
+<!--            <tr>-->
+
+<!--                <th >Zonas</th>-->
+<!--                <th >Estado de la Reserva</th>-->
+<!--                <th> Fecha </th>-->
+<!--                <th> Hora de la reserva</th>-->
+<!--                <th> Fin de la reserva</th>-->
+<!--                <th> Número de asistentes</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--            <tr th:each="res: ${reservas}">-->
+
+<!--                <td th:text="${res.zona}"></td>-->
+<!--                <td th:text="${res.estado_reserva}"></td>-->
+<!--                <td th:text="${#temporals.format(res.fechaIni,'dd MMMM yyyy')}"></td>-->
+<!--                <td th:text="${res.horaIniString}"></td>-->
+<!--                <td th:text="${res.horaFinString}"></td>-->
+<!--                <td th:text="${res.numPersonas}"></td>-->
+<!--                <td><a th:href="@{/espacios/prereserva/{id}(id=${res.espacio_publico})} "  class="boton_azul" >Ir a espacio</a></td>-->
+<!--                <td><a th:href="@{/reservas/update/{id}(id=${res.id})} " class="boton_verde">Modificar reserva</a></td>-->
+<!--                <td><a th:href="@{/reservas/canceladaU/{id}(id=${res.id})}" class="boton_rojo" >Borrar</a></td>-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
 
 
     </div>

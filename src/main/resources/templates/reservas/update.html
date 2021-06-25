@@ -62,8 +62,8 @@
 
             margin:auto;
             flex:1;
-            padding: 50px;
-            border-radius:20px;
+            padding: 10px;
+
 
 
 
@@ -108,7 +108,7 @@ div.p4{
     </div>
     <form style="margin-left:50px" action="#" th:action="@{/reservas/update}" th:object="${reserva}" method="post">
 
-
+        <p class="error" th:if="${#fields.hasErrors('zona')}" th:errors="*{zona}" style="font-size:15px; text-align:center;"></p>
         <div th:each="lista: ${matrizZonas}"  class="principal" >
             <div th:each="zona: ${lista}" class="p2">
 
@@ -139,19 +139,23 @@ div.p4{
     <h2>Reservar zona</h2>
     <div >
         <div class="informativo">
-            <p class="parrafo" style="text-align-center;">Indica el día, la hora de la reserva, la hora hasta la que piensa estar en el espacio natural
-                y cuantas personas van a asistir al espacio natural.</p>
+            <p class="parrafo" style="text-align-center;">Indica el día de la reserva, solo se puede hacer una reserva
+                a dos días vista, el número de personas que van a asistir
+                y selecciona una franja de horas.</p>
         </div>
         <div style="width:400px; text-align:center; margin: auto;">
 
 
 
                 <label style="margin:0;display:inline" >Fecha de la reserva</label><input type="date" class="form-control" th:field="*{fechaIniString}" />
+                <p class="error" th:if="${#fields.hasErrors('fechaIniString')}" th:errors="*{fechaIniString}" style="font-size:15px"></p>
                 <br>
 
                 <br>
                 <label style="margin:0;display:inline" >Numero de asistentes</label><input type="number" class="form-control" th:field="*{numPersonas}" />
-                <br>
+            <p class="error" th:if="${#fields.hasErrors('numPersonas')}" th:errors="*{numPersonas}" style="font-size:15px"></p>
+
+            <br>
 
                 <input class="form-control" type="text" th:field="*{espacio_publico}" hidden />
                 <input class="form-control" type="text" th:field="*{dniCiudadano}" hidden />
@@ -159,6 +163,7 @@ div.p4{
                 <input class="form-control" type="text" th:field="*{id}" hidden />
 
             <label style="margin:0;display:inline" >Escoge una franja horaria</label>
+            <p class="error" th:if="${#fields.hasErrors('franja')}" th:errors="*{franja}" style="font-size:15px"></p>
 
 
 
