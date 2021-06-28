@@ -66,7 +66,7 @@ public class UsuarioDao {
         //Datos ciudadanos
         public List<Usuario> getCiudadanos (){
             try{
-                return jdbcTemplate.query("SELECT * FROM usuario WHERE tipo_usuario='Controlador'", new UsuarioRowMapper());
+                return jdbcTemplate.query("SELECT * FROM usuario WHERE tipo_usuario='Ciudadano'", new UsuarioRowMapper());
             }
             catch (EmptyResultDataAccessException e){
                 return null;

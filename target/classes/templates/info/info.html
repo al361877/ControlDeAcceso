@@ -1,0 +1,36 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <title>Info</title>
+    <meta charset=" UTF-8" />
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+
+</head>
+<body>
+
+
+<div  layout:fragment="content" >
+    <h1 style="margin: auto;margin-bottom:50px;">Información de interés</h1>
+    <div style="margin-top:80px; width:800px; height:600px; text-align: justify;  margin: auto;">
+        <p class="parrafo" style="margin: auto;">La comunidad valenciana dispone de numerosos espacios naturales a lo largo de los municipios, como playas, ríos, montañas...
+            La consejería de Medio Ambiente de la Generelatit Valenciana, la cual quiere impulsar el uso adecuado de las intalaciones y
+            sercivicos disponibles, controla la ocupación para evitar aglomeraciones.<br>
+            Para ello, cada municipio tiene una serie de espacios naturales divididos en zonas mediantes balizas. Cada zona tiene un aforo máximo, de forma que
+            si se excede este aforo, se puede reservar más de una zona. <br>
+            Por favor, cuide de los espacios naturales, en cada uno de los espacios habrá un controlador que si lo ve oportuno le echará, inhabilitando su acceso de nuevo.
+        <br> Si tienes alguna consulta, no dude en contactar con nosotros.<br>
+            <a   style="margin: auto;text-align: center" href="mailto:al361877@uji.es">control-acceso@gva.es<span class="sr-only"></span></a></p>
+
+        <br>
+        <button onClick="history.back()" style="margin: auto;text-align: center" class=" btn boton_azul"  ><img src="https://image.flaticon.com/icons/svg/929/929730.svg" width="20"  alt="x"> Volver</button>
+
+
+    </div>
+</div>
+
+</body>
+</html>

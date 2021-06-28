@@ -47,7 +47,7 @@ public class ControladorController {
 
 
     @RequestMapping(value="/add")
-    public String addControlado(Model model) {
+    public String addControlador(Model model) {
         model.addAttribute("user", new Usuario());
 
         return "controlador/add";
@@ -115,9 +115,9 @@ public class ControladorController {
     public String index(HttpSession session, Model model) {
         Usuario user= (Usuario) session.getAttribute("user");
         try{
-            if(user.getTipoUsuario().equals("Ciudadano")) {
+            if(user.getTipoUsuario().equals("Controlador")) {
                 model.addAttribute("perfil", userDao.getUsuario(user.getUsuario()));
-                return "/ciudadano/index";
+                return "/controlador/index";
             }
         } catch (Exception e){
             return "error/error";

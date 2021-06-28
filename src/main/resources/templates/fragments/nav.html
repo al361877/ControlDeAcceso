@@ -18,6 +18,8 @@
 <div  th:object="${session}" style="background: #30180b; ">
     <table style="width:100%;"><tr><td style="text-align: left;"><a href="https://www.uji.es/"><img src="http://imgfz.com/i/7wYrtfZ.png" width="160" height="30" align="left" ></a></td><td style="text-align: right;"><p style="font-size:70%; color:white;">Idioma: Español | ei102720gpr&nbsp;&nbsp;&nbsp;</p></td></tr></table>
 
+
+<!--    Si se inicia sesion con un ciudadano, aparece este navbar-->
     <div th:if="*{tipo=='Ciudadano'}" class=" barra_verde">
 
 
@@ -46,6 +48,9 @@
 
 
     </div>
+
+    <!--    Si no hay sesion inciada, aparece este navbar-->
+
     <div th:unless="*{user}" class=" barra_verde">
 
 
@@ -68,6 +73,8 @@
 
     </div>
 
+    <!--    Si se inicia sesion con un gestor, aparece este navbar-->
+
     <div th:if="*{tipo=='Gestor'}" class=" barra_azul">
 
 
@@ -87,7 +94,7 @@
                     <p  >Perfil</p>
                 </button>
                 <div class="dropdown-content">
-                    <a href="/ciudadano/index">inicio</a>
+                    <a href="/gestor/index">inicio</a>
                     <a href="/logout">Cerrar sesion</a>
                 </div>
             </div>
@@ -98,6 +105,7 @@
 
     </div>
 
+    <!--    Si se inicia sesion con un controlador, aparece este navbar-->
 
     <div th:if="*{tipo=='Controlador'}" class=" barra_marron">
 
@@ -108,7 +116,7 @@
 
 
             <button type="button" class="botones_navMarron"  style=" font-size:30px;"  onclick="location.href='/espacios/list'"><p >Espacios naturales</p></button>
-            <button type="button" class="botones_navMarron"  style=" font-size:30px;"  onclick="location.href='/ciudadano/list'"><p >Lista usuario</p></button>
+<!--            <button type="button" class="botones_navMarron"  style=" font-size:30px;"  onclick="location.href='/ciudadano/list'"><p >Lista usuario</p></button>-->
         </div>
         <div style="flex:2;text-align:right;" >
             <div style="" class="dropdown">
@@ -118,7 +126,7 @@
                     <p  >Perfil</p>
                 </button>
                 <div class="dropdown-content">
-                    <a href="/ciudadano/index">inicio</a>
+                    <a href="/controlador/index">inicio</a>
                     <a href="/logout">Cerrar sesion</a>
                 </div>
             </div>
