@@ -89,6 +89,33 @@ public class ReservaDao {
         }
     }
 
+    public List<Reserva> getReservaPorMunicipio (String id_municipio){
+        try{
+            //almaceno todas las reservas de ese espacio
+            List<Reserva> reservas = (List<Reserva>) jdbcTemplate.queryForObject("SELECT * FROM reserva WHERE id_espacio=?", new ReservaRowMapper(), id_municipio);
+
+            //busco las zonas almacenadas de cada reserva
+            for (Reserva reserva: reservas) {
+                List<RelacionRZ> listaRelaciones = jdbcTemplate.query("SELECT * FROM relacionrz WHERE id_reserva=?", new RelacionRZRowMapper(), reserva.getId());
+                //meto todas las zonas en un string
+                StringBuilder zonas = new StringBuilder();
+                RelacionRZ relacion = null;
+                for (int i = 0; i < listaRelaciones.size() - 1; i++) {
+                    relacion = listaRelaciones.get(i);
+                    zonas.append(relacion.getId_zona()).append(",");
+                }
+                relacion = listaRelaciones.get(listaRelaciones.size() - 1);
+                zonas.append(relacion.getId_zona());
+                //cambio el string zonas de la reserva
+                reserva.setZona(zonas.toString());
+            }
+            return reservas;
+        }
+        catch (EmptyResultDataAccessException e){
+            return null;
+        }
+    }
+
 //    public List<Reserva> getReservasByDni(String dni){
 //        try{
 //            System.out.println("Estas en la Lista de reservas con el dni "+dni);

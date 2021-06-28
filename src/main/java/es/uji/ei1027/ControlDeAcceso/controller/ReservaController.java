@@ -1,10 +1,7 @@
 package es.uji.ei1027.ControlDeAcceso.controller;
 
 import com.sun.xml.internal.fastinfoset.tools.FI_DOM_Or_XML_DOM_SAX_SAXEvent;
-import es.uji.ei1027.ControlDeAcceso.dao.EspacioPublicoDao;
-import es.uji.ei1027.ControlDeAcceso.dao.FranjaDao;
-import es.uji.ei1027.ControlDeAcceso.dao.ReservaDao;
-import es.uji.ei1027.ControlDeAcceso.dao.ZonaDao;
+import es.uji.ei1027.ControlDeAcceso.dao.*;
 import es.uji.ei1027.ControlDeAcceso.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.trace.http.HttpTrace;
@@ -35,6 +32,7 @@ public class ReservaController {
     private ZonaDao zonaDao;
     private FranjaDao franjaDao;
     private EspacioPublicoDao espacioDao;
+    private UsuarioDao usuarioDao;
 
     @Autowired
     public void setEspacioDao(EspacioPublicoDao espacioDao) {
@@ -55,6 +53,11 @@ public class ReservaController {
     public void setZona(ZonaDao zonaDao) {
 
         this.zonaDao = zonaDao;
+    }
+    @Autowired
+    public void setUsuarioDao(UsuarioDao usuarioDao) {
+
+        this.usuarioDao = usuarioDao;
     }
     @RequestMapping("/list")
     public String listReserva(HttpSession session, Model model) {
@@ -401,6 +404,64 @@ public class ReservaController {
         cadena=cadena+alfa.charAt(forma)+numero;
         return cadena;
     }
+
+    @RequestMapping(value="/listAll/{id}", method = RequestMethod.GET)
+    public String listReservaEspacio(HttpSession session, Model model, @PathVariable String id) {
+        Usuario user = (Usuario) session.getAttribute("user");
+
+        try{
+            /*if(user.getTipoUsuario().equals("Ciudadano")){
+
+
+                List<Reserva> lista = resDao.getReservasPendientesByDni(user.getDni());
+                FranjaEspacio franjaEspacio;
+                for(Reserva res: lista){
+                    franjaEspacio=franjaDao.getFranja(res.getFranja());
+                    res.setHoraIniString(franjaEspacio.getHoraIniString());
+                    res.setHoraFinString(franjaEspacio.getHoraFinString());
+                    EspacioPublico espacioPublico=espacioDao.getEspacio(res.getEspacio_publico());
+                    res.setNombreEspacio(espacioPublico.getNombre());
+                }
+
+                model.addAttribute("reservas", lista);
+                if(lista.isEmpty()){
+                    return "reservas/unlist";
+                }
+
+                return "reservas/list";
+            }
+
+            else */
+            if (user.getTipoUsuario().equals("Controlador")) {
+
+                List<Reserva> lista = resDao.getReservaPorMunicipio(id);
+
+                FranjaEspacio franjaEspacio;
+                for(Reserva res: lista){
+                    franjaEspacio=franjaDao.getFranja(res.getFranja());
+                    res.setHoraIniString(franjaEspacio.getHoraIniString());
+                    res.setHoraFinString(franjaEspacio.getHoraFinString());
+                    EspacioPublico espacioPublico=espacioDao.getEspacio(res.getEspacio_publico());
+                    res.setNombreEspacio(espacioPublico.getNombre());
+                }
+
+                model.addAttribute("reservas", lista);
+
+                if(lista.isEmpty()){
+                    return "reservas/unlist";
+                }
+                return "reservas/list";
+            }
+
+
+        }catch (Exception e){
+            System.out.println("Estás en el catch");
+            return "error/error";
+        }
+        System.out.println("Estás fuera del try");
+        return "error/error";
+    }
+
 
 /*
     @RequestMapping(value="/delete/{dni}")

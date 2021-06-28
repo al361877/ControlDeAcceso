@@ -1,0 +1,51 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <title>Control De Acceso</title>
+    <meta charset=" UTF-8" />
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+
+
+</head>
+<body>
+
+
+<div  layout:fragment="content" >
+    <h1>Lista de ciudadanos</h1>
+    <div align="center">
+        <table  class="table table-striped">
+            <thead>
+            <tr>
+                <th >Nombre</th>
+                <th >Telefono</th>
+                <th >Email</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user: ${usuarios}">
+                <td  th:text="${user.nombre}"></td>
+                <td  th:text="${user.telefono}"></td>
+                <td th:text="${user.email}"></td>
+                <td th:text="${#temporals.format(user.nacimiento,'dd MMMM yyyy')}"></td>
+                <td><a th:href="@{/controlador/update/{dni}(dni=${user.dni})}" class="btn btn-warning" role="button">Edita</a></td>
+                <td><a th:href="@{/controlador/delete/{dni}(dni=${user.dni})}" class="btn btn-danger" role="button">Borrar</a></td>
+
+            </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+
+    <a onClick="history.back()" class="btn boton_azul" role="button" ><img src="https://image.flaticon.com/icons/svg/929/929730.svg" width="20"  alt="x"> Volver</a>
+    <br><br>
+    <br><br>
+</div>
+
+</body>
+</html>

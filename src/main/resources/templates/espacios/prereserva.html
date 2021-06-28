@@ -98,75 +98,111 @@
 
 <body>
 
-
 <div layout:fragment="content">
-    <br>
-    <h1 >Reservar espacio</h1>
 
-    <div style="margin-bottom:20px;" class="principal" >
+<div  th:object="${session}" style="background: #30180b; ">
 
-        <div class="p2Foto" >
-            <img th:src="@{/images/espacios/espacio-{espacio}.jpg(espacio=${espacio.id})}" class="imgRedonda">
+    <div th:if="*{tipo=='Ciudadano'}" class=" barra_verde">
 
 
-        </div>
-        <div class="p3Foto" >
-            <h2 style="text-align:left;">Tipo de espacio</h2>
-            <p th:text="${espacio.tipo_espacio}" class="parrafo"></p>
+            <br>
+            <h1 >Reservar espacio</h1>
 
-            <br><br>
-            <button onClick="history.back()" class=" btn boton_azul"  ><img src="https://image.flaticon.com/icons/svg/929/929730.svg" width="20"  alt="x"> Volver</button>
+            <div style="margin-bottom:20px;" class="principal" >
 
-
-        </div>
-
-    </div>
-    <br>
-    <div th:if="*{disponibilidad}">
-    <h2>Zonas disponibles </h2>
-    <div class="informativo">
-        <p class="parrafo" style="text-align-center;">Estas son las zonas disponibles dentro del espacio natural. Selecciona una zona para realizar la reserva.</p>
-    </div>
-        <form action="#" th:action="@{/reservas/add}" th:object="${zona}" method="post">
+                <div class="p2Foto" >
+                    <img th:src="@{/images/espacios/espacio-{espacio}.jpg(espacio=${espacio.id})}" class="imgRedonda">
 
 
+                </div>
+                <div class="p3Foto" >
+                    <h2 style="text-align:left;">Tipo de espacio</h2>
+                    <p th:text="${espacio.tipo_espacio}" class="parrafo"></p>
+
+                    <br><br>
+                    <button onClick="history.back()" class=" btn boton_azul"  ><img src="https://image.flaticon.com/icons/svg/929/929730.svg" width="20"  alt="x"> Volver</button>
 
 
-    <div th:each="lista: ${matrizZonas}"  class="principal" >
-        <div th:each="zona: ${lista}" class="p2">
-            <input type="checkbox" th:field ="*{nombre}"  th:value="${zona.id}"/>
-            <label th:for="${#ids.prev('nombre')}" th:text ="${zona.id}" ></label>
-                <div class="p3" >
-
-                    <b  class="parrafo" style="margin:0;display:inline">Zona </b><b  class="parrafo" style="margin-left:5px;display:inline" th:text="${zona.id}"></b>
-                    <br>
-
-                    <div style="text-align:left;margin:auto; height:50px; width:200px;" >
-                        <p class="parrafo" style="margin-left:20px;display:inline;" >Tipo suelo:</p><p   class="parrafo" style="margin-left:5px;display:inline" th:text="${zona.tipo_suelo}"></p>
-                        <br>
-                        <p class="parrafo" style="margin-left:20px;display:inline;" >Aforo actual:</p><p  class="parrafo" style="margin-left:5px;display:inline" th:text="${zona.aforo_actual}"></p>
-                        <br>
-                        <p class="parrafo"style="margin-left:20px;display:inline;" >Aforo maximo:</p><p  class="parrafo" style="margin-left:5px;display:inline" th:text="${zona.aforo_maximo}"></p>
-                    </div>
-
-
-                    <br>
                 </div>
 
-        </div>
-        <br>
+            </div>
+            <br>
+            <div th:if="*{disponibilidad}">
+            <h2>Zonas disponibles </h2>
+            <div class="informativo">
+                <p class="parrafo" style="text-align-center;">Estas son las zonas disponibles dentro del espacio natural. Selecciona una zona para realizar la reserva.</p>
+            </div>
+                <form action="#" th:action="@{/reservas/add}" th:object="${zona}" method="post">
+
+
+
+
+            <div th:each="lista: ${matrizZonas}"  class="principal" >
+                <div th:each="zona: ${lista}" class="p2">
+                    <input type="checkbox" th:field ="*{nombre}"  th:value="${zona.id}"/>
+                    <label th:for="${#ids.prev('nombre')}" th:text ="${zona.id}" ></label>
+                        <div class="p3" >
+
+                            <b  class="parrafo" style="margin:0;display:inline">Zona </b><b  class="parrafo" style="margin-left:5px;display:inline" th:text="${zona.id}"></b>
+                            <br>
+
+                            <div style="text-align:left;margin:auto; height:50px; width:200px;" >
+                                <p class="parrafo" style="margin-left:20px;display:inline;" >Tipo suelo:</p><p   class="parrafo" style="margin-left:5px;display:inline" th:text="${zona.tipo_suelo}"></p>
+                                <br>
+                                <p class="parrafo" style="margin-left:20px;display:inline;" >Aforo actual:</p><p  class="parrafo" style="margin-left:5px;display:inline" th:text="${zona.aforo_actual}"></p>
+                                <br>
+                                <p class="parrafo"style="margin-left:20px;display:inline;" >Aforo maximo:</p><p  class="parrafo" style="margin-left:5px;display:inline" th:text="${zona.aforo_maximo}"></p>
+                            </div>
+
+
+                            <br>
+                        </div>
+
+                </div>
+                <br>
+
+            </div>
+                        <input type="submit" value="Seleccionar zonas" class="boton_verde" style="margin:auto;">
+                    </form>
+
+            </div>
+            <div th:unless="*{disponibilidad}" style="height:200px">
+                <h2 > No hay zonas disponibles </h2>
+            </div>
 
     </div>
-                <input type="submit" value="Seleccionar zonas" class="boton_verde" style="margin:auto;">
-            </form>
+
+    <div th:if="*{tipo=='Controlador'}" class=" barra_marron">
+
+         <br>
+            <h1 >Listar reservas del espacio</h1>
+
+            <div style="margin-bottom:20px;" class="principal" >
+
+                <div class="p2Foto" >
+                    <img th:src="@{/images/espacios/espacio-{espacio}.jpg(espacio=${espacio.id})}" class="imgRedonda">
+
+
+                </div>
+                <div class="p3Foto" >
+                    <h2 style="text-align:left;">Tipo de espacio</h2>
+                    <p th:text="${espacio.tipo_espacio}" class="parrafo"></p>
+
+                    <br><br>
+                    <button onClick="history.back()" class=" btn boton_azul"  ><img src="https://image.flaticon.com/icons/svg/929/929730.svg" width="20"  alt="x"> Volver</button>
+
+
+                </div>
+
+            </div>
+        <form action="#" th:action="@{/reservas/list}" th:object="${espacio.id}" method="get">
+        </form>
 
     </div>
-    <div th:unless="*{disponibilidad}" style="height:200px">
-        <h2 > No hay zonas disponibles </h2>
-    </div>
 
+    <br>
 </div>
-
+</div>
 
 
 </body>

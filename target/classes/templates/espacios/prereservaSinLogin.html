@@ -1,0 +1,85 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <title>Control De Acceso</title>
+    <meta charset=" UTF-8" />
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+
+
+    <style>
+
+        div.principal{
+            display: flex;
+
+        }
+
+        div.p2{
+
+            margin-left:50px;
+            flex:1;
+            padding: 50px;
+            border-radius:20px;
+
+
+        }
+        div.p3{
+
+            flex:1;
+            border-radius:20px;
+            margin-left:10px;
+            margin-top:10px;
+            text-align:left;
+        }
+
+        .imgRedonda {
+            width:100%;
+            border-radius:10px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+<div layout:fragment="content">
+    <br>
+    <h1 >Reservar espacio</h1>
+
+    <div style="margin-bottom:20px;" class="principal" >
+
+        <div class="p2" >
+            <img th:src="@{/images/espacios/espacio-{espacio}.jpg(espacio=${espacio.id})}" class="imgRedonda">
+
+
+        </div>
+        <div class="p3" >
+            <h2 style="text-align:left;">Información del espacio</h2>
+            <b style="margin:0;display:inline">Nombre: </b> <p style="margin:0;display:inline" th:text="${espacio.nombre}" class="parrafo"></p>
+            <br>
+            <b style="margin:0;display:inline">Municipio: </b> <p style="margin:0;display:inline" th:text="${espacio.municipio}" class="parrafo"></p>
+            <br>
+            <b style="margin:0;display:inline">Tipo espacio: </b> <p style="margin:0;display:inline" th:text="${espacio.tipo_espacio}" class="parrafo"></p>
+            <br>
+            <b style="margin:0;display:inline">Servicio: </b> <p style="margin:0;display:inline" th:text="${servicio}" class="parrafo"></p>
+            <br>
+            <a th:href="@{~/reservas/add/{espacio}(espacio=${espacio.id})}" style=" margin-top: 10px;" class="btn boton_verde"  >Reservar espacio</a>
+            <br><br>
+            <button onClick="history.back()" class=" btn boton_azul"  ><img src="https://image.flaticon.com/icons/svg/929/929730.svg" width="20"  alt="x"> Volver</button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+</body>
+</html>
