@@ -1,14 +1,12 @@
 package es.uji.ei1027.ControlDeAcceso.controller;
 
 
-import es.uji.ei1027.ControlDeAcceso.dao.EspacioPublicoDao;
-import es.uji.ei1027.ControlDeAcceso.dao.EstacionDao;
-import es.uji.ei1027.ControlDeAcceso.dao.ServicioDao;
-import es.uji.ei1027.ControlDeAcceso.dao.ZonaDao;
+import es.uji.ei1027.ControlDeAcceso.dao.*;
 import es.uji.ei1027.ControlDeAcceso.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Controller
 @RequestMapping("espacios")
@@ -26,10 +25,16 @@ public class EspaciosController {
     private ZonaDao zonaDao;
     private EstacionDao estacionDao;
     private ServicioDao servicioDao;
+    private UsuarioDao usuarioDao;
 
     @Autowired
     public void setEspacios(EspacioPublicoDao espacioPublicoDao) {
         this.espacioPublicoDao = espacioPublicoDao;
+    }
+
+    @Autowired
+    public void setUsuarioDao(UsuarioDao usuarioDao) {
+        this.usuarioDao = usuarioDao;
     }
 
     @Autowired
@@ -174,9 +179,102 @@ public class EspaciosController {
         }
 
             return "espacios/prereservaSinLogin.html";
+    }
+
+
+    @RequestMapping(value="/add")
+    public String addEspacio(Model model) {
+        model.addAttribute("espacio", new EspacioPublico());
+
+        return "espacios/add";
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public String addEspacio(Model model, HttpSession session,@ModelAttribute("espacio") EspacioPublico espacio,
+                             BindingResult bindingResult) {
+        Usuario user=(Usuario) session.getAttribute("user");
+
+
+
+        try{
+            if(session.getAttribute("tipo").equals("Gestor")){
+
+                Gestor gestor = usuarioDao.getGestorByDni(user.getDni());
+
+
+
+                EspacioValidator espacioValidator=new EspacioValidator();
+                espacioValidator.validate(espacio, bindingResult);
+
+                if(bindingResult.hasErrors()){
+                    return "espacios/add";
+                }
+
+                if(espacio.getMunicipio() != null && !gestor.getMunicipio().equals(espacio.getMunicipio())){
+                    bindingResult.rejectValue("municipio", "invalitStr", "No gestionas el espacio de municipio");
+                }
+
+                espacio.setId(aleatorio());
+
+                return "espacios/add";
+            }else{
+                return "error/error";
+            }
+        }catch (Exception e){
+            return "error/error";
+        }
+      //  return "redirect:/login";
+    }
+
+    @RequestMapping(value="/update/{id}", method = RequestMethod.GET)
+    public String updateEspacio(Model model, HttpSession session, @PathVariable String id){
+
+        Usuario user = (Usuario) session.getAttribute("user");
+
+        try{
+            if(user.getTipoUsuario().equals("Gestor")){
+                EspacioPublico espacio=espacioPublicoDao.getEspacio(id);
+
+                model.addAttribute("espacio", espacio);
+
+            }
+        }catch (Exception e){
+            return "error/error";
         }
 
+        return "error/error";
+    }
 
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public String publicUpdateSubmit(@ModelAttribute("espacio") EspacioPublico espacio, HttpSession session, BindingResult bindingResult, Model model){
+        Usuario user = (Usuario) session.getAttribute("user");
 
+        try{
+            if(user.getTipoUsuario().equals("Gestor")){
+                EspacioValidator validator = new EspacioValidator();
+                validator.validate(espacio, bindingResult);
+
+                if(bindingResult.hasErrors()){
+
+                    return "espacios/add";
+                }
+            }
+        }catch (Exception e){
+            return "error/error";
+        }
+        return "error/error";
+    }
+
+    private String aleatorio(){
+        Random aleatorio = new Random();
+        String alfa = "ABCDEFGHIJKLMNOPQRSTVWXYZ";
+        String cadena = "";
+        int numero;
+        int forma;
+        forma=(int)(aleatorio.nextDouble() * alfa.length()-1+0);
+        numero=(int)(aleatorio.nextDouble() * 99+100);
+        cadena=cadena+alfa.charAt(forma)+numero;
+        return cadena;
+    }
 }
 

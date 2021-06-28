@@ -16,10 +16,10 @@ public class EspacioPublico {
     public String toString() {
         return "EspacioPublico{" +
                 "id='" + id + '\'' +
+                ", nombre='" + nombre + '\'' +
                 ", municipio='" + municipio + '\'' +
                 ", tipo_espacio='" + tipo_espacio + '\'' +
                 ", cp=" + cp +
-                ", nombre='" + nombre + '\'' +
                 '}';
     }
 

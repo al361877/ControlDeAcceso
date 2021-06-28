@@ -104,6 +104,15 @@ public class UsuarioDao {
                 return null;
             }
         }
+        //Get getsor
+        public Gestor getGestorByDni(String dni){
+            try{
+                return jdbcTemplate.queryForObject("SELECT * FROM gestor WHERE dni=?", new GestorRowMapper(), dni);
+            }
+            catch (EmptyResultDataAccessException e){
+                return null;
+            }
+        }
         //AÑADIMOS gestor
         public void addGestor(String dni, String municipio) {
             jdbcTemplate.update("INSERT INTO Gestor VALUES (?,?)",

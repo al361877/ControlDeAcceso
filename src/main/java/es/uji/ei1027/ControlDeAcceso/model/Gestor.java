@@ -1,5 +1,7 @@
 package es.uji.ei1027.ControlDeAcceso.model;
 
+import java.util.List;
+
 public class Gestor extends Usuario{
     private String municipio;
     private String dni;
@@ -18,7 +20,5 @@ public class Gestor extends Usuario{
         return municipio;
     }
 
-    public void setMunicipio(String municipio) {
-        this.municipio = municipio;
-    }
+    public void setMunicipio(String municipios){this.municipio = municipios;}
 }

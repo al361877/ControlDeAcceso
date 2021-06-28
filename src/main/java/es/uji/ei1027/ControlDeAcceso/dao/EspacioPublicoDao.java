@@ -26,7 +26,7 @@ public class EspacioPublicoDao {
     public void addEspacio(EspacioPublico espacioPublico) {
         try {
             jdbcTemplate.update("INSERT INTO EspacioPublico VALUES (?,?,?,?,?)",
-                    espacioPublico.getId(),espacioPublico.getMunicipio(),espacioPublico.getTipo_espacio(),espacioPublico.getCp(),espacioPublico.getNombre());
+                    espacioPublico.getId(), espacioPublico.getNombre(),espacioPublico.getMunicipio(),espacioPublico.getTipo_espacio(),espacioPublico.getCp());
         } catch (EmptyResultDataAccessException e){
             return;
         }
@@ -52,7 +52,7 @@ public class EspacioPublicoDao {
             return null;
         }
     }
-    public EspacioPublico getEspacio (String espacio ){
+    public EspacioPublico getEspacio (String espacio){
         try{
             return jdbcTemplate.queryForObject("SELECT * FROM espaciopublico WHERE id_espacio=?", new EspacioRowMapper(), espacio);
         }

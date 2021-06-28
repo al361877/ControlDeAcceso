@@ -24,6 +24,7 @@ public class ReservaValidator implements Validator {
     public void validate(Object obj, Errors errors) {
         Reserva reserva = (Reserva) obj;
 
+        boolean entro=false;
 
         if (reserva.getZona()==null || reserva.getZona().trim().equals("")){
             System.out.println("ejnogfos");
@@ -31,7 +32,8 @@ public class ReservaValidator implements Validator {
         }
 
         if (reserva.getFechaIniString()==null || reserva.getFechaIniString().trim().equals("")) {
-            System.out.println("etro");
+            System.out.println("etro fecha null");
+            entro=true;
             errors.rejectValue("fechaIniString", "nonullobj", "No se ha introducido ninguna fecha de reserva");
         }else{
             //compruebo que haya sido con 2 dias de antelacion
@@ -41,9 +43,14 @@ public class ReservaValidator implements Validator {
 
             int daysFecha=fechaini.getDayOfYear(), yearsFecha=fechaini.getYear();
 
-            if(daysFecha>daysToday && yearsFecha==yearsToday){
+            if(daysFecha>daysToday && yearsFecha>=yearsToday ){
                 errors.rejectValue("fechaIniString", "invalidStr", "La reserva es para dentro de más de 2 días ");
             }
+            daysToday=daysToday-2;
+            if(daysFecha<daysToday && yearsFecha<=yearsToday){
+                errors.rejectValue("fechaIniString", "invalidStr", "La reserva no se puede hacer en el pasado ");
+            }
+
 
 
         }
@@ -60,19 +67,23 @@ public class ReservaValidator implements Validator {
         else{
 
 
-            //compruebo que haya sido 1h antes de la hora de inicio
-            LocalDate today = LocalDate.now();
-            LocalDate fechaini=reserva.getFechaIni();
-            int daysFecha=fechaini.getDayOfYear(), daysToday=today.getDayOfYear();
-            if(daysFecha==daysToday){
-                int horaIni=Time.valueOf(reserva.getHoraIniString()).getHours();
-                int ahora=LocalDateTime.now().getHour()+1;
-                System.out.println("Hora ini= "+horaIni+" ahora "+ahora);
-                if(ahora>=horaIni){
-                    System.out.println("entro");
-                    errors.rejectValue("franja", "invalidStr", "La reserva ha de hacerse con 1h de antelación");
+            if(!entro){
+
+
+                LocalDate today = LocalDate.now();
+                LocalDate fechaini=reserva.getFechaIni();
+                int daysFecha=fechaini.getDayOfYear(), daysToday=today.getDayOfYear();
+                if(daysFecha==daysToday){
+                    int horaIni=Time.valueOf(reserva.getHoraIniString()).getHours();
+                    int ahora=LocalDateTime.now().getHour()+1;
+                    System.out.println("Hora ini= "+horaIni+" ahora "+ahora);
+                    if(ahora>=horaIni){
+                        System.out.println("entro");
+                        errors.rejectValue("franja", "invalidStr", "La reserva ha de hacerse con 1h de antelación");
+                    }
                 }
             }
+
 
 
         }
