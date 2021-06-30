@@ -30,58 +30,35 @@ td{
 
 <div   layout:fragment="content">
     <div  style="height: 600px; width:400px; text-align:center; margin: auto;">
-    <h2>Editar perfil </h2>
+    <h2>Editar espacio </h2>
     <div align="center" >
+
         <form action="#" th:action="@{/espacios/update}" th:object="${espacio}" method="post">
             <table>
-                <tr>
-
-                    <td><input class="form-control" type="text" th:field="*{nombre}" hidden/></td>
-                </tr>
 
                 <tr>
-
-                    <td><input class="form-control" type="text" th:field="*{municipio}" hidden /></td>
-                </tr>
-                <tr><td><br></td></tr>
-                <tr>
-                    <td><label>Nombre y apellidos</label></td>
-                    <td><input class="form-control" type="text" th:field="*{tipo}" /></td>
+                    <td><label>Nombre</label></td>
+                    <td><input class="form-control" type="text" th:field="*{nombre}" /></td>
 
                 </tr>
                 <tr>
                     <td class="error" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" style="font-size:15px"></td>
                 </tr>
-                <tr><td><br></td></tr>
-
                 <tr>
-                    <td class="error" th:if="${#fields.hasErrors('nacimientoString')}" th:errors="*{nacimientoString}" style="font-size:15px"></td>
-                </tr>
-                <tr><td><br></td></tr>
-                <tr>
-                    <td><label>Ciudad</label></td>
-                    <td><input class="form-control" type="text" th:field="*{ciudad}" /></td>
-                </tr>
-                <tr>
-                    <td class="error" th:if="${#fields.hasErrors('ciudad')}" th:errors="*{ciudad}" style="font-size:15px"></td>
-                </tr>
-                <tr><td><br></td></tr>
-                <tr>
-                    <td><label>Calle</label></td>
-                    <td><input class="form-control" type="text" th:field="*{calle}" /></td>
+                    <td><label>Tipo de espacio</label></td>
+                    <td>
+                        <select class="form-control" type="text" th:field="*{ciudad}" id="tipo" name="tipo">
+                            <option value="playa">Playa</option>
+                            <option value="rio">Rio</option>
+                            <option value="estanque">Estanque</option>
+                            <option value="lago">Lago</option>
+                            <option value="otros">Otros</option>
+                        </select>
+                    </td>
                 </tr>
                 <tr>
-                    <td class="error" th:if="${#fields.hasErrors('calle')}" th:errors="*{calle}" style="font-size:15px"></td>
+                    <td class="error" th:if="${#fields.hasErrors('tipo')}" th:errors="*{tipo}" style="font-size:15px"></td>
                 </tr>
-                <tr><td><br></td></tr>
-                <tr>
-                    <td><label>Código postal</label></td>
-                    <td><input class="form-control" type="number" th:field="*{cp}" /></td>
-                </tr>
-                <tr>
-                    <td class="error" th:if="${#fields.hasErrors('cp')}" th:errors="*{cp}" style="font-size:15px"></td>
-                </tr>
-                <tr><td><br></td></tr>
                 <tr>
                     <td>
                         <button onClick="history.back()" class=" btn boton_azul"  ><img src="https://image.flaticon.com/icons/svg/929/929730.svg" width="20"  alt="x"> Volver</button>

@@ -33,8 +33,6 @@ public class EspacioValidator implements Validator{
             errors.rejectValue("municipio", "nonullobj", "No se ha introducido el municipio al que perteneces el espacio");
         }
 
-
-
         if (espacio.getTipo_espacio()==null || espacio.getTipo_espacio().trim().equals("")) {
             System.out.println("etro");
             errors.rejectValue("fechaIniString", "nonullobj", "No se ha introducido tipo de espacio");

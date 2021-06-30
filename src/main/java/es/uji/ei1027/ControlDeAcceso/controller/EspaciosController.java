@@ -3,6 +3,8 @@ package es.uji.ei1027.ControlDeAcceso.controller;
 
 import es.uji.ei1027.ControlDeAcceso.dao.*;
 import es.uji.ei1027.ControlDeAcceso.model.*;
+import es.uji.ei1027.ControlDeAcceso.services.EspacioService;
+import es.uji.ei1027.ControlDeAcceso.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +28,8 @@ public class EspaciosController {
     private EstacionDao estacionDao;
     private ServicioDao servicioDao;
     private UsuarioDao usuarioDao;
+
+    private EspacioService espacioService;
 
     @Autowired
     public void setEspacios(EspacioPublicoDao espacioPublicoDao) {
@@ -51,6 +55,31 @@ public class EspaciosController {
     public void setZona(ZonaDao zonaDao) {
 
         this.zonaDao = zonaDao;
+    }
+
+    @Autowired
+    public void setEspacioService(EspacioService espacioService){
+        this.espacioService = espacioService;
+    }
+
+
+    @RequestMapping("/listDelGestor")
+    public String listEspaciosPorGestor(HttpSession session, Model model){
+        Usuario user = (Usuario) session.getAttribute("user");
+
+        try{
+            if(user.getTipoUsuario().equals("Gestor")){
+                List<EspacioPublico> espacios = espacioService.listEspaciosPorGestor(user);
+
+                model.addAttribute("espacios", espacios);
+
+                return "espacios/listDelGestor.html";
+            }
+        }catch (Exception e){
+            return "error/error";
+        }
+
+        return "error/error";
     }
 
     @RequestMapping("/list")
@@ -246,7 +275,7 @@ public class EspaciosController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String publicUpdateSubmit(@ModelAttribute("espacio") EspacioPublico espacio, HttpSession session, BindingResult bindingResult, Model model){
+    public String publicUpdateSubmit(@ModelAttribute("esp") EspacioPublico espacio, HttpSession session, BindingResult bindingResult, Model model){
         Usuario user = (Usuario) session.getAttribute("user");
 
         try{

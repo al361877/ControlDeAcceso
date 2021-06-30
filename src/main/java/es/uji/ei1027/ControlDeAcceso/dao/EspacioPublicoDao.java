@@ -67,7 +67,7 @@ public class EspacioPublicoDao {
 
     //ACTUALIZAMOS espacio
     public void updateEspacio(EspacioPublico espacioPublico) {
-        jdbcTemplate.update("UPDATE espaciopublico SET municipio=?,tipo_espacio=? WHERE id_espacio=?",
+        jdbcTemplate.update("UPDATE espaciopublico SET nombre=?, tipo_espacio=? WHERE id_espacio=?",
                 espacioPublico.getMunicipio(),espacioPublico.getTipo_espacio(),espacioPublico.getId());
 
     }

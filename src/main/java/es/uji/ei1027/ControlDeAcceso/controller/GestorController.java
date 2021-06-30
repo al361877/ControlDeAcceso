@@ -16,8 +16,8 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
-@RequestMapping("controlador")
-public class ControladorController {
+@RequestMapping("gestor")
+public class GestorController {
     private UsuarioDao userDao;
 
 
@@ -32,11 +32,11 @@ public class ControladorController {
         try{
             if(user.getTipoUsuario().equals("Gestor")) {
 
-                List<Usuario> lista = userDao.getControladores();
+                List<Usuario> lista = userDao.getGestores();
 
                 model.addAttribute("usuarios", lista);
 
-                return "controlador/list.html";
+                return "gestor/list.html";
             }
         } catch (Exception e){
             return "error/error";
@@ -50,28 +50,28 @@ public class ControladorController {
     public String addControlado(Model model) {
         model.addAttribute("user", new Usuario());
 
-        return "controlador/add";
+        return "gestor/add";
     }
 
-    //add ciudadano
-    @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddControladorSubmit(@ModelAttribute("user") Usuario user, HttpSession session,BindingResult bindingResult) {
+    //add gestor
+  /*  @RequestMapping(value="/add", method= RequestMethod.POST)
+    public String processAddGestorSubmit(@ModelAttribute("user") Usuario user, HttpSession session,BindingResult bindingResult) {
 
         RegisterValidator validator = new RegisterValidator();
         validator.validate(user, bindingResult);
         if (bindingResult.hasErrors())
-            return "controlador/add";
+            return "gestor/add";
 
-        userDao.addControlador(user);
-        userDao.addControlador(user.getDni());
-        user.setTipoUsuario("Controlador");
+        userDao.addGestor(user);
+        userDao.addGestor(user.getDni());
+        user.setTipoUsuario("Gestor");
         session.setAttribute("user", user);
 
         session.setAttribute("tipo",user.getTipoUsuario());
 
-        return "controlador/index";
+        return "gestor/index";
     }
-
+*/
     @RequestMapping(value="/update/{dni}", method = RequestMethod.GET)
     public String editUsuario(Model model, @PathVariable String dni,HttpSession session) {
         Usuario user = (Usuario) session.getAttribute("user");
@@ -80,7 +80,7 @@ public class ControladorController {
             if(user.getTipoUsuario().equals("Gestor") || user.getDni().equals(dni)){
 
                 model.addAttribute("user", userDao.getUsuarioDni(dni));
-                return "controlador/update";
+                return "gestor/update";
             }
         }catch (Exception e){
 
@@ -115,9 +115,9 @@ public class ControladorController {
     public String index(HttpSession session, Model model) {
         Usuario user= (Usuario) session.getAttribute("user");
         try{
-            if(user.getTipoUsuario().equals("Controlador")) {
+            if(user.getTipoUsuario().equals("Gestor")) {
                 model.addAttribute("perfil", userDao.getUsuario(user.getUsuario()));
-                return "/controlador/index";
+                return "/gestor/index";
             }
         } catch (Exception e){
             return "error/error";
