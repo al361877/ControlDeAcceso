@@ -85,6 +85,10 @@ public class ReservaController {
                 return "reservas/list";
             }
 
+            else if (user.getTipoUsuario().equals("Gestor")) {
+                return "reservas/list";
+            }
+
         }catch (Exception e){
             System.out.println("Estás en el catch");
             return "error/error";

@@ -1,7 +1,5 @@
 package es.uji.ei1027.ControlDeAcceso.dao;
 
-
-import es.uji.ei1027.ControlDeAcceso.model.Reserva;
 import es.uji.ei1027.ControlDeAcceso.model.Servicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -68,9 +66,5 @@ public class ServicioDao {
                 servicio.getId());
 
     }
-
-
-
-
 
 }

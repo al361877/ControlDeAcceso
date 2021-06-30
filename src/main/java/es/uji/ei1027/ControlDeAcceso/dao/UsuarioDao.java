@@ -98,7 +98,7 @@ public class UsuarioDao {
         //Datos controladores
         public List<Usuario> getControladores (){
             try{
-                return jdbcTemplate.query("SELECT * FROM usuario WHERE tipo_usuario='controlador'", new UsuarioRowMapper());
+                return jdbcTemplate.query("SELECT * FROM usuario WHERE tipo_usuario='Controlador'", new UsuarioRowMapper());
             }
             catch (EmptyResultDataAccessException e){
                 return null;

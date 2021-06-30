@@ -13,14 +13,31 @@
 <body>
 
 
-<div  layout:fragment="content" >
-    <h1>Reserva confirmada</h1>
-    <div style=" height: 600px; width:400px; text-align:center; margin: auto;">
-        <p>Se ha añadido la reserva correctamente.</p>
-        <button type="button" class="boton_azul"  style=" font-size:30px;"  onclick="location.href='/reservas/list'">Lista de reservas<span class="sr-only"></span></button>
-        <button type="button" class="boton_azul"  style=" font-size:30px;"  onclick="location.href='/ciudadano/index'">Inicio<span class="sr-only"></span></button>
-
+<div  th:object="${session}" style="background: #30180b; ">
+    <div th:if="*{tipo=='Ciudadano'}" class=" barra_marron">
+        <div  layout:fragment="content" >
+            <h1>Reserva confirmada</h1>
+            <div style=" height: 600px; width:400px; text-align:center; margin: auto;">
+                <p>Se ha añadido la reserva correctamente.</p>
+                <!--                                                                            modificar a la redireccion del listar adecuado-->
+                <button type="button" class="boton_azul"  style=" font-size:30px;"  onclick="location.href='/reservas/list'">Lista de reservas<span class="sr-only"></span></button>
+                <button type="button" class="boton_azul"  style=" font-size:30px;"  onclick="location.href='/ciudadano/index'">Inicio<span class="sr-only"></span></button>
+            </div>
+        </div>
     </div>
+
+    <div th:if="*{tipo=='Gestor'}" class=" barra_azul">
+        <div  layout:fragment="content" >
+            <h1>Reserva confirmada</h1>
+            <div style=" height: 600px; width:400px; text-align:center; margin: auto;">
+                <p>Se ha añadido la reserva correctamente.</p>
+                <!--                                                                            modificar a la redireccion del listar adecuado-->
+                <button type="button" class="boton_azul"  style=" font-size:30px;"  onclick="location.href='/reservas/list'">Lista de reservas<span class="sr-only"></span></button>
+                <button type="button" class="boton_azul"  style=" font-size:30px;"  onclick="location.href='/gestor/index'">Inicio<span class="sr-only"></span></button>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 </body>

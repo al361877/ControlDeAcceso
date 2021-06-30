@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{fragments/base}">
 <head>
-    <title>Registro</title>
+    <title>Control De Acceso</title>
     <meta charset=" UTF-8" />
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
@@ -15,7 +15,7 @@
 
 <div layout:fragment="content">
     <br>
-    <h1 >Registrarse</h1>
+    <h1 >Registro de controlador</h1>
     <div align="center" style="height: 600px;" >
         <form action="#" th:action="@{/controlador/add}" th:object="${user}" method="post">
             <table>
@@ -26,9 +26,6 @@
                 <tr>
                     <td  class="error" th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}" style="font-size:15px"></td>
                 </tr>
-
-
-
                 <tr>
                     <td><label>Usuario</label></td>
                     <td><input type="text" class="form-control" th:field="*{usuario}" /></td>
@@ -36,9 +33,6 @@
                 <tr>
                     <td class="error" th:if="${#fields.hasErrors('usuario')}" th:errors="*{usuario}" style="font-size:15px"></td>
                 </tr>
-
-
-
                 <tr>
                     <td><label>Nombre y apellidos</label></td>
                     <td><input type="text" class="form-control" th:field="*{nombre}" /></td>
@@ -46,9 +40,6 @@
                 <tr>
                     <td class="error" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" style="font-size:15px"></td>
                 </tr>
-
-
-
                 <tr>
                     <td><label>Telefono </label></td>
                     <td><input type="text" class="form-control" th:field="*{telefono}" /></td>
@@ -56,9 +47,6 @@
                 <tr>
                     <td class="error" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}" style="font-size:15px"></td>
                 </tr>
-
-
-
                 <tr>
                     <td><label>Email</label></td>
                     <td><input type="text" class="form-control" th:field="*{email}" /></td>
@@ -66,9 +54,6 @@
                 <tr>
                     <td class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="font-size:15px"></td>
                 </tr>
-
-
-
                 <tr>
                     <td><label>Contraseña</label></td>
                     <td><input type="password" class="form-control" th:field="*{contraseña}" /></td>
@@ -76,9 +61,6 @@
                 <tr>
                     <td class="error" th:if="${#fields.hasErrors('contraseña')}" th:errors="*{contraseña}" style="font-size:15px"></td>
                 </tr>
-
-
-
                 <tr>
                     <td><label>Año nacimiento</label></td>
                     <td><input type="date" placeholder="dd/MM/yyyy"  th:field="*{nacimientoString}" /></td>
@@ -86,7 +68,6 @@
                 <tr>
                     <td class="error" th:if="${#fields.hasErrors('nacimientoString')}" th:errors="*{nacimientoString}" style="font-size:15px"></td>
                 </tr>
-
 
                 <tr>
                     <td><label>Ciudad</label></td>

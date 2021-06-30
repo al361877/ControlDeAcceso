@@ -87,7 +87,7 @@ public class RegisterValidator implements Validator {
         if (usuario.getCalle().length() > 100)
             errors.rejectValue("calle", "invalidStr","El nombre de la calle es demasiado largo");
 
-        if ( usuario.getCp()==0 || usuario.getCp() < 1000 || usuario.getCp() > 52999 )
+        if (usuario.getCp() < 1000 || usuario.getCp() > 52999)
             errors.rejectValue("cp", "invalidInt","El codigo postal introducido no es valido");
 
 

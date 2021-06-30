@@ -2,6 +2,7 @@ package es.uji.ei1027.ControlDeAcceso.controller;
 
 
 import es.uji.ei1027.ControlDeAcceso.dao.UsuarioDao;
+import es.uji.ei1027.ControlDeAcceso.model.Reserva;
 import es.uji.ei1027.ControlDeAcceso.model.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -69,7 +70,7 @@ public class ControladorController {
 
         session.setAttribute("tipo",user.getTipoUsuario());
 
-        return "controlador/index";
+        return "controlador/addConfirm";
     }
 
     @RequestMapping(value="/update/{dni}", method = RequestMethod.GET)
@@ -79,7 +80,7 @@ public class ControladorController {
         try{
             if(user.getTipoUsuario().equals("Gestor") || user.getDni().equals(dni)){
 
-                model.addAttribute("user", userDao.getUsuarioDni(dni));
+                model.addAttribute("controlador", userDao.getUsuarioDni(dni));
                 return "controlador/update";
             }
         }catch (Exception e){
@@ -97,18 +98,28 @@ public class ControladorController {
     public String processUpdateSubmit(@ModelAttribute("user") Usuario user, BindingResult bindingResult,HttpSession session) {
         System.out.println("before update "+user.getNombre());
 
-
+        UpdateValidator validator = new UpdateValidator();
+        validator.validate(user, bindingResult);
         if (bindingResult.hasErrors())
-            return "ciudadano/update/"+user.getDni();
+            return "controlador/update";
 
         userDao.updateUsuario(user);
-        return "ciudadano/updateConfirm";
+        return "controlador/updateConfirm";
     }
 
     @RequestMapping(value="/delete/{dni}")
-    public String processDelete(@PathVariable String dni) {
-        userDao.deleteUsuario(dni);
-        return "redirect:../list";
+    public String processDelete(@PathVariable String dni, HttpSession session) {
+        Usuario user = (Usuario) session.getAttribute("user");
+        try{
+            if(user.getTipoUsuario().equals("Gestor")){
+                userDao.deleteUsuario(dni);
+                return "controlador/deleteConfirm";
+            }
+        }catch (Exception e){
+            System.out.println("Estás en el catch");
+            return "error/error";
+        }
+        return "error/error";
     }
 
     @RequestMapping(value = "/index")
