@@ -9,7 +9,7 @@ import java.util.List;
 
 
 public interface EspacioService {
-   // public Map<String, List<EspacioPublico>> listEspaciosPorMunicipio(String municipio);
+    public List<EspacioPublico> listEspaciosPorControlador(String dni);
 
     public List<EspacioPublico> listEspaciosPorGestor(Usuario user);
 }

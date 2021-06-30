@@ -71,7 +71,7 @@ public class EspaciosController {
             if(user.getTipoUsuario().equals("Gestor")){
                 List<EspacioPublico> espacios = espacioService.listEspaciosPorGestor(user);
 
-                model.addAttribute("espacios", espacios);
+                model.addAttribute("espaciosC", espacios);
 
                 return "espacios/listDelGestor.html";
             }
@@ -81,6 +81,25 @@ public class EspaciosController {
 
         return "error/error";
     }
+
+    @RequestMapping("listDelControlador")
+    public String listEspaciosPorControlador(HttpSession session, Model model){
+        Usuario user = (Usuario) session.getAttribute("user");
+
+        try{
+            if(user.getTipoUsuario().equals("Controlador")){
+                List<EspacioPublico> espacios = espacioService.listEspaciosPorGestor(user);
+
+                model.addAttribute("espacios", espacios);
+
+                return "espacios/listDelControlador.html";
+            }
+        }catch (Exception e){
+            return "error/error";
+        }
+        return "error/error";
+    }
+
 
     @RequestMapping("/list")
     public String listEspacios(Model model) {

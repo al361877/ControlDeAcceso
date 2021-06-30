@@ -104,6 +104,19 @@ public class UsuarioDao {
                 return null;
             }
         }
+
+    //Get Para poder sacar los espacios que tiene asignados para vigilar un controlador
+    public List<Controlador> getControladorByDni(String dni){
+        try{
+            return jdbcTemplate.query("SELECT * FROM controlador WHERE dni=?", new ControladorRowMapper());
+        }
+        catch (EmptyResultDataAccessException e){
+            return null;
+        }
+    }
+
+
+
         //Get getsor
         public Gestor getGestorByDni(String dni){
             try{
