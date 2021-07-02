@@ -57,7 +57,7 @@
     <form style="margin-left:50px" action="#" th:action="@{/espacios/listDelGestor}" method="GET">
     </form>
     <div >
-        <div th:each="lista: ${espacios}" class="principal">
+        <div th:each="lista: ${espaciosC}" class="principal">
             <div th:each="espacio: ${lista}" class="p2">
                 <div class="p3" >
                     <div style="text-align: center;  margin-bottom:10px;">

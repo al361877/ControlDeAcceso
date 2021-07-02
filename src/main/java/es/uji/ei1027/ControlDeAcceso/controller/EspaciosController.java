@@ -66,11 +66,12 @@ public class EspaciosController {
     @RequestMapping("/listDelGestor")
     public String listEspaciosPorGestor(HttpSession session, Model model){
         Usuario user = (Usuario) session.getAttribute("user");
+        System.out.println("Eres un : " + user.getTipoUsuario());
 
         try{
             if(user.getTipoUsuario().equals("Gestor")){
                 List<EspacioPublico> espacios = espacioService.listEspaciosPorGestor(user);
-
+                System.out.println("Los espacios que tiene son: "+ espacios);
                 model.addAttribute("espaciosC", espacios);
 
                 return "espacios/listDelGestor.html";
@@ -85,11 +86,11 @@ public class EspaciosController {
     @RequestMapping("listDelControlador")
     public String listEspaciosPorControlador(HttpSession session, Model model){
         Usuario user = (Usuario) session.getAttribute("user");
-
+        System.out.println("Eres un : " + user.getTipoUsuario());
         try{
             if(user.getTipoUsuario().equals("Controlador")){
-                List<EspacioPublico> espacios = espacioService.listEspaciosPorGestor(user);
-
+                List<EspacioPublico> espacios = espacioService.listEspaciosPorControlador(user.getDni());
+                System.out.println("Los espacios que tienes son: "+ espacios);
                 model.addAttribute("espacios", espacios);
 
                 return "espacios/listDelControlador.html";
