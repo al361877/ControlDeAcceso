@@ -5,10 +5,6 @@ import es.uji.ei1027.ControlDeAcceso.model.EspacioPublico;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
-import java.sql.Time;
-import java.time.LocalDate;
-
-
 public class EspacioValidator implements Validator{
 
     @Override
@@ -19,13 +15,11 @@ public class EspacioValidator implements Validator{
     @Override
     public void validate(Object obj, Errors errors) {
         EspacioPublico espacio = (EspacioPublico) obj;
-    //    LocalDate today= LocalDate.now();
-
 
         if (espacio.getId()==null || espacio.getId().trim().equals("") || espacio.getId().trim().equals(" "))
-            errors.rejectValue("id", "nonullobj","No se ha introducido el nombre del espacio");
-        if (espacio.getNombre().length() > 50)
-            errors.rejectValue("id", "invalidStr", "El nombre supera el límite de carácteres (50)");
+            errors.rejectValue("id", "nonullobj","No se ha introducido id del espacio");
+        if (espacio.getId().length() > 20)
+            errors.rejectValue("id", "invalidStr", "La id supera el límite de carácteres (20)");
 
         if (espacio.getNombre()==null || espacio.getNombre().trim().equals("") || espacio.getNombre().trim().equals(" "))
             errors.rejectValue("nombre", "nonullobj","No se ha introducido el nombre del espacio");

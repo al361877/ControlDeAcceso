@@ -1,5 +1,6 @@
 package es.uji.ei1027.ControlDeAcceso.dao;
 
+import es.uji.ei1027.ControlDeAcceso.model.FranjaEspacio;
 import es.uji.ei1027.ControlDeAcceso.model.Zona;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -60,19 +61,15 @@ public class ZonaDao {
 
     //ACTUALIZAMOS zona
     public void updateZona(Zona zona) {
-        jdbcTemplate.update("UPDATE zona SET nombre=?,espacio_publico=?,cp=?,tipo_suelo=?,tipo_acceso=? WHERE id_zona=?",
-                zona.getNombre(),zona.getEspacio_publico(),
-                zona.getCp(),zona.getTipo_suelo(),
-                zona.getTipo_acceso(),zona.getId());
+        jdbcTemplate.update("UPDATE zona SET nombre=?,tipo_suelo=?,tipo_acceso=?, aforo_actual=?, aforo_maximo=? WHERE id_zona=?",
+                zona.getNombre(),zona.getTipo_suelo(), zona.getTipo_acceso(),
+                zona.getAforo_actual(), zona.getAforo_maximo(), zona.getId());
 
     }
 
-
-    /*
-    public void deleteReserva(String id){
-
-        jdbcTemplate.delete()
+    //ACTUALIZAMOS zona
+    public void deleteZona(String id_zona) {
+        jdbcTemplate.update("DELETE FROM zona WHERE id_zona=?", id_zona);
     }
- */
 
 }

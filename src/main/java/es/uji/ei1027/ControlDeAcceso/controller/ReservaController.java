@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpSession;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -90,10 +92,10 @@ public class ReservaController {
             }
 
         }catch (Exception e){
-            System.out.println("Estás en el catch");
+//            System.out.println("Estás en el catch");
             return "error/error";
         }
-        System.out.println("Estás fuera del try");
+//        System.out.println("Estás fuera del try");
         return "error/error";
     }
 
@@ -140,7 +142,7 @@ public class ReservaController {
                 }
             }
         }catch (Exception e){
-            System.out.println("salto al login");
+//            System.out.println("salto al login");
             return "redirect:/login";
         }
 
@@ -148,29 +150,6 @@ public class ReservaController {
 
 
     }
-//
-//    @RequestMapping(value="/add", method = RequestMethod.POST)
-//    public String addReservaEspacio(HttpSession session,@ModelAttribute("zona") Zona zona) {
-//        Usuario user = (Usuario) session.getAttribute("user");
-//        System.out.println("ENTROOO");
-//
-//        try{
-//            if(user.getTipoUsuario().equals("Ciudadano")){
-//
-//                System.out.println("zona "+zona.toString());
-//                return "reservas/add";
-//
-//
-//            }
-//        }catch (Exception e){
-//            System.out.println("Estás en el catch");
-//            return "error/error";
-//        }
-//        System.out.println("Estás fuera del try");
-//        return "error/error";
-//
-//
-//    }
 
     public List<List<FranjaEspacio>> crearMatrizFranja(){
         List<FranjaEspacio> listaFranja=franjaDao.getFranjas();
@@ -235,18 +214,33 @@ public class ReservaController {
         Reserva res=resDao.getReservaId(id);
         try{
             if(user.getTipoUsuario().equals("Ciudadano") && user.getDni().equals(res.getDniCiudadano())){
-                System.out.println("entro");
+//                System.out.println("entro");
                 resDao.canceladaPorUsuarioReserva(id);
+
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
+                System.out.println("EMAIL ENVIADO");
+                System.out.println("*************************");
+                System.out.println("Fecha y hora de envío: " + formatter.format(new Date()));
+                System.out.println("Correo destinatario: " + user.getEmail() + "\n"+
+                        "Correo del que envia: controlDeAcceso@gva.es\n" +
+                        "Estimado/a señor/a "+ user.getNombre() + ":");
+                System.out.println("Desde CONTROL DE ACCESO le comunicamos que se ha cancelado su reserva en" + res.getEspacio_publico() + ".");
+                System.out.println("Si usted no ha cancelado esta reserva o no entiende este email, por favor póngase");
+                System.out.println("en contacto con nosotros respondiendo a este correo o llame al numero de teléfono: 920 14 58 74");
+                System.out.println("");
+                System.out.println("Gracias por su colaboración.\n");
+                System.out.println("Control de acceso.\n");
+                System.out.println("*************************");
 
                 return "reservas/deleteConfirm";
 
-
             }
         }catch (Exception e){
-            System.out.println("Estás en el catch");
+//            System.out.println("Estás en el catch");
             return "error/error";
         }
-        System.out.println("Estás fuera del try");
+//        System.out.println("Estás fuera del try");
         return "error/error";
 
 
@@ -266,7 +260,7 @@ public class ReservaController {
                 validator.validate(res, bindingResult);
 
                 if (bindingResult.hasErrors()){
-                    System.out.println("ennntrooo");
+//                    System.out.println("ennntrooo");
 
                     List<List<Zona>> matriz =crearMatrizZonas(res.getEspacio_publico());
                     List<List<FranjaEspacio>> matrizFranja=crearMatrizFranja();
@@ -282,22 +276,51 @@ public class ReservaController {
                 res.setId(aleatorio());
                 res.setDniCiudadano(user.getDni());
                 res.setEstado_reserva("pendienteDeUso");
-                System.out.println(res.toString());
-
-
-
+//                System.out.println(res.toString());
 
                 resDao.addReserva(res);
-                //FALTA AÑADIR LAS PERSONAS A LA ZONAAAA
+
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
+                System.out.println("EMAIL ENVIADO");
+                System.out.println("*************************");
+                System.out.println("Fecha y hora de envío: " + formatter.format(new Date()));
+                System.out.println("Correo destinatario: " + user.getEmail() + "\n"+
+                        "Correo del que envia: controlDeAcceso@gva.es\n" +
+                        "Estimado/a señor/a "+ user.getNombre() + ":");
+                System.out.println("Desde CONTROL DE ACCESO le comunicamos que se ha realizado su reserva en" + res.getEspacio_publico() + "correctamente.");
+                System.out.println("Si usted no ha realizado esta reserva o no entiende este email, por favor póngase");
+                System.out.println("en contacto con nosotros respondiendo a este correo o llame al numero de teléfono: 920 14 58 74");
+                System.out.println("");
+                System.out.println("Gracias por su colaboración.\n");
+                System.out.println("Control de acceso.\n");
+                System.out.println("*************************");
+
+                System.out.println("EMAIL ENVIADO");
+                System.out.println("*************************");
+                System.out.println("Fecha y hora de envío: " + formatter.format(new Date()));
+                System.out.println("Correo destinatario: " + user.getEmail() + "\n"+
+                        "Correo del que envia: controlDeAcceso@gva.es\n" +
+                        "Estimado/a señor/a "+ user.getNombre() + ":");
+                System.out.println("En este correo dispone de los datos de la reserva realizada:");
+                System.out.println("Espacio público reservado:  " + res.getNombreEspacio());
+                System.out.println("Fecha de la visita:         " + res.getFechaIniString());
+                System.out.println("Horario de la visita:       " + res.getHoraIniString() + " - " + res.getHoraFinString());
+                System.out.println("Número de visitantes:       " + res.getNumPersonas());
+                System.out.println("Estado de la reserva:       " + res.getEstado_reserva());
+                System.out.println("Gracias por su atención.\n");
+                System.out.println("Control de acceso.\n");
+                System.out.println("*************************");
+
                 return "/reservas/addConfirm";
 
 
             }
         }catch (Exception e){
-            System.out.println("Estás en el catch");
+//            System.out.println("Estás en el catch");
             return "error/error";
         }
-        System.out.println("Estás fuera del try");
+//        System.out.println("Estás fuera del try");
         return "error/error";
 
 
@@ -341,7 +364,7 @@ public class ReservaController {
                 }
             }
         }catch (Exception e){
-            System.out.println("salto al login");
+//            System.out.println("salto al login");
             return "error/error";
         }
 
@@ -355,7 +378,7 @@ public class ReservaController {
 
 
         Usuario user = (Usuario) session.getAttribute("user");
-        System.out.println("holaa");
+//        System.out.println("holaa");
         try{
             if(user.getTipoUsuario().equals("Ciudadano")){
 
@@ -363,7 +386,7 @@ public class ReservaController {
                 validator.validate(res, bindingResult);
 
                 if (bindingResult.hasErrors()){
-                    System.out.println("ennntrooo");
+//                    System.out.println("ennntrooo");
 
                     List<List<Zona>> matriz =crearMatrizZonas(res.getEspacio_publico());
                     List<List<FranjaEspacio>> matrizFranja=crearMatrizFranja();
@@ -384,15 +407,48 @@ public class ReservaController {
 
                 resDao.updateReserva(res);
 
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
+                System.out.println("EMAIL ENVIADO");
+                System.out.println("*************************");
+                System.out.println("Fecha y hora de envío: " + formatter.format(new Date()));
+                System.out.println("Correo destinatario: " + user.getEmail() + "\n"+
+                        "Correo del que envia: controlDeAcceso@gva.es\n" +
+                        "Estimado/a señor/a "+ user.getNombre() + ":");
+                System.out.println("Desde CONTROL DE ACCESO le comunicamos que se ha realizado la modificación de su reserva en " + res.getEspacio_publico() + ".");
+                System.out.println("Si usted no ha modificado esta reserva o no entiende este email, por favor póngase");
+                System.out.println("en contacto con nosotros respondiendo a este correo o llame al numero de teléfono: 920 14 58 74");
+                System.out.println("");
+                System.out.println("Gracias por su colaboración.\n");
+                System.out.println("Control de acceso.\n");
+                System.out.println("*************************");
+
+                System.out.println("EMAIL ENVIADO");
+                System.out.println("*************************");
+                System.out.println("Fecha y hora de envío: " + formatter.format(new Date()));
+                System.out.println("Correo destinatario: " + user.getEmail() + "\n"+
+                        "Correo del que envia: controlDeAcceso@gva.es\n" +
+                        "Estimado/a señor/a "+ user.getNombre() + ":");
+                System.out.println("En este correo dispone de los nuevos datos de la reserva:");
+                System.out.println("Espacio público reservado:  " + res.getNombreEspacio());
+                System.out.println("Fecha de la visita:         " + res.getFechaIniString());
+                System.out.println("Horario de la visita:       " + res.getHoraIniString() + " - " + res.getHoraFinString());
+                System.out.println("Número de visitantes:       " + res.getNumPersonas());
+                System.out.println("Estado de la reserva:       " + res.getEstado_reserva());
+                System.out.println("Gracias por su atención.\n");
+                System.out.println("Control de acceso.\n");
+                System.out.println("*************************");
+
+
                 return "/reservas/updateConfirm";
 
 
             }
         }catch (Exception e){
-            System.out.println("Estás en el catch");
+//            System.out.println("Estás en el catch");
             return "error/error";
         }
-        System.out.println("Estás fuera del try");
+//        System.out.println("Estás fuera del try");
         return "error/error";
 
     }
@@ -459,10 +515,10 @@ public class ReservaController {
 
 
         }catch (Exception e){
-            System.out.println("Estás en el catch");
+//            System.out.println("Estás en el catch");
             return "error/error";
         }
-        System.out.println("Estás fuera del try");
+//        System.out.println("Estás fuera del try");
         return "error/error";
     }
 

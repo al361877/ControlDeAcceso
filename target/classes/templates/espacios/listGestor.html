@@ -57,16 +57,6 @@
   <div align="center" >
     <a onClick="location.href='/espacios/add'" class="btn boton_azul" role="button" >Añadir espacio</a>
   </div>
-  <form style="margin-left:50px" action="#" th:action="@{/espacios/listPorMunicipio}" th:object="${municipio}" method="post">
-    <label for="municipio">Filtrar por municipios:</label>
-    <select id="municipio" name="municipio" >
-      <option th:each="mun:${municipios}" th:text="${mun}" th:value="${mun}">
-
-      </option>
-
-    </select>
-    <input type="submit" value="Filtrar">
-  </form>
   <div >
     <div th:each="lista: ${matrizEspacios}" class="principal">
       <div th:each="espacio: ${lista}" class="p2">
@@ -91,6 +81,10 @@
     <br>
 
   </div>
+<!--  Si la pagina resulta ser muy larga, descomentar esto-->
+<!--  <div align="center" >-->
+<!--    <a onClick="location.href='/espacios/add'" class="btn boton_azul" role="button" >Añadir espacio</a>-->
+<!--  </div>-->
   <div>
   </div>
 </div>

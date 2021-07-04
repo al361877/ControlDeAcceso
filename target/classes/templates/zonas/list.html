@@ -1,0 +1,83 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+  <title>Zonas</title>
+  <meta charset=" UTF-8" />
+  <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+  <link rel="stylesheet" type="text/css" href="/css/estils.css"
+        th:href="@{/css/estils.css}"/>
+  <style>
+
+
+      div.p2{
+
+            margin:auto;
+            display: flex;
+            padding: 20px;
+            background-color:#a4d7e5;
+            border-radius:10px;
+            height:200px;
+            width:1000px;
+        }
+  div.p3{
+
+            margin:auto;
+            text-align:left;
+
+            color:black;
+
+
+        }
+</style>
+</head>
+<body>
+
+
+<div  layout:fragment="content" >
+  <h1>Zonas del municipio</h1>
+  <div align="center">
+
+    <div th:each="zon: ${zonas}" style="padding:20px;" >
+      <div class="p2">
+        <!--            <div style="text-align:"></div>-->
+
+        <div class="p3">
+          <b style="margin:0;display:inline">Nombre de la zona: </b> <p style="margin:0;display:inline" th:text="${zon.nombre}" class="parrafo"></p>
+
+          <br>
+          <b style="margin:0;display:inline">Tipo de suelo: </b> <p style="margin:0;display:inline" th:text="${zon.tipo_suelo}" class="parrafo"></p>
+          <br>
+          <b style="margin:0;display:inline">Tipo de acceso: </b> <p style="margin:0;display:inline" th:text="${zon.tipo_acceso}" class="parrafo"></p>
+          <br>
+          <b style="margin:0;display:inline">Aforo actual: </b> <p style="margin:0;display:inline" th:text="${zon.aforo_actual}" class="parrafo"></p>
+          <br>
+          <b style="margin:0;display:inline">Aforo máximo: </b> <p style="margin:0;display:inline" th:text="${zon.aforo_maximo}" class="parrafo"></p>
+          <br>
+          <div style="padding:10px;text-align:left">
+            <a th:href="@{/zonas/update/{id}(id=${zon.id})} " class="boton_verde">Modificar zona</a>
+          </div>
+        </div>
+
+
+        <div style="  text-align:left">
+          <div style="padding:10px;">
+            <a th:href="@{/zonas/delete/{id}(id=${zon.id})}" class="boton_rojo" >Eliminar zona</a>
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <br><br>
+  <br><br>
+</div>
+
+</body>
+</html>

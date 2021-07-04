@@ -179,7 +179,7 @@ public class EspaciosController {
             int diasHoy= today.getDayOfYear();
 
             if(diasHoy>=diasIni && diasHoy<=diasFin){
-                System.out.println(estacion.getId());
+//                System.out.println(estacion.getId());
                 Servicio servicioActual=servicioDao.getServicioEspacioEstacion(espacio,estacion.getId());
                 model.addAttribute("servicio", servicioActual.getTipo_servicio());
             }
@@ -198,8 +198,9 @@ public class EspaciosController {
         return "espacios/add";
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addEspacio(Model model, HttpSession session,@ModelAttribute("espacio") EspacioPublico espacio, BindingResult bindingResult) {
+    @RequestMapping(value = "/addServicio", method = RequestMethod.POST)
+    public String addServicio(Model model, HttpSession session,@ModelAttribute("espacio") EspacioPublico espacioPublico, @ModelAttribute("servicio") Servicio servicio, BindingResult bindingResult) {
+//        @ModelAttribute("estaciones") List<Estacion> estaciones,
         Usuario user=(Usuario) session.getAttribute("user");
 
         try{
@@ -207,19 +208,62 @@ public class EspaciosController {
 
                 Gestor gestor = usuarioDao.getGestorByDni(user.getDni());
 
+                servicio.setIdEspacio(espacioPublico.getId());
+
+                ServicioValidator servicioValidator = new ServicioValidator();
+                servicioValidator.validate(servicio, bindingResult);
+                if(bindingResult.hasErrors())
+                    return "espacios/addServicio";
+
+//                espacio.setId(aleatorio());
+
+
+                servicioDao.addServicio(servicio);
+
+                return "espacios/addConfirm";
+            }else{
+                return "error/error";
+            }
+        }catch (Exception e){
+            return "error/error";
+        }
+        //  return "redirect:/login";
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public String addEspacio(Model model, HttpSession session,@ModelAttribute("espacio") EspacioPublico espacio, BindingResult bindingResult) {
+        Usuario user=(Usuario) session.getAttribute("user");
+
+        try{
+
+            if(session.getAttribute("tipo").equals("Gestor")){
+
+                Gestor gestor = usuarioDao.getGestorByDni(user.getDni());
+
+                String municipio = gestor.getMunicipio();
+                espacio.setMunicipio(municipio);
+
                 EspacioValidator espacioValidator=new EspacioValidator();
+
                 espacioValidator.validate(espacio, bindingResult);
                 if(bindingResult.hasErrors())
                     return "espacios/add";
 
-
+                System.out.println("todo normal");
                 if(espacio.getMunicipio() != null && !gestor.getMunicipio().equals(espacio.getMunicipio())){
+                    System.out.println("aqui no deberia entrar");
                     bindingResult.rejectValue("municipio", "invalitStr", "No gestionas el espacio de municipio");
                 }
 
-                espacio.setId(aleatorio());
+//                espacio.setId(aleatorio());
 
-                return "espacios/addConfirm";
+                espacioPublicoDao.addEspacio(espacio);
+                List<Estacion> estaciones = estacionDao.getEstaciones();
+
+                model.addAttribute("estaciones", estaciones);
+
+                return "espacios/addServicio";
+
             }else{
                 return "error/error";
             }
@@ -240,6 +284,7 @@ public class EspaciosController {
 
                 model.addAttribute("espacio", espacio);
 
+                espacioPublicoDao.updateEspacio(espacio);
                 return "espacios/update";
             }
 
@@ -274,6 +319,7 @@ public class EspaciosController {
     }
 
 /*
+    EL GESTOR MUNICIPAL NO PUEDE ELIMINAR ESPACIOS
     @RequestMapping(value="/delete/{id}")
     public String processDelete(@PathVariable String id, HttpSession session) {
         Usuario user = (Usuario) session.getAttribute("user");

@@ -65,10 +65,8 @@ public class ControladorController {
 
         userDao.addControlador(user);
         userDao.addControlador(user.getDni());
-        user.setTipoUsuario("Controlador");
-        session.setAttribute("user", user);
 
-        session.setAttribute("tipo",user.getTipoUsuario());
+        user.setTipoUsuario("Controlador");
 
         return "controlador/addConfirm";
     }
@@ -76,7 +74,7 @@ public class ControladorController {
     @RequestMapping(value="/update/{dni}", method = RequestMethod.GET)
     public String editUsuario(Model model, @PathVariable String dni,HttpSession session) {
         Usuario user = (Usuario) session.getAttribute("user");
-        System.out.println("dni de la sesion-> "+user.getDni()+" dni del get-> "+dni);
+//        System.out.println("dni de la sesion-> "+user.getDni()+" dni del get-> "+dni);
         try{
             if(user.getTipoUsuario().equals("Gestor") || user.getDni().equals(dni)){
 
@@ -96,7 +94,7 @@ public class ControladorController {
 
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public String processUpdateSubmit(@ModelAttribute("user") Usuario user, BindingResult bindingResult,HttpSession session) {
-        System.out.println("before update "+user.getNombre());
+//        System.out.println("before update "+user.getNombre());
 
         UpdateValidator validator = new UpdateValidator();
         validator.validate(user, bindingResult);
@@ -116,7 +114,7 @@ public class ControladorController {
                 return "controlador/deleteConfirm";
             }
         }catch (Exception e){
-            System.out.println("Estás en el catch");
+//            System.out.println("Estás en el catch");
             return "error/error";
         }
         return "error/error";

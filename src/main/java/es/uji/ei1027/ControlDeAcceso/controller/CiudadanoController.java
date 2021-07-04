@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -87,13 +89,29 @@ public class CiudadanoController {
 
         session.setAttribute("tipo",user.getTipoUsuario());
 
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
+        System.out.println("EMAIL ENVIADO");
+        System.out.println("*************************");
+        System.out.println("Fecha y hora de envío: " + formatter.format(new Date()));
+        System.out.println("Correo destinatario: " + user.getEmail() + "\n"+
+                "Correo del que envia: controlDeAcceso@gva.es\n" +
+                "Estimado/a señor/a "+ user.getNombre() + ":");
+        System.out.println("Desde CONTROL DE ACCESO le comunicamos que se ha registrado en el sistema correctamente.");
+        System.out.println("Si usted no está ha realizado este registro o no entiende este email, por favor póngase");
+        System.out.println("en contacto con nosotros respondiendo a este correo o llame al numero de teléfono: 920 14 58 74");
+        System.out.println("");
+        System.out.println("Gracias por su colaboración.\n");
+        System.out.println("Control de acceso.\n");
+        System.out.println("*************************");
+
         return "ciudadano/index";
     }
 
     @RequestMapping(value="/update/{dni}", method = RequestMethod.GET)
     public String editUsuario(Model model, @PathVariable String dni,HttpSession session) {
         Usuario user = (Usuario) session.getAttribute("user");
-        System.out.println("dni de la sesion-> "+user.getDni()+" dni del get-> "+dni);
+//        System.out.println("dni de la sesion-> "+user.getDni()+" dni del get-> "+dni);
         try{
             if(user.getTipoUsuario().equals("Gestor") || user.getDni().equals(dni)){
 

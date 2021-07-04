@@ -1,0 +1,169 @@
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <title>Zonas</title>
+    <meta charset=" UTF-8" />
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+    <style>
+
+        div.principal{
+            display: flex;
+
+        }
+
+        div.p2{
+
+            margin:auto;
+            flex:1;
+            padding: 50px;
+            border-radius:20px;
+
+
+            height:300px;
+        }
+         div.p2Foto{
+
+            margin-left:50px;
+            flex:1;
+            padding: 50px;
+            border-radius:20px;
+
+
+        }
+        div.p3{
+
+            margin:auto;
+            text-align:center;
+            background-color:#65d9b8;
+            border-radius:20px;
+            width:250px;
+            height:150px;
+            color:black;
+             text-decoration: none;
+
+
+        }
+        div.p3Foto{
+
+            flex:1;
+            border-radius:20px;
+            margin-left:10px;
+            margin-top:10px;
+            text-align:left;
+        }
+
+  div.p5{
+
+            margin:auto;
+            flex:1;
+            padding: 10px;
+
+
+
+
+        }
+div.p4{
+
+            margin:auto;
+            text-align:center;
+            background-color:#65d9b8;
+            border-radius:20px;
+            width:200px;
+            height:100px;
+            color:black;
+
+
+        }
+        .imgRedonda {
+           width:100%;
+            border-radius:10px;
+        }
+
+
+    div.informativo{
+                margin:auto;
+                color: black;
+                text-align: left;
+                border-radius:10px;
+                padding: 20px;
+                background-color:#649baa;
+                width:50%;
+        }
+
+    </style>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <br>
+    <h1 >Modificar la zona</h1>
+    <div align="center" style="height: 600px;" >
+        <form action="#" th:action="@{/zonas/update}" th:object="${zona}" method="post">
+            <table>
+                <tr>
+                    <td><label>ID</label></td>
+                    <td><input type="text" class="form-control" th:field="*{id}" readonly/></td>
+                </tr>
+                <tr>
+                    <td  class="error" th:if="${#fields.hasErrors('id')}" th:errors="*{id}" style="font-size:15px"></td>
+                </tr>
+                <tr>
+                    <td><label>Nombre</label></td>
+                    <td><input type="text" class="form-control" th:field="*{nombre}" /></td>
+                </tr>
+                <tr>
+                    <td class="error" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" style="font-size:15px"></td>
+                </tr>
+                <tr>
+                    <td><label>Tipo de suelo</label></td>
+                    <td><input type="text" class="form-control" th:field="*{tipo_suelo}" /></td>
+                </tr>
+                <tr>
+                    <td  class="error" th:if="${#fields.hasErrors('tipo_suelo')}" th:errors="*{tipo_suelo}" style="font-size:15px"></td>
+                </tr>
+                <tr>
+                    <td><label>Tipo de acceso</label></td>
+                    <td><input type="text" class="form-control" th:field="*{tipo_acceso}" /></td>
+                </tr>
+                <tr>
+                    <td class="error" th:if="${#fields.hasErrors('tipo_acceso')}" th:errors="*{tipo_acceso}" style="font-size:15px"></td>
+                </tr>
+                <tr>
+                    <td><label>Aforo actual</label></td>
+                    <td><input type="number" class="form-control" th:field="*{aforo_actual}" /></td>
+                </tr>
+                <tr>
+                    <td  class="error" th:if="${#fields.hasErrors('aforo_actual')}" th:errors="*{aforo_actual}" style="font-size:15px"></td>
+                </tr>
+                <tr>
+                    <td><label>Aforo máximo</label></td>
+                    <td><input type="number" class="form-control" th:field="*{aforo_maximo}" /></td>
+                </tr>
+                <tr>
+                    <td class="error" th:if="${#fields.hasErrors('aforo_maximo')}" th:errors="*{aforo_maximo}" style="font-size:15px"></td>
+                </tr>
+
+                <tr><td><br></td></tr>
+                <tr>
+                    <td>    <button onClick="history.back()" class=" btn boton_azul"  ><img src="https://image.flaticon.com/icons/svg/929/929730.svg" width="20"  alt="x"> Volver</button>
+                    </td>
+                    <td colspan="2"><input type="submit" role="button" class="btn boton_verde"  value="Aceptar" /></td>
+
+                </tr>
+            </table>
+
+        </form>
+    </div>
+
+</div>
+
+
+
+</body>
+</html>
