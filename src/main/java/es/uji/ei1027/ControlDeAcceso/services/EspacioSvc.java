@@ -29,15 +29,12 @@ public class EspacioSvc implements EspacioService{
         //Lista del mismo controlador junto a los datos de cada vigilancia
         List<Controlador> controlador_esp = usuarioDao.getControladorByDni(dni);
 
-        System.out.println("La lista del controlador es: " + controlador_esp);
-
         //Lista de espacios
         List<EspacioPublico> espacios = new ArrayList<EspacioPublico>();
 
         //por cada controlador saco el espacio público y lo añado a la lista de espacios
-        for(int i=0; i<controlador_esp.size(); i++) {
-            espacios.add(espacioDao.getEspacio(controlador_esp.get(i).getEspacio_publico()));
-            System.out.println("El espacio " + i + " es: ");
+        for(Controlador controlador:controlador_esp) {
+            espacios.add(espacioDao.getEspacio(controlador.getEspacio_publico()));
         }
 
         return espacios;

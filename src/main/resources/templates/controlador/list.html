@@ -16,26 +16,27 @@
 
 
 <div  layout:fragment="content" >
-    <h1>Lista de ciudadanos</h1>
+    <h1>Lista de controladores del municipio</h1>
     <div align="center">
         <table  class="table table-striped">
             <thead>
             <tr>
-                <th >Nombre</th>
-                <th >Telefono</th>
-                <th >Email</th>
+                <th >DNI</th>
+                <th >Espacio</th>
+                <th >Horario</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="user: ${usuarios}">
-                <td  th:text="${user.nombre}"></td>
-                <td  th:text="${user.telefono}"></td>
-                <td th:text="${user.email}"></td>
-                <td th:text="${#temporals.format(user.nacimiento,'dd MMMM yyyy')}"></td>
+            <div th:each="lista: ${controladores}">
+            <tr th:each="controlador: ${lista}">
+                <td  th:text="${controlador.dni}"></td>
+                <td  th:text="${conrolador.nombre}"></td>
+                <td th:text="${controlador.usuario}"></td>
                 <td><a th:href="@{/controlador/update/{dni}(dni=${user.dni})}" class="btn btn-warning" role="button">Edita</a></td>
                 <td><a th:href="@{/controlador/delete/{dni}(dni=${user.dni})}" class="btn btn-danger" role="button">Borrar</a></td>
 
             </tr>
+            </div>
             </tbody>
         </table>
 

@@ -1,0 +1,28 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <title>Reservas</title>
+    <meta charset=" UTF-8" />
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+
+</head>
+<body>
+
+
+<div  layout:fragment="content" >
+    <h1>No existen controladores para este espacio</h1>
+    <div style="height: 600px; width:400px; text-align:center; margin: auto;">
+        <p>Consulta otro espacio.</p>
+        <div  th:object="${session}">
+            <div th:if="*{tipo=='Gestor'}">
+                <button type="button" class="boton_azul"  style=" font-size:30px;"  onclick="location.href='/espacios/listDelGestor'">Espacios naturales<span class="sr-only"></span></button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

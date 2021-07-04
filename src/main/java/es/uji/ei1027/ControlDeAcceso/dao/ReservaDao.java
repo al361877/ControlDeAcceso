@@ -58,7 +58,7 @@ public class ReservaDao {
     //Datos reserva
     public List<Reserva> getReservas (){
         try{
-            return jdbcTemplate.query("SELECT * FROM rerserva ", new ReservaRowMapper());
+            return jdbcTemplate.query("SELECT * FROM reserva ", new ReservaRowMapper());
         }
         catch (EmptyResultDataAccessException e){
             return null;
@@ -83,6 +83,18 @@ public class ReservaDao {
             reserva.setZona(zonas.toString());
             System.out.println(reserva.toString());
             return reserva;
+        }
+        catch (EmptyResultDataAccessException e){
+            return null;
+        }
+    }
+
+    public List<Reserva> getReservasByEspacio (String idEspacio){
+        try{
+            List<Reserva> reservas= jdbcTemplate.query("SELECT * FROM Reserva WHERE id_espacio=?", new ReservaRowMapper(), idEspacio);
+            //cojo todas las relaciones entre esta reserva y las zonas
+
+            return reservas;
         }
         catch (EmptyResultDataAccessException e){
             return null;

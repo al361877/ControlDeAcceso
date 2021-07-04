@@ -89,6 +89,7 @@ public class EspaciosController {
         System.out.println("Eres un : " + user.getTipoUsuario());
         try{
             if(user.getTipoUsuario().equals("Controlador")){
+                System.out.println("Estás dentro del if");
                 List<EspacioPublico> espacios = espacioService.listEspaciosPorControlador(user.getDni());
                 System.out.println("Los espacios que tienes son: "+ espacios);
                 model.addAttribute("espacios", espacios);

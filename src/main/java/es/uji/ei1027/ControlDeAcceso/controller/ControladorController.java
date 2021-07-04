@@ -2,7 +2,11 @@ package es.uji.ei1027.ControlDeAcceso.controller;
 
 
 import es.uji.ei1027.ControlDeAcceso.dao.UsuarioDao;
+import es.uji.ei1027.ControlDeAcceso.model.Controlador;
+import es.uji.ei1027.ControlDeAcceso.model.Gestor;
+import es.uji.ei1027.ControlDeAcceso.model.Reserva;
 import es.uji.ei1027.ControlDeAcceso.model.Usuario;
+import es.uji.ei1027.ControlDeAcceso.services.ControladoresService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,28 +17,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 @RequestMapping("controlador")
 public class ControladorController {
     private UsuarioDao userDao;
-
+    private ControladoresService controladoresService;
 
     @Autowired
     public void setUsuario(UsuarioDao userDao) {
         this.userDao = userDao;
     }
 
-    @RequestMapping("/list")
-    public String listUsuarios( HttpSession session, Model model) {
+  /*  @RequestMapping("/list")
+    public String listControladoresPorMunicipio(HttpSession session, Model model) {
         Usuario user= (Usuario) session.getAttribute("user");
         try{
+            System.out.println("Estás en la lista de controladores por municipio");
             if(user.getTipoUsuario().equals("Gestor")) {
 
-                List<Usuario> lista = userDao.getControladores();
-
-                model.addAttribute("usuarios", lista);
+                //Cojo el municipio del gestor que está loggeado
+                String municipioDelGestor = userDao.getGestorByDni(user.getDni()).getMunicipio();
+                System.out.println(controladoresService.listControladoresPorMunicipio(municipioDelGestor));
+                List<Controlador> controladores=controladoresService.listControladoresPorMunicipio(municipioDelGestor);
+                System.out.println("Y no ha petado");
+                model.addAttribute("controladores", controladores);
 
                 return "controlador/list.html";
             }
@@ -44,7 +53,41 @@ public class ControladorController {
         return "error/error";
     }
 
+*/
 
+
+    @RequestMapping(value="/listPorEspacio/{espacio}", method = RequestMethod.GET)
+    public String listControladoresPorEspacio(HttpSession session, Model model, @PathVariable String espacio) {
+        Usuario user= (Usuario) session.getAttribute("user");
+        try{
+
+            if(user.getTipoUsuario().equals("Gestor")) {
+                System.out.println("Estás en la lista de controladores por espacio");
+                List<Controlador> controladores= userDao.getControladorByEspacio(espacio);
+
+                Usuario usuarioControlador=new Usuario();
+                List<Usuario> usuariosControlador=new ArrayList<>();
+                List<String> diasTrabajo=new ArrayList<>();
+
+                for(Controlador cont:controladores){
+                    System.out.println(cont.toString());
+                    usuarioControlador=userDao.getUsuarioDni(cont.getDni());
+                    usuariosControlador.add(usuarioControlador);
+                }
+
+                if(controladores.isEmpty()) {
+                    return "controlador/noHayControladoresEspacio";
+                }
+                System.out.println("Y no ha petado");
+                model.addAttribute("controladores", usuariosControlador);
+
+                return "controlador/listPorEspacio";
+            }
+        } catch (Exception e){
+            return "error/error";
+        }
+        return "error/error";
+    }
 
     @RequestMapping(value="/add")
     public String addControlado(Model model) {

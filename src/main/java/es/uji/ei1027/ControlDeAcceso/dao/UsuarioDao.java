@@ -95,8 +95,8 @@ public class UsuarioDao {
 
         }
 
-        //Datos controladores
-        public List<Usuario> getControladores (){
+        //Datos usuarios controlador
+        public List<Usuario> getUsuariosControlador (){
             try{
                 return jdbcTemplate.query("SELECT * FROM usuario WHERE tipo_usuario='controlador'", new UsuarioRowMapper());
             }
@@ -105,10 +105,32 @@ public class UsuarioDao {
             }
         }
 
+    public List<Controlador> getControladores (){
+        try{
+            return jdbcTemplate.query("SELECT * FROM controlador", new ControladorRowMapper());
+        }
+        catch (EmptyResultDataAccessException e){
+            return null;
+        }
+    }
+
     //Get Para poder sacar los espacios que tiene asignados para vigilar un controlador
     public List<Controlador> getControladorByDni(String dni){
         try{
-            return jdbcTemplate.query("SELECT * FROM controlador WHERE dni=?", new ControladorRowMapper());
+            System.out.println("Estas en el if del controlador dao: " + dni);
+            return jdbcTemplate.query("SELECT * FROM controlador WHERE dni=?", new ControladorRowMapper(), dni);
+
+        }
+        catch (EmptyResultDataAccessException e){
+            return null;
+        }
+    }
+
+
+    public List<Controlador> getControladorByEspacio(String idEspacio){
+        try{
+            return jdbcTemplate.query("SELECT * FROM controlador WHERE id_espacio=?", new ControladorRowMapper(), idEspacio);
+
         }
         catch (EmptyResultDataAccessException e){
             return null;

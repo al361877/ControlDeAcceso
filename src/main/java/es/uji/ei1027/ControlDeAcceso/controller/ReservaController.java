@@ -6,6 +6,7 @@ import es.uji.ei1027.ControlDeAcceso.dao.FranjaDao;
 import es.uji.ei1027.ControlDeAcceso.dao.ReservaDao;
 import es.uji.ei1027.ControlDeAcceso.dao.ZonaDao;
 import es.uji.ei1027.ControlDeAcceso.model.*;
+import es.uji.ei1027.ControlDeAcceso.services.ReservaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.trace.http.HttpTrace;
 import org.springframework.boot.origin.SystemEnvironmentOrigin;
@@ -35,6 +36,7 @@ public class ReservaController {
     private ZonaDao zonaDao;
     private FranjaDao franjaDao;
     private EspacioPublicoDao espacioDao;
+    private ReservaService reservaService;
 
     @Autowired
     public void setEspacioDao(EspacioPublicoDao espacioDao) {
@@ -87,6 +89,47 @@ public class ReservaController {
             return "error/error";
         }
         System.out.println("Estás fuera del try");
+        return "error/error";
+    }
+
+
+    @RequestMapping(value ="/listDelFuncionario/{espacio}", method = RequestMethod.GET)
+    public String listReservasPorGestor(HttpSession session, Model model, @PathVariable String espacio){
+        Usuario user = (Usuario) session.getAttribute("user");
+        System.out.println("Eres otro: " + user.getTipoUsuario());
+
+        try{
+            if(user.getTipoUsuario().equals("Gestor") || user.getTipoUsuario().equals("Controlador")){
+                List<Reserva> reservas = resDao.getReservasByEspacio(espacio);
+                System.out.println("Estás dentro del if del : " + espacio);
+
+
+
+
+                FranjaEspacio franjaEspacio;
+                for(Reserva res: reservas){
+                    franjaEspacio=franjaDao.getFranja(res.getFranja());
+                    res.setHoraIniString(franjaEspacio.getHoraIniString());
+                    res.setHoraFinString(franjaEspacio.getHoraFinString());
+                    EspacioPublico espacioPublico=espacioDao.getEspacio(res.getEspacio_publico());
+                    res.setNombreEspacio(espacioPublico.getNombre());
+                }
+
+
+
+
+                if(reservas.isEmpty()){
+                    return"reservas/noHayReservasEspacio";
+                }
+                System.out.println("Los espacios que tiene son: "+ reservas);
+                model.addAttribute("reservas", reservas);
+
+                return "reservas/listFuncionario";
+            }
+        }catch (Exception e){
+            return "error/error";
+        }
+
         return "error/error";
     }
 

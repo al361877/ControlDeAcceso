@@ -43,15 +43,7 @@ public class EspacioPublicoDao {
             return null;
         }
     }
-    //Datos espacios por municipio
-    public List<EspacioPublico> getEspaciosPorMunicipio(String municipio){
-        try{
-            return jdbcTemplate.query("select * from espaciopublico where n_municipio=?", new EspacioRowMapper(),municipio);
-        }
-        catch (EmptyResultDataAccessException e){
-            return null;
-        }
-    }
+
     public EspacioPublico getEspacio (String espacio){
         try{
             return jdbcTemplate.queryForObject("SELECT * FROM espaciopublico WHERE id_espacio=?", new EspacioRowMapper(), espacio);
@@ -60,6 +52,17 @@ public class EspacioPublicoDao {
             return null;
         }
     }
+
+
+    public List<EspacioPublico> getEspaciosPorMunicipio(String municipio){
+        try{
+            return jdbcTemplate.query("select * from espaciopublico where n_municipio=?", new EspacioRowMapper(),municipio);
+        }
+        catch (EmptyResultDataAccessException e){
+            return null;
+        }
+    }
+
 
 
 

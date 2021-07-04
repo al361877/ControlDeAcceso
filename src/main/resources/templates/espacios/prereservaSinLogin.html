@@ -69,7 +69,21 @@
             <br>
             <b style="margin:0;display:inline">Servicio: </b> <p style="margin:0;display:inline" th:text="${servicio}" class="parrafo"></p>
             <br>
-            <a th:href="@{~/reservas/add/{espacio}(espacio=${espacio.id})}" style=" margin-top: 10px;" class="btn boton_verde"  >Reservar espacio</a>
+            <div  th:object="${session}">
+                <div th:if="*{tipo=='Ciudadano'}">
+                    <a th:href="@{~/reservas/add/{espacio}(espacio=${espacio.id})}" style=" margin-top: 10px;" class="btn boton_verde" >Reservar espacio</a>
+                </div>
+                <div th:if="*{tipo=='Gestor'}">
+                    <a th:href="@{~/reservas/listDelFuncionario/{espacio}(espacio=${espacio.id})}" style=" margin-top: 10px;" class="btn boton_verde" >Listar reservas</a>
+                    <a th:href="@{~/controlador/listPorEspacio/{espacio}(espacio=${espacio.id})}" style=" margin-top: 10px;" class="btn boton_verde" >Listar controladores</a>
+                    <a th:href="@{~/zona/listPorEspacio/{espacio}(espacio=${espacio.id})}" style=" margin-top: 10px;" class="btn boton_verde" >Listar zonas</a>
+                    <a th:href="@{~/espacios/update/{espacio}(espacio=${espacio.id})}" style=" margin-top: 10px;" class="btn btn-warning" >Editar espacio</a>
+                </div>
+                <div th:if="*{tipo=='Controlador'}">
+                    <a th:href="@{~/reservas/listDelFuncionario/{espacio}(espacio=${espacio.id})}" style=" margin-top: 10px;" class="btn boton_verde" >Listar reservas</a>
+                    <a th:href="@{~/zona/listPorEspacio/{espacio}(espacio=${espacio.id})}" style=" margin-top: 10px;" class="btn boton_verde" >Listar zonas</a>
+                </div>
+            </div>
             <br><br>
             <button onClick="history.back()" class=" btn boton_azul"  ><img src="https://image.flaticon.com/icons/svg/929/929730.svg" width="20"  alt="x"> Volver</button>
 
