@@ -537,7 +537,7 @@ public class ReservaController {
             else */
             if (user.getTipoUsuario().equals("Controlador")) {
 
-                List<Reserva> lista = resDao.getReservaPorMunicipio(id);
+                List<Reserva> lista = resDao.getReservasByEspacio(id);
 
                 FranjaEspacio franjaEspacio;
                 for(Reserva res: lista){

@@ -229,8 +229,9 @@ public class EspaciosController {
 
             if(diasHoy>=diasIni && diasHoy<=diasFin){
 //                System.out.println(estacion.getId());
-                Servicio servicioActual=servicioDao.getServicioEspacioEstacion(espacio,estacion.getId());
-                model.addAttribute("servicio", servicioActual.getTipo_servicio());
+                List<Servicio> servicios=servicioDao.getServiciosEspacio(espacio);
+                Servicio servicio = servicios.get(0);
+                model.addAttribute("servicio", servicio.getTipo_servicio());
             }
 
 
@@ -346,7 +347,7 @@ public class EspaciosController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String publicUpdateSubmit(@ModelAttribute("esp") EspacioPublico espacio, HttpSession session, BindingResult bindingResult, Model model){
+    public String publicUpdateSubmit(@ModelAttribute("espacio") EspacioPublico espacio, HttpSession session, BindingResult bindingResult, Model model){
         Usuario user = (Usuario) session.getAttribute("user");
 
         try{

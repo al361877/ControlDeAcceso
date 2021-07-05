@@ -30,10 +30,12 @@ td{
 
 <div   layout:fragment="content">
     <div  style="height: 600px; width:400px; text-align:center; margin: auto;">
-    <h2>Editar perfil </h2>
+    <h2>Editar espacio </h2>
     <div align="center" >
+
         <form action="#" th:action="@{/espacios/update}" th:object="${espacio}" method="post">
             <table>
+
                 <tr>
                     <td><label>ID</label></td>
                     <td><input type="text" class="form-control" th:field="*{id}" readonly/></td>
@@ -76,7 +78,6 @@ td{
                 <tr>
                     <td class="error" th:if="${#fields.hasErrors('cp')}" th:errors="*{cp}" style="font-size:15px"></td>
                 </tr>
-                <tr><td><br></td></tr>
                 <tr>
                     <td>
                         <button onClick="history.back()" class=" btn boton_azul"  ><img src="https://image.flaticon.com/icons/svg/929/929730.svg" width="20"  alt="x"> Volver</button>

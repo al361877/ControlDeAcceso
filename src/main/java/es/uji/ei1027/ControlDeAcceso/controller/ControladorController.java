@@ -151,7 +151,7 @@ public class ControladorController {
 
 
     @RequestMapping(value="/update", method = RequestMethod.POST)
-    public String processUpdateSubmit(@ModelAttribute("user") Usuario user, BindingResult bindingResult,HttpSession session) {
+    public String processUpdateSubmit(@ModelAttribute("controlador") Usuario user, BindingResult bindingResult,HttpSession session) {
 //        System.out.println("before update "+user.getNombre());
 
         UpdateValidator validator = new UpdateValidator();

@@ -18,32 +18,19 @@ public class ZonasValidator implements Validator {
         if (zona.getId().length() > 20)
             errors.rejectValue("id", "invalidStr","El ID de la zona supera el límite de carácteres (20)");
 
-        if (zona.getNombre() == null || zona.getNombre().trim().equals("") || zona.getNombre().trim().equals(" ")) {
-            System.out.println("perros");
-
+        if (zona.getNombre() == null || zona.getNombre().trim().equals("") || zona.getNombre().trim().equals(" "))
             errors.rejectValue("nombre", "nonullobj","No se ha introducido el nombre de la zona");
-            System.out.println("gatos");
-        }
-        if (zona.getNombre().length() > 50) {
-            System.out.println("perros");
+        if (zona.getNombre().length() > 50)
 
             errors.rejectValue("nombre", "invalidStr","El nombre de la zona supera el límite de carácteres (50)");
-            System.out.println("gatos");
-        }
 
-        if (zona.getTipo_suelo() == null || zona.getTipo_suelo().trim().equals("") || zona.getTipo_suelo().trim().equals(" ")) {
-            System.out.println("perros");
+        if (zona.getTipo_suelo() == null || zona.getTipo_suelo().trim().equals("") || zona.getTipo_suelo().trim().equals(" "))
 
             errors.rejectValue("tipo_suelo", "nonullobj","No se ha introducido el tipo de suelo de la zona");
-            System.out.println("gatos");
 
-        }
-        if (zona.getTipo_suelo().length() > 30) {
+        if (zona.getTipo_suelo().length() > 30)
 
-            System.out.println("perros");
             errors.rejectValue("tipo_suelo", "invalidStr","El nombre del tipo de suelo de la zona supera el límite de carácteres (30)");
-            System.out.println("gatos");
-        }
 
         if (zona.getTipo_acceso() == null || zona.getTipo_acceso().trim().equals("") || zona.getTipo_acceso().trim().equals(" "))
             errors.rejectValue("tipo_acceso", "nonullobj","No se ha introducido el tipo de acceso de la zona");

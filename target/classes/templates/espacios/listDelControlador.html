@@ -54,13 +54,10 @@
 <div layout:fragment="content">
     <br>
     <h1 >Espacios naturales</h1>
-    <div align="center" >
-        <button onClick="location.href='/espacios/add'" class="btn boton_azul">Añadir espacio</button>
-    </div>
-    <form style="margin-left:50px" action="#" th:action="@{/espacios/listDelGestor}" method="GET">
+    <form style="margin-left:50px" action="#" th:action="@{/espacios/listDelControlador}" method="GET">
     </form>
     <div >
-        <div th:each="lista: ${espaciosC}" class="principal">
+        <div th:each="lista: ${espacios}" class="principal">
             <div th:each="espacio: ${lista}" class="p2">
                 <div class="p3" >
                     <div style="text-align: center;  margin-bottom:10px;">
@@ -73,9 +70,7 @@
                         <img th:src="@{/images/espacios/espacio-{espacio}.jpg(espacio=${espacio.id})}" class="imgRedonda">
                     </a>
                     <br>
-                    <a th:href="@{./prereserva/{espacio}(espacio=${espacio.id})}" style=" margin-top: 10px;" class="btn boton_verde" >Más info</a>
-
-
+                    <a th:href="@{./prereserva/{espacio}(espacio=${espacio.id})}" style=" margin:auto; margin-top: 10px;" class="btn boton_azul" role="button" >Más info</a>
                 </div>
 
             </div>

@@ -33,27 +33,27 @@ public class ZonasController {
     @Autowired
     public void setUsuarioDao(UsuarioDao usuarioDao) { this.usuarioDao = usuarioDao; }
 
-    @RequestMapping(value="/list/{id}", method = RequestMethod.GET)
-    public String listZonasPorEspacio(HttpSession session, Model model, @PathVariable String id) {
+    @RequestMapping(value="/listPorEspacio/{espacio}", method = RequestMethod.GET)
+    public String listZonasPorEspacio(HttpSession session, Model model, @PathVariable String espacio) {
         Usuario user= (Usuario) session.getAttribute("user");
         try{
-            if(user.getTipoUsuario().equals("Gestor")) {
 
-//                EspacioPublico espacioPublico = espacioPublicoDao.getEspacio(id);
-                List<Zona> lista = zonaDao.getZonasDisponiblesPorEspacio(id);
+            if(user.getTipoUsuario().equals("Gestor") || user.getTipoUsuario().equals("Controlador")) {
+                List<Zona> zonas=zonaDao.getZonasByEspacio(espacio);
 
-//                List<Zona> lista = zonaDao.getZonas();
-                model.addAttribute("zonas", lista);
-                model.addAttribute("espacio", id);
+                if(zonas.isEmpty()) {
+                    return "zona/noHayZonasEspacio";
+                }
 
-                return "zonas/list.html";
+                model.addAttribute("zonas", zonas);
+
+                return "zona/listPorEspacio";
             }
         } catch (Exception e){
             return "error/error";
         }
         return "error/error";
     }
-
     @RequestMapping(value="/add/{id}", method = RequestMethod.GET)
     public String addZona(Model model, @PathVariable String id_espacio) {
         Zona zona = new Zona();
@@ -128,7 +128,6 @@ public class ZonasController {
                 return "controlador/deleteConfirm";
             }
         }catch (Exception e){
-            System.out.println("Estás en el catch");
             return "error/error";
         }
         return "error/error";
