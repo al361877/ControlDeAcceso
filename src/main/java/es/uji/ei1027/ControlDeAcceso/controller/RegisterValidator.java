@@ -62,7 +62,7 @@ public class RegisterValidator implements Validator {
         if (usuario.getNacimientoString()==null || usuario.getNacimientoString().trim().equals("") || usuario.getNacimientoString().trim().equals(" "))
             errors.rejectValue("nacimientoString", "nonullobj","No se ha introducido ninguna fecha de nacimiento");
         else{
-            System.out.println("nacimiento string= "+usuario.getNacimientoString());
+//            System.out.println("nacimiento string= "+usuario.getNacimientoString());
             usuario.setNacimiento(usuario.getNacimientoString());
             LocalDate nacimiento= usuario.getNacimiento();
             LocalDate today= LocalDate.now();
@@ -87,7 +87,7 @@ public class RegisterValidator implements Validator {
         if (usuario.getCalle().length() > 100)
             errors.rejectValue("calle", "invalidStr","El nombre de la calle es demasiado largo");
 
-        if ( usuario.getCp()==0 || usuario.getCp() < 1000 || usuario.getCp() > 52999 )
+        if (usuario.getCp() < 1000 || usuario.getCp() > 52999)
             errors.rejectValue("cp", "invalidInt","El codigo postal introducido no es valido");
 
 

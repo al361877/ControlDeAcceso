@@ -37,24 +37,43 @@ td{
             <table>
 
                 <tr>
-                    <td><label>Nombre</label></td>
-                    <td><input class="form-control" type="text" th:field="*{nombre}" /></td>
-
+                    <td><label>ID</label></td>
+                    <td><input type="text" class="form-control" th:field="*{id}" readonly/></td>
+                </tr>
+                <tr>
+                    <td  class="error" th:if="${#fields.hasErrors('id')}" th:errors="*{id}" style="font-size:15px"></td>
+                </tr>
+                <tr>
+                    <td><label>Título</label></td>
+                    <td><input type="text" class="form-control" th:field="*{nombre}" /></td>
                 </tr>
                 <tr>
                     <td class="error" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" style="font-size:15px"></td>
                 </tr>
+
+                <tr>
+                    <td><label>Municipio</label></td>
+                    <td><input type="text" class="form-control" th:field="*{municipio}" readonly/></td>
+                </tr>
+                <tr>
+                    <td class="error" th:if="${#fields.hasErrors('municipio')}" th:errors="*{municipio}" style="font-size:15px"></td>
+                </tr>
+
+
+
                 <tr>
                     <td><label>Tipo de espacio</label></td>
-                    <td>
-                        <select class="form-control" type="text" th:field="*{ciudad}" id="tipo" name="tipo">
-                            <option value="playa">Playa</option>
-                            <option value="rio">Rio</option>
-                            <option value="estanque">Estanque</option>
-                            <option value="lago">Lago</option>
-                            <option value="otros">Otros</option>
-                        </select>
-                    </td>
+                    <td><input type="text" class="form-control" th:field="*{tipo_espacio}" /></td>
+                </tr>
+                <tr>
+                    <td class="error" th:if="${#fields.hasErrors('tipo_espacio')}" th:errors="*{tipo_espacio}" style="font-size:15px"></td>
+                </tr>
+
+
+
+                <tr>
+                    <td><label>Código postal</label></td>
+                    <td><input type="text" class="form-control" th:field="*{cp}" readonly/></td>
                 </tr>
                 <tr>
                     <td class="error" th:if="${#fields.hasErrors('tipo')}" th:errors="*{tipo}" style="font-size:15px"></td>

@@ -24,7 +24,7 @@ public class UsuarioDao {
         //AÑADIMOS Ciudadano
 
         public void addCiudadano(Usuario usuario) {
-            System.out.println(usuario.toString());
+//            System.out.println(usuario.toString());
             try {
 
                 jdbcTemplate.update("INSERT INTO Usuario VALUES (?,?,?,?,?,?,?,?,?,?,?)",
@@ -45,7 +45,7 @@ public class UsuarioDao {
     //AÑADIMOS Ciudadano
 
     public void addControlador(Usuario usuario) {
-        System.out.println(usuario.toString());
+//        System.out.println(usuario.toString());
         try {
 
             jdbcTemplate.update("INSERT INTO Usuario VALUES (?,?,?,?,?,?,?,?,?,?,?)",
@@ -66,7 +66,7 @@ public class UsuarioDao {
         //Datos ciudadanos
         public List<Usuario> getCiudadanos (){
             try{
-                return jdbcTemplate.query("SELECT * FROM usuario WHERE tipo_usuario='Controlador'", new UsuarioRowMapper());
+                return jdbcTemplate.query("SELECT * FROM usuario WHERE tipo_usuario='Ciudadano'", new UsuarioRowMapper());
             }
             catch (EmptyResultDataAccessException e){
                 return null;
@@ -98,7 +98,7 @@ public class UsuarioDao {
         //Datos usuarios controlador
         public List<Usuario> getUsuariosControlador (){
             try{
-                return jdbcTemplate.query("SELECT * FROM usuario WHERE tipo_usuario='controlador'", new UsuarioRowMapper());
+                return jdbcTemplate.query("SELECT * FROM usuario WHERE tipo_usuario='Controlador'", new UsuarioRowMapper());
             }
             catch (EmptyResultDataAccessException e){
                 return null;
@@ -184,9 +184,9 @@ public class UsuarioDao {
 
         //ACTUALIZAMOS Usuario
         public void updateUsuario(Usuario usuario){
-            System.out.println("entro en el update");
+//            System.out.println("entro en el update");
             usuario.setNacimiento(usuario.getNacimientoString());
-            System.out.println(usuario.toString());
+//            System.out.println(usuario.toString());
 
             jdbcTemplate.update(" UPDATE Usuario SET  nombre_y_apellidos=?," +
                             " telefono=?, nacimiento=?, email=?, ciudad=?,calle=?, cp=? " +
@@ -197,7 +197,7 @@ public class UsuarioDao {
         }
         public Usuario getUsuario (String usuario ){
             try{
-                System.out.println("entro con usuario = "+usuario);
+//                System.out.println("entro con usuario = "+usuario);
                 return jdbcTemplate.queryForObject("SELECT * FROM usuario WHERE nombre_usuario=?", new UsuarioRowMapper(), usuario);
             }
             catch (EmptyResultDataAccessException e){

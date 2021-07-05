@@ -25,7 +25,7 @@ public class UpdateValidator implements Validator {
         if (usuario.getNacimientoString()==null || usuario.getNacimientoString().trim().equals("") || usuario.getNacimientoString().trim().equals(" "))
             errors.rejectValue("nacimientoString", "nonullobj","No se ha introducido ninguna fecha de nacimiento");
         else{
-            System.out.println("nacimiento string= "+usuario.getNacimientoString());
+//            System.out.println("nacimiento string= "+usuario.getNacimientoString());
             usuario.setNacimiento(usuario.getNacimientoString());
             LocalDate nacimiento= usuario.getNacimiento();
             LocalDate today= LocalDate.now();

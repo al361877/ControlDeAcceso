@@ -1,0 +1,98 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
+<head>
+    <title>Ajustes de perfil</title>
+    <meta charset=" UTF-8" />
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+</head>
+<style>
+body {
+  background-color: lightgreen;
+}
+
+div {
+  background-color: white;
+}
+table, th {
+  border: 1px solid black;
+}
+td{
+    border: 1px solid black;
+    padding:5px;
+}
+</style>
+<body>
+
+<div   layout:fragment="content">
+    <div  style="height: 600px; width:400px; text-align:center; margin: auto;">
+    <h2>Editar perfil </h2>
+    <div align="center" >
+        <form action="#" th:action="@{/espacios/update}" th:object="${espacio}" method="post">
+            <table>
+                <tr>
+                    <td><label>ID</label></td>
+                    <td><input type="text" class="form-control" th:field="*{id}" readonly/></td>
+                </tr>
+                <tr>
+                    <td  class="error" th:if="${#fields.hasErrors('id')}" th:errors="*{id}" style="font-size:15px"></td>
+                </tr>
+                <tr>
+                    <td><label>Título</label></td>
+                    <td><input type="text" class="form-control" th:field="*{nombre}" /></td>
+                </tr>
+                <tr>
+                    <td class="error" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" style="font-size:15px"></td>
+                </tr>
+
+                <tr>
+                    <td><label>Municipio</label></td>
+                    <td><input type="text" class="form-control" th:field="*{municipio}" readonly/></td>
+                </tr>
+                <tr>
+                    <td class="error" th:if="${#fields.hasErrors('municipio')}" th:errors="*{municipio}" style="font-size:15px"></td>
+                </tr>
+
+
+
+                <tr>
+                    <td><label>Tipo de espacio</label></td>
+                    <td><input type="text" class="form-control" th:field="*{tipo_espacio}" /></td>
+                </tr>
+                <tr>
+                    <td class="error" th:if="${#fields.hasErrors('tipo_espacio')}" th:errors="*{tipo_espacio}" style="font-size:15px"></td>
+                </tr>
+
+
+
+                <tr>
+                    <td><label>Código postal</label></td>
+                    <td><input type="text" class="form-control" th:field="*{cp}" readonly/></td>
+                </tr>
+                <tr>
+                    <td class="error" th:if="${#fields.hasErrors('cp')}" th:errors="*{cp}" style="font-size:15px"></td>
+                </tr>
+                <tr><td><br></td></tr>
+                <tr>
+                    <td>
+                        <button onClick="history.back()" class=" btn boton_azul"  ><img src="https://image.flaticon.com/icons/svg/929/929730.svg" width="20"  alt="x"> Volver</button>
+                    </td>
+                    <td colspan="2"><input type="submit" role="button" class="btn boton_verde"  value="Aceptar" /></td>
+
+                </tr>
+
+            </table>
+
+        </form>
+    </div>
+    </div>
+</div>
+
+
+
+</body>
+</html>

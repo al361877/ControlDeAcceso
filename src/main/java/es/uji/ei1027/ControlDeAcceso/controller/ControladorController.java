@@ -106,7 +106,7 @@ public class ControladorController {
     }
 
     @RequestMapping(value="/add")
-    public String addControlado(Model model) {
+    public String addControlador(Model model) {
         model.addAttribute("user", new Usuario());
 
         return "controlador/add";
@@ -123,22 +123,20 @@ public class ControladorController {
 
         userDao.addControlador(user);
         userDao.addControlador(user.getDni());
+
         user.setTipoUsuario("Controlador");
-        session.setAttribute("user", user);
 
-        session.setAttribute("tipo",user.getTipoUsuario());
-
-        return "controlador/index";
+        return "controlador/addConfirm";
     }
 
     @RequestMapping(value="/update/{dni}", method = RequestMethod.GET)
     public String editUsuario(Model model, @PathVariable String dni,HttpSession session) {
         Usuario user = (Usuario) session.getAttribute("user");
-        System.out.println("dni de la sesion-> "+user.getDni()+" dni del get-> "+dni);
+//        System.out.println("dni de la sesion-> "+user.getDni()+" dni del get-> "+dni);
         try{
             if(user.getTipoUsuario().equals("Gestor") || user.getDni().equals(dni)){
 
-                model.addAttribute("user", userDao.getUsuarioDni(dni));
+                model.addAttribute("controlador", userDao.getUsuarioDni(dni));
                 return "controlador/update";
             }
         }catch (Exception e){
@@ -154,20 +152,30 @@ public class ControladorController {
 
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public String processUpdateSubmit(@ModelAttribute("user") Usuario user, BindingResult bindingResult,HttpSession session) {
-        System.out.println("before update "+user.getNombre());
+//        System.out.println("before update "+user.getNombre());
 
-
+        UpdateValidator validator = new UpdateValidator();
+        validator.validate(user, bindingResult);
         if (bindingResult.hasErrors())
-            return "ciudadano/update/"+user.getDni();
+            return "controlador/update";
 
         userDao.updateUsuario(user);
-        return "ciudadano/updateConfirm";
+        return "controlador/updateConfirm";
     }
 
     @RequestMapping(value="/delete/{dni}")
-    public String processDelete(@PathVariable String dni) {
-        userDao.deleteUsuario(dni);
-        return "redirect:../list";
+    public String processDelete(@PathVariable String dni, HttpSession session) {
+        Usuario user = (Usuario) session.getAttribute("user");
+        try{
+            if(user.getTipoUsuario().equals("Gestor")){
+                userDao.deleteUsuario(dni);
+                return "controlador/deleteConfirm";
+            }
+        }catch (Exception e){
+//            System.out.println("Estás en el catch");
+            return "error/error";
+        }
+        return "error/error";
     }
 
     @RequestMapping(value = "/index")

@@ -1,0 +1,67 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:form="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/base}">
+<head>
+  <title>Añadir espacio público</title>
+  <meta charset=" UTF-8" />
+  <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+  <link rel="stylesheet" type="text/css"
+        href="/css/estils.css"
+        th:href="@{/css/estils.css}"/>
+
+<body>
+
+<div layout:fragment="content">
+  <br>
+  <h1 >Añadir espacio público</h1>
+  <div align="center" style="height: 600px;" >
+    <form action="#" th:action="@{/espacios/addServicio}" th:object="${servicio}" method="post">
+      <table>
+        <tr>
+          <td><label>ID</label></td>
+          <td><input type="text" class="form-control" th:field="*{id}" /></td>
+        </tr>
+        <tr>
+          <td  class="error" th:if="${#fields.hasErrors('id')}" th:errors="*{id}" style="font-size:15px"></td>
+        </tr>
+        <tr>
+          <td><label>Tipo de servicio</label></td>
+          <td><input type="text" class="form-control" th:field="*{tipo_servicio}" /></td>
+        </tr>
+        <tr>
+          <td class="error" th:if="${#fields.hasErrors('tipo_servicio')}" th:errors="*{tipo_servicio}" style="font-size:15px"></td>
+        </tr>
+
+        <tr>
+          <td><label>Estacion del año</label></td>
+          <select id="estacion" name="estacion">
+            <option value="verano">Verano</option>
+            <option value="invierno">Invierno</option>
+            <option value="otoño">Otoño</option>
+            <option value="primavera">Primavera</option>
+          </select>
+        </tr>
+        <tr>
+          <td class="error" th:if="${#fields.hasErrors('estacion')}" th:errors="*{estacion}" style="font-size:15px"></td>
+        </tr>
+        <tr><td><br></td></tr>
+
+        <tr>
+          <td>    <button onClick="history.back()" class=" btn boton_azul"  ><img src="https://image.flaticon.com/icons/svg/929/929730.svg" width="20"  alt="x"> Volver</button>
+          </td>
+          <td colspan="2"><input type="submit" role="button" class="btn boton_verde"  value="Aceptar" /></td>
+
+        </tr>
+      </table>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+
+</body>
+</html>

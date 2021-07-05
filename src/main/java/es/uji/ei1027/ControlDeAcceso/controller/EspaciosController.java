@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import es.uji.ei1027.ControlDeAcceso.dao.ServicioDao;
+
 @Controller
 @RequestMapping("espacios")
 public class EspaciosController {
@@ -37,24 +39,19 @@ public class EspaciosController {
     }
 
     @Autowired
-    public void setUsuarioDao(UsuarioDao usuarioDao) {
-        this.usuarioDao = usuarioDao;
-    }
+    public void setZona(ZonaDao zonaDao) { this.zonaDao = zonaDao; }
 
     @Autowired
     public void setEstacionDao(EstacionDao estacionDao) {
         this.estacionDao = estacionDao;
     }
-    @Autowired
-    public void setServicioDao(ServicioDao servicioDao) {
-        this.servicioDao = servicioDao;
-    }
-
 
     @Autowired
-    public void setZona(ZonaDao zonaDao) {
+    public void setServicioDao(ServicioDao servicioDao) { this.servicioDao = servicioDao; }
 
-        this.zonaDao = zonaDao;
+    @Autowired
+    public void setUsuarioDao(UsuarioDao usuarioDao) {
+        this.usuarioDao = usuarioDao;
     }
 
     @Autowired
@@ -104,7 +101,8 @@ public class EspaciosController {
 
 
     @RequestMapping("/list")
-    public String listEspacios(Model model) {
+    public String listEspacios(Model model, HttpSession session) {
+        Usuario user=(Usuario) session.getAttribute("user");
 
         List<EspacioPublico> lista = espacioPublicoDao.getEspacios();
         int cont = 0;
@@ -143,8 +141,18 @@ public class EspaciosController {
         model.addAttribute("municipios", municipios);
         model.addAttribute("matrizEspacios", matriz);
 
+        if(session.getAttribute("tipo").equals("Gestor"))
+            return "espacios/listGestor";
+
         return "espacios/list.html";
     }
+
+    /*
+    @RequestMapping("/listGestor")
+    public String listEspaciosGestor(Model model) {
+        String algo = listEspacios(model);
+        return "espacios/listGestor";
+    }*/
 
     @RequestMapping(value = "/listPorMunicipio", method = RequestMethod.POST)
     public String listEspaciosPorMunicipio(@ModelAttribute("municipio") String municipio, Model model) {
@@ -220,7 +228,7 @@ public class EspaciosController {
             int diasHoy= today.getDayOfYear();
 
             if(diasHoy>=diasIni && diasHoy<=diasFin){
-                System.out.println(estacion.getId());
+//                System.out.println(estacion.getId());
                 Servicio servicioActual=servicioDao.getServicioEspacioEstacion(espacio,estacion.getId());
                 model.addAttribute("servicio", servicioActual.getTipo_servicio());
             }
@@ -239,34 +247,73 @@ public class EspaciosController {
         return "espacios/add";
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addEspacio(Model model, HttpSession session,@ModelAttribute("espacio") EspacioPublico espacio,
-                             BindingResult bindingResult) {
+    @RequestMapping(value = "/addServicio", method = RequestMethod.POST)
+    public String addServicio(Model model, HttpSession session,@ModelAttribute("espacio") EspacioPublico espacioPublico, @ModelAttribute("servicio") Servicio servicio, BindingResult bindingResult) {
+//        @ModelAttribute("estaciones") List<Estacion> estaciones,
         Usuario user=(Usuario) session.getAttribute("user");
-
-
 
         try{
             if(session.getAttribute("tipo").equals("Gestor")){
 
                 Gestor gestor = usuarioDao.getGestorByDni(user.getDni());
 
+                servicio.setIdEspacio(espacioPublico.getId());
+                ServicioValidator servicioValidator = new ServicioValidator();
 
+                servicioValidator.validate(servicio, bindingResult);
+                if(bindingResult.hasErrors())
+                    return "espacios/addServicio";
+
+//                espacio.setId(aleatorio());
+
+
+                servicioDao.addServicio(servicio);
+
+                return "espacios/addConfirm";
+            }else{
+                return "error/error";
+            }
+        }catch (Exception e){
+            return "error/error";
+        }
+        //  return "redirect:/login";
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public String addEspacio(Model model, HttpSession session,@ModelAttribute("espacio") EspacioPublico espacio, BindingResult bindingResult) {
+        Usuario user=(Usuario) session.getAttribute("user");
+
+        try{
+
+            if(session.getAttribute("tipo").equals("Gestor")){
+
+                Gestor gestor = usuarioDao.getGestorByDni(user.getDni());
+
+                String municipio = gestor.getMunicipio();
+                espacio.setMunicipio(municipio);
 
                 EspacioValidator espacioValidator=new EspacioValidator();
+
                 espacioValidator.validate(espacio, bindingResult);
-
-                if(bindingResult.hasErrors()){
+                if(bindingResult.hasErrors())
                     return "espacios/add";
-                }
 
+                System.out.println("todo normal");
                 if(espacio.getMunicipio() != null && !gestor.getMunicipio().equals(espacio.getMunicipio())){
+                    System.out.println("aqui no deberia entrar");
                     bindingResult.rejectValue("municipio", "invalitStr", "No gestionas el espacio de municipio");
                 }
 
-                espacio.setId(aleatorio());
+//                espacio.setId(aleatorio());
 
-                return "espacios/add";
+                espacioPublicoDao.addEspacio(espacio);
+                List<Estacion> estaciones = estacionDao.getEstaciones();
+
+                model.addAttribute("estaciones", estaciones);
+                model.addAttribute("servicio", new Servicio());
+
+                return "espacios/addServicio";
+
             }else{
                 return "error/error";
             }
@@ -287,7 +334,10 @@ public class EspaciosController {
 
                 model.addAttribute("espacio", espacio);
 
+                espacioPublicoDao.updateEspacio(espacio);
+                return "espacios/update";
             }
+
         }catch (Exception e){
             return "error/error";
         }
@@ -304,16 +354,37 @@ public class EspaciosController {
                 EspacioValidator validator = new EspacioValidator();
                 validator.validate(espacio, bindingResult);
 
-                if(bindingResult.hasErrors()){
+                if(bindingResult.hasErrors())
+                    return "espacios/update";
 
-                    return "espacios/add";
-                }
+                return "espacios/updateConfirm";
             }
         }catch (Exception e){
+            System.out.println("este error entras otra vez");
+            return "error/error";
+        }
+        System.out.println("y si es este??");
+
+        return "error/error";
+    }
+
+/*
+    EL GESTOR MUNICIPAL NO PUEDE ELIMINAR ESPACIOS
+    @RequestMapping(value="/delete/{id}")
+    public String processDelete(@PathVariable String id, HttpSession session) {
+        Usuario user = (Usuario) session.getAttribute("user");
+        try{
+            if(user.getTipoUsuario().equals("Gestor")){
+                espacioPublicoDao;
+                return "controlador/deleteConfirm";
+            }
+        }catch (Exception e){
+            System.out.println("Estás en el catch");
             return "error/error";
         }
         return "error/error";
     }
+*/
 
     private String aleatorio(){
         Random aleatorio = new Random();

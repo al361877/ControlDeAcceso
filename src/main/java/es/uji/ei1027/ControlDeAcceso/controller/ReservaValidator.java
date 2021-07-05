@@ -27,12 +27,12 @@ public class ReservaValidator implements Validator {
         boolean entro=false;
 
         if (reserva.getZona()==null || reserva.getZona().trim().equals("")){
-            System.out.println("ejnogfos");
+//            System.out.println("ejnogfos");
             errors.rejectValue("zona", "nonullobj","No se ha introducido ninguna zona");
         }
 
         if (reserva.getFechaIniString()==null || reserva.getFechaIniString().trim().equals("")) {
-            System.out.println("etro fecha null");
+//            System.out.println("etro fecha null");
             entro=true;
             errors.rejectValue("fechaIniString", "nonullobj", "No se ha introducido ninguna fecha de reserva");
         }else{
@@ -56,12 +56,12 @@ public class ReservaValidator implements Validator {
         }
 
         if (reserva.getNumPersonas()<=0 ){
-            System.out.println("etro personas");
+//            System.out.println("etro personas");
             errors.rejectValue("numPersonas", "invalidInt","El número de asistentes se ha introducido erroneamente");
 
         }
         if (reserva.getFranja()==null || reserva.getFranja().trim().equals("")) {
-            System.out.println("etro franja");
+//            System.out.println("etro franja");
             errors.rejectValue("franja", "nonullobj", "No se ha introducido ninguna franja horaria");
         }
         else{
@@ -76,9 +76,9 @@ public class ReservaValidator implements Validator {
                 if(daysFecha==daysToday){
                     int horaIni=Time.valueOf(reserva.getHoraIniString()).getHours();
                     int ahora=LocalDateTime.now().getHour()+1;
-                    System.out.println("Hora ini= "+horaIni+" ahora "+ahora);
+//                    System.out.println("Hora ini= "+horaIni+" ahora "+ahora);
                     if(ahora>=horaIni){
-                        System.out.println("entro");
+//                        System.out.println("entro");
                         errors.rejectValue("franja", "invalidStr", "La reserva ha de hacerse con 1h de antelación");
                     }
                 }

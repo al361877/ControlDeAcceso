@@ -20,7 +20,6 @@ import java.util.List;
 public class GestorController {
     private UsuarioDao userDao;
 
-
     @Autowired
     public void setUsuario(UsuarioDao userDao) {
         this.userDao = userDao;
