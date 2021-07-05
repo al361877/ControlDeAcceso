@@ -33,16 +33,18 @@ public class ZonasController {
     @Autowired
     public void setUsuarioDao(UsuarioDao usuarioDao) { this.usuarioDao = usuarioDao; }
 
-    @RequestMapping(value="/list", method = RequestMethod.GET)
-    public String listZonasPorEspacio(HttpSession session, Model model, @ModelAttribute("espacio") EspacioPublico espacioPublico) {
+    @RequestMapping(value="/list/{id}", method = RequestMethod.GET)
+    public String listZonasPorEspacio(HttpSession session, Model model, @PathVariable String id) {
         Usuario user= (Usuario) session.getAttribute("user");
         try{
             if(user.getTipoUsuario().equals("Gestor")) {
 
-//                List<Zona> lista = zonaDao.getZonasDisponiblesPorEspacio(espacioPublico.getId());
+//                EspacioPublico espacioPublico = espacioPublicoDao.getEspacio(id);
+                List<Zona> lista = zonaDao.getZonasDisponiblesPorEspacio(id);
 
-                List<Zona> lista = zonaDao.getZonas();
+//                List<Zona> lista = zonaDao.getZonas();
                 model.addAttribute("zonas", lista);
+                model.addAttribute("espacio", id);
 
                 return "zonas/list.html";
             }
@@ -52,22 +54,24 @@ public class ZonasController {
         return "error/error";
     }
 
-    @RequestMapping(value="/add")
-    public String addZona(Model model) {
-        model.addAttribute("zona", new Zona());
+    @RequestMapping(value="/add/{id}", method = RequestMethod.GET)
+    public String addZona(Model model, @PathVariable String id_espacio) {
+        Zona zona = new Zona();
+        EspacioPublico espacioPublico = espacioPublicoDao.getEspacio(id_espacio);
+        zona.setEspacio_publico(espacioPublico.getId());
+        zona.setCp(espacioPublico.getCp());
+        model.addAttribute("zona", zona);
 
         return "zonas/add";
     }
 
     //add ciudadano
     @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddZonaSubmit(@ModelAttribute("zona") Zona zona, @ModelAttribute("espacio") EspacioPublico espacioPublico, HttpSession session, BindingResult bindingResult) {
+    public String processAddZonaSubmit(@ModelAttribute("zona") Zona zona, HttpSession session, BindingResult bindingResult) {
         Usuario user= (Usuario) session.getAttribute("user");
         try{
             if(user.getTipoUsuario().equals("Gestor")) {
 
-                zona.setEspacio_publico(espacioPublico.getId());
-                zona.setCp(espacioPublico.getCp());
                 ZonasValidator validator = new ZonasValidator();
                 validator.validate(zona, bindingResult);
                 if (bindingResult.hasErrors())
@@ -82,13 +86,13 @@ public class ZonasController {
     }
 
 
-    @RequestMapping(value="/update/{id_zona}", method = RequestMethod.GET)
-    public String editZona(Model model, @PathVariable String id_zona, HttpSession session) {
+    @RequestMapping(value="/update/{id}", method = RequestMethod.GET)
+    public String editZona(Model model, @PathVariable String id, HttpSession session) {
         Usuario user = (Usuario) session.getAttribute("user");
         try{
             if(user.getTipoUsuario().equals("Gestor")){
 
-                model.addAttribute("zona", zonaDao.getZonaId(id_zona));
+                model.addAttribute("zona", zonaDao.getZonaId(id));
                 return "zonas/update";
             }
         }catch (Exception e){
@@ -103,10 +107,8 @@ public class ZonasController {
 
 
     @RequestMapping(value="/update", method = RequestMethod.POST)
-    public String processUpdateSubmit(@ModelAttribute("zona") Zona zona, @ModelAttribute("espacio") EspacioPublico espacioPublico, BindingResult bindingResult,HttpSession session) {
+    public String processUpdateSubmit(@ModelAttribute("zona") Zona zona, BindingResult bindingResult,HttpSession session) {
 
-        zona.setEspacio_publico(espacioPublico.getId());
-        zona.setCp(espacioPublico.getCp());
         ZonasValidator validator = new ZonasValidator();
         validator.validate(zona, bindingResult);
         if (bindingResult.hasErrors())
@@ -117,12 +119,12 @@ public class ZonasController {
     }
 
 
-    @RequestMapping(value="/delete/{id_zona}")
-    public String processDelete(@PathVariable String id_zona, HttpSession session) {
+    @RequestMapping(value="/delete/{id}")
+    public String processDelete(@PathVariable String id, HttpSession session) {
         Usuario user = (Usuario) session.getAttribute("user");
         try{
             if(user.getTipoUsuario().equals("Gestor")){
-                zonaDao.deleteZona(id_zona);
+                zonaDao.deleteZona(id);
                 return "controlador/deleteConfirm";
             }
         }catch (Exception e){

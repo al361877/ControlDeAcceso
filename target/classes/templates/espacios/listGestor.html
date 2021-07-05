@@ -71,6 +71,7 @@
             <img th:src="@{/images/espacios/espacio-{espacio}.jpg(espacio=${espacio.id})}" class="imgRedonda">
           </a>
           <br>
+          <a th:href="@{../zonas/list/{espacio}(espacio=${espacio.id})}" style=" margin:auto; margin-top: 10px;" class="btn boton_azul" role="button">Listar zonas</a>
           <a th:href="@{./update/{espacio}(espacio=${espacio.id})}" style=" margin:auto; margin-top: 10px;" class="btn boton_azul" role="button">Modificar espacio</a>
 <!--          <a th:href="@{./delete/{espacio}(espacio=${espacio.id})}" style=" margin:auto; margin-top: 10px;" class="btn boton_azul" role="button">Eliminar espacio</a>-->
         </div>
