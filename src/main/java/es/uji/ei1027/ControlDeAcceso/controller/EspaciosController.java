@@ -120,7 +120,7 @@ public class EspaciosController {
                 municipios.add(espacio.getMunicipio());
             }
 
-            if (cont < 3) {
+            if (cont <= 2) {
 
                 listaInterior.add(espacio);
             } else {
@@ -141,8 +141,9 @@ public class EspaciosController {
         model.addAttribute("municipios", municipios);
         model.addAttribute("matrizEspacios", matriz);
 
-        if(session.getAttribute("tipo").equals("Gestor"))
-            return "espacios/listGestor";
+        if (session.getAttribute("tipo") != null)
+            if(session.getAttribute("tipo").equals("Gestor"))
+                return "espacios/listGestor";
 
         return "espacios/list.html";
     }
