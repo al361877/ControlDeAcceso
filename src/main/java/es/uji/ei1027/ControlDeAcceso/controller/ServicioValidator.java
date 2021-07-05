@@ -17,7 +17,6 @@ public class ServicioValidator implements Validator{
     public void validate(Object obj, Errors errors) {
         Servicio servicio = (Servicio) obj;
 
-
         if (servicio.getId()==null || servicio.getId().trim().equals("") || servicio.getId().trim().equals(" "))
             errors.rejectValue("id_servicio", "nonullobj","No se ha introducido id del servicio");
         if (servicio.getId().length() > 20)

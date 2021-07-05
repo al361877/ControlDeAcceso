@@ -36,9 +36,11 @@ public class ZonasValidator implements Validator {
         if (zona.getAforo_actual()<0)
             errors.rejectValue("aforo_actual", "nonullobj","El aforo actual introducido no es valido");
 
-//        int nose = zona.getAforo_actual();  || zona.getAforo_maximo() < nose
         if (zona.getAforo_maximo() < 0)
-            errors.rejectValue("aforo_maximo", "nonullobj","El aforo maximo introducido no es valido o es inferior al actual");
+            errors.rejectValue("aforo_maximo", "nonullobj","El aforo maximo introducido no es valido");
+
+        if (zona.getAforo_maximo() < zona.getAforo_actual())
+            errors.rejectValue("aforo_maximo", "nonullobj","El aforo maximo introducido no puede ser inferior al actual");
 
     }
 }

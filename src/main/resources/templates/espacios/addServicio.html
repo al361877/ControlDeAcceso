@@ -16,14 +16,14 @@
   <br>
   <h1 >Añadir espacio público</h1>
   <div align="center" style="height: 600px;" >
-    <form action="#" th:action="@{/espacios/add}" th:object="${servicio}" method="post">
+    <form action="#" th:action="@{/espacios/addServicio}" th:object="${servicio}" method="post">
       <table>
         <tr>
           <td><label>ID</label></td>
-          <td><input type="text" class="form-control" th:field="*{id_servicio}" /></td>
+          <td><input type="text" class="form-control" th:field="*{id}" /></td>
         </tr>
         <tr>
-          <td  class="error" th:if="${#fields.hasErrors('id_servicio')}" th:errors="*{id_servicio}" style="font-size:15px"></td>
+          <td  class="error" th:if="${#fields.hasErrors('id')}" th:errors="*{id}" style="font-size:15px"></td>
         </tr>
         <tr>
           <td><label>Tipo de servicio</label></td>
@@ -35,34 +35,17 @@
 
         <tr>
           <td><label>Estacion del año</label></td>
-          <form:select path="id_estacion" th:object="${estaciones}" />
+          <select id="estacion" name="estacion">
+            <option value="verano">Verano</option>
+            <option value="invierno">Invierno</option>
+            <option value="otoño">Otoño</option>
+            <option value="primavera">Primavera</option>
+          </select>
         </tr>
         <tr>
-          <td class="error" th:if="${#fields.hasErrors('id_estacion')}" th:errors="*{id_estacion}" style="font-size:15px"></td>
+          <td class="error" th:if="${#fields.hasErrors('estacion')}" th:errors="*{estacion}" style="font-size:15px"></td>
         </tr>
         <tr><td><br></td></tr>
-
-        <!--                <tr>-->
-        <!--                    <td><label>Municipio</label></td>-->
-        <!--                    <td><input type="text" class="form-control" th:field="*{municipio}" /></td>-->
-        <!--                </tr>-->
-        <!--                <tr>-->
-        <!--                    <td class="error" th:if="${#fields.hasErrors('municipio')}" th:errors="*{municipio}" style="font-size:15px"></td>-->
-        <!--                </tr>-->
-
-<!--        <select th:>-->
-<!--&lt;!&ndash;        <select th:field="*{estacion}">&ndash;&gt;-->
-<!--          <option th:each="est : ${estacion}" th:value="${est}" th:text="${est}"></option>-->
-<!--        </select>-->
-        <!--        <form style="margin-left:50px" action="#" th:action="@{/espacios/listEstaciones}" th:object="${estacion}" method="get">-->
-        <!--          <label for="estacion">Estacion del año:</label>-->
-        <!--          <select id="estacion" name="estacion" >-->
-        <!--            <option th:each="est:${estacion}" th:text="${est}" th:value="${est}">-->
-
-        <!--            </option>-->
-        <!--          </select>-->
-        <!--          &lt;!&ndash;          <input type="submit" value="Filtrar">&ndash;&gt;-->
-        <!--        </form>-->
 
         <tr>
           <td>    <button onClick="history.back()" class=" btn boton_azul"  ><img src="https://image.flaticon.com/icons/svg/929/929730.svg" width="20"  alt="x"> Volver</button>

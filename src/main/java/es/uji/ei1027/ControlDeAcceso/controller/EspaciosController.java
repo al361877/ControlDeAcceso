@@ -209,8 +209,8 @@ public class EspaciosController {
                 Gestor gestor = usuarioDao.getGestorByDni(user.getDni());
 
                 servicio.setIdEspacio(espacioPublico.getId());
-
                 ServicioValidator servicioValidator = new ServicioValidator();
+
                 servicioValidator.validate(servicio, bindingResult);
                 if(bindingResult.hasErrors())
                     return "espacios/addServicio";
@@ -261,6 +261,7 @@ public class EspaciosController {
                 List<Estacion> estaciones = estacionDao.getEstaciones();
 
                 model.addAttribute("estaciones", estaciones);
+                model.addAttribute("servicio", new Servicio());
 
                 return "espacios/addServicio";
 
