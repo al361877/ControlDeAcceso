@@ -120,14 +120,14 @@ public class EspaciosController {
                 municipios.add(espacio.getMunicipio());
             }
 
-            if (cont <= 2) {
+            if (cont < 3) {
 
                 listaInterior.add(espacio);
             } else {
                 matriz.add(listaInterior);
                 listaInterior = new ArrayList<>();
                 listaInterior.add(espacio);
-                cont = -1;
+                cont = 0;
             }
 
             if (i == lista.size() - 1) {
