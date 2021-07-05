@@ -3,7 +3,7 @@ package es.uji.ei1027.ControlDeAcceso.model;
 public class Controlador extends Usuario{
     private String dni;
     private String espacio_publico;
-    private String dias_semana_trabaja;
+    private String diaSemanaTrabaja;
 
     public void setDni(String dni) {
         this.dni = dni;
@@ -21,16 +21,16 @@ public class Controlador extends Usuario{
         this.espacio_publico = espacio_publico;
     }
 
-    public  void setDiasSemana(String dias_semana_trabaja){this.dias_semana_trabaja=dias_semana_trabaja;}
+    public  void setDiasSemanaTrabaja(String diaSemanaTrabaja){this.diaSemanaTrabaja=diaSemanaTrabaja;}
 
-    public String getDiasSemana(){return dias_semana_trabaja;}
+    public String getDiasSemanaTrabaja(){return diaSemanaTrabaja;}
 
     @Override
     public String toString() {
         return "Controlador{" +
                 "dni='" + dni + '\'' +
                 ", espacio_publico='" + espacio_publico + '\'' +
-                ", dias_semana_trabaja='" + dias_semana_trabaja + '\'' +
+                ", dias_semana_trabaja='" + diaSemanaTrabaja + '\'' +
                 '}';
     }
 }

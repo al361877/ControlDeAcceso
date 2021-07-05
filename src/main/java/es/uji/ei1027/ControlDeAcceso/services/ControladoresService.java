@@ -5,7 +5,6 @@ import java.util.List;
 
 
 public interface ControladoresService {
-   // public List<Controlador> listControladoresPorEspacio(String idEspacio);
-   // public List<Controlador> listControladoresPorMunicipio(String idMunicipio);
+    public List<Controlador> listControladoresPorMunicipio(String idMunicipio);
 
 }

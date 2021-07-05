@@ -20,19 +20,6 @@ public class ControladoresSvc implements ControladoresService{
     @Autowired
     UsuarioDao controladorDao;
 
- /*   @Override
-    public List<Controlador> listControladoresPorEspacio(String idEspacio){
-        //lista de todos los controladores de la bbdd
-
-        List<Controlador> contPorEspacio=new ArrayList<>();
-        for(Controlador controlador: controladores){
-            if(controlador.getEspacio_publico().equals(idEspacio)){
-                contPorEspacio.add(controlador);
-            }
-        }
-        return contPorEspacio;
-    }
-
     @Override
     public List<Controlador> listControladoresPorMunicipio(String idMunicipio){
         //lista de espacios de ese municipio
@@ -40,13 +27,17 @@ public class ControladoresSvc implements ControladoresService{
 
 
         //controladores que trabajan en el municipio dado
-        List<Controlador> contDelMunicipio=null;
-        List<String> idConDelMunicipio=null;
+        List<Controlador> contDelMunicipio=new ArrayList<>();
+        List<String> idConDelMunicipio=new ArrayList<>();
+
+        List<Controlador> controladoresDelEspacio=new ArrayList<>();
 
         //compruebo para cada espacio del municipio obtenido de qué controladores tiene
         for(EspacioPublico espacio:espacios){
+            controladoresDelEspacio=controladorDao.getControladorByEspacio(espacio.getId());
+
             //de cada lista de controladores devuelta de ese espacio
-            for(Controlador controlador:listControladoresPorEspacio(espacio.getId())){
+            for(Controlador controlador:controladoresDelEspacio){
                 //miro que no se repita el dni del controlador para mostrarlo solo una vez
                 if(!idConDelMunicipio.contains(controlador.getDni())){
                     contDelMunicipio.add(controlador);
@@ -57,6 +48,6 @@ public class ControladoresSvc implements ControladoresService{
 
         return contDelMunicipio;
     }
-    */
+
 
 }

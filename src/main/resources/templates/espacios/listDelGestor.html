@@ -70,7 +70,7 @@
                         <img th:src="@{/images/espacios/espacio-{espacio}.jpg(espacio=${espacio.id})}" class="imgRedonda">
                     </a>
                     <br>
-                    <a th:href="@{~/reservas/listDelGestor/{espacio}(espacio=${espacio.id})}" style=" margin-top: 10px;" class="btn boton_verde" >Listar reservas</a>
+                    <a th:href="@{./prereserva/{espacio}(espacio=${espacio.id})}" style=" margin-top: 10px;" class="btn boton_verde" >Más info</a>
 
                 </div>
 

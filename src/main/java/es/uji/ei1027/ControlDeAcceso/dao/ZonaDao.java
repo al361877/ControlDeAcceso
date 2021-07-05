@@ -49,6 +49,18 @@ public class ZonaDao {
         }
     }
 
+    public List<Zona> getZonasByEspacio (String espacio){
+        try{
+            System.out.println("Estás en el dao de zona : " + espacio);
+            List<Zona> lista = jdbcTemplate.query("SELECT * FROM zona WHERE id_espacio=?", new ZonaRowMapper(), espacio);
+
+            return lista;
+        }
+        catch (EmptyResultDataAccessException e){
+            return null;
+        }
+    }
+
     public Zona getZonaId (String id){
         try{
             return jdbcTemplate.queryForObject("SELECT * FROM zona WHERE id_zona=?", new ZonaRowMapper(), id);

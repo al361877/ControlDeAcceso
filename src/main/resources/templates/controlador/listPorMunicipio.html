@@ -18,32 +18,31 @@
 
 <div layout:fragment="content">
     <br>
-    <h1 >Lista de controladores del Espacio</h1>
+    <h1 >Lista de controladores de todo el municipio</h1>
+    <h4>*Los días de la semana se representan como:</h4>
+    <h5>L=lunes   M=martes   X=miércoles   J=jueves   V=viernes   S=sábado   D=domingo</h5>
     <div align="center">
         <table class="table table-striped">
             <thead>
             <tr>
                 <th>DNI</th>
-                <th>Nombre y Apellidos</th>
-                <th>Nombre de usuario</th>
-                <th>Correo</th>
-                <th>Teléfono</th>
+                <th>Espacio que controla</th>
+                <th>Días de la semana que trabaja</th>
             </tr>
             </thead>
             <div th:each="lista: ${controladores}" class="principal">
             <tr th:each="controlador: ${lista}" class="p2">
                 <td th:text="*{controlador.dni}"></td>
-                <td th:text="*{controlador.nombre}"></td>
-                <td th:text="*{controlador.usuario}"></td>
-                <td th:text="*{controlador.email}"></td>
-                <td th:text="*{controlador.telefono}"></td>
+                <td th:text="*{controlador.espacio_publico}"></td>
+                <td th:text="*{controlador.diasSemanaTrabaja}"></td>
+
                 <td><a th:href="@{/controlador/update/{dni}(dni=${controlador.dni})}" class="btn btn-warning" role="button">Edita</a></td>
                 <td><a th:href="@{/controlador/delete/{dni}(dni=${controlador.dni})}" class="btn btn-danger" role="button">Borrar</a></td>
             </tr>
         </div>
             <br>
         </table>
-        <button onClick="history.back()" class="btn boton_azul" role="button" ><img src="https://image.flaticon.com/icons/svg/929/929730.svg" width="20"  alt="x"> Volver</button>
+        <button onClick="history.back()" class="btn boton_azul"><img src="https://image.flaticon.com/icons/svg/929/929730.svg" width="20"  alt="x"> Volver</button>
     </div>
 
 

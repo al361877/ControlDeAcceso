@@ -11,7 +11,7 @@ public class ControladorRowMapper implements RowMapper<Controlador> {
         Controlador controlador = new Controlador();
         controlador.setDni(rs.getString("dni"));
         controlador.setEspacio_publico(rs.getString("id_espacio"));
-        controlador.setDiasSemana(rs.getString("dias_semana_trabaja"));
+        controlador.setDiasSemanaTrabaja(rs.getString("dias_semana_trabaja"));
 
         return controlador;
     }

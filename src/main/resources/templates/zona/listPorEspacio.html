@@ -1,10 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/base}">
 <head>
-    <meta charset="UTF-8">
-    <title>Zonas de este espacio</title>
+    <title>Control De Acceso</title>
+    <meta charset=" UTF-8" />
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css"
+          href="/css/estils.css"
+          th:href="@{/css/estils.css}"/>
+
 </head>
+
 <body>
 
+
+<div layout:fragment="content">
+    <br>
+    <h1 >Lista de zonas que forman este espacio</h1>
+    <div align="center">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Código postal</th>
+                <th>Tipo de suelo</th>
+                <th>Tipo de acceso</th>
+                <th>Aforo máx</th>
+                <th>Ocupación actual</th>
+            </tr>
+            </thead>
+            <div th:each="lista: ${zonas}" class="principal">
+            <tr th:each="zona: ${lista}" class="p2">
+                <td th:text="*{zona.id}"></td>
+                <td th:text="*{zona.nombre}"></td>
+                <td th:text="*{zona.cp}"></td>
+                <td th:text="*{zona.tipo_suelo}"></td>
+                <td th:text="*{zona.tipo_acceso}"></td>
+                <td th:text="*{zona.aforo_maximo}"></td>
+                <td th:text="*{zona.aforo_actual}"></td>
+                <td><a th:href="@{/zona/update/{dni}(id=${zona.id})}" class="btn btn-warning" role="button">Edita</a></td>
+                <td><a th:href="@{/zona/delete/{dni}(id=${zona.id})}" class="btn btn-danger" role="button">Borrar</a></td>
+            </tr>
+        </div>
+            <br>
+        </table>
+        <button onClick="history.back()" class="btn boton_azul" role="button" ><img src="https://image.flaticon.com/icons/svg/929/929730.svg" width="20"  alt="x"> Volver</button>
+    </div>
+
+
+</div>
+
+
+<br>
 </body>
 </html>

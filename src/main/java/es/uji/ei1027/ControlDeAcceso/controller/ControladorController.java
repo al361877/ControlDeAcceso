@@ -2,6 +2,7 @@ package es.uji.ei1027.ControlDeAcceso.controller;
 
 
 import es.uji.ei1027.ControlDeAcceso.dao.UsuarioDao;
+import es.uji.ei1027.ControlDeAcceso.dao.ZonaDao;
 import es.uji.ei1027.ControlDeAcceso.model.Controlador;
 import es.uji.ei1027.ControlDeAcceso.model.Gestor;
 import es.uji.ei1027.ControlDeAcceso.model.Reserva;
@@ -31,21 +32,29 @@ public class ControladorController {
         this.userDao = userDao;
     }
 
-  /*  @RequestMapping("/list")
+    @Autowired
+    public void setControladoresService(ControladoresService controladoresService) {
+        this.controladoresService = controladoresService;
+    }
+
+    @RequestMapping("/listPorMunicipio")
     public String listControladoresPorMunicipio(HttpSession session, Model model) {
         Usuario user= (Usuario) session.getAttribute("user");
         try{
-            System.out.println("Estás en la lista de controladores por municipio");
+
             if(user.getTipoUsuario().equals("Gestor")) {
 
                 //Cojo el municipio del gestor que está loggeado
                 String municipioDelGestor = userDao.getGestorByDni(user.getDni()).getMunicipio();
-                System.out.println(controladoresService.listControladoresPorMunicipio(municipioDelGestor));
-                List<Controlador> controladores=controladoresService.listControladoresPorMunicipio(municipioDelGestor);
+
+                System.out.println("Estás en la lista de controladores del municipio " + municipioDelGestor);
+
+                List<Controlador> controladores=new ArrayList<>();
+                controladores=controladoresService.listControladoresPorMunicipio(municipioDelGestor);
                 System.out.println("Y no ha petado");
                 model.addAttribute("controladores", controladores);
 
-                return "controlador/list.html";
+                return "controlador/listPorMunicipio.html";
             }
         } catch (Exception e){
             return "error/error";
@@ -53,7 +62,6 @@ public class ControladorController {
         return "error/error";
     }
 
-*/
 
 
     @RequestMapping(value="/listPorEspacio/{espacio}", method = RequestMethod.GET)
@@ -64,6 +72,10 @@ public class ControladorController {
             if(user.getTipoUsuario().equals("Gestor")) {
                 System.out.println("Estás en la lista de controladores por espacio");
                 List<Controlador> controladores= userDao.getControladorByEspacio(espacio);
+
+                for(Controlador contr:controladores){
+                    System.out.println(contr.toString());
+                }
 
                 Usuario usuarioControlador=new Usuario();
                 List<Usuario> usuariosControlador=new ArrayList<>();
@@ -80,8 +92,12 @@ public class ControladorController {
                 }
                 System.out.println("Y no ha petado");
                 model.addAttribute("controladores", usuariosControlador);
-
                 return "controlador/listPorEspacio";
+
+
+              //  model.addAttribute("controladores",controladores);
+              //  return "controlador/listPorEspacioPrueba";
+
             }
         } catch (Exception e){
             return "error/error";

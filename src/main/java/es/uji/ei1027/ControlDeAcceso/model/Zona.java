@@ -10,24 +10,6 @@ public class Zona {
     private int aforo_actual;
     private int aforo_maximo;
 
-    public int getAforo_actual() {
-        return aforo_actual;
-    }
-
-    public void setAforo_actual(int aforo_actual) {
-        this.aforo_actual = aforo_actual;
-    }
-
-    public int getAforo_maximo() {
-        return aforo_maximo;
-    }
-
-    public void setAforo_maximo(int aforo_maximo) {
-        this.aforo_maximo = aforo_maximo;
-    }
-
-
-
 
     public String getId() {
         return id;
@@ -75,6 +57,22 @@ public class Zona {
 
     public void setTipo_acceso(String tipo_acceso) {
         this.tipo_acceso = tipo_acceso;
+    }
+
+    public int getAforo_actual() {
+        return aforo_actual;
+    }
+
+    public void setAforo_actual(int aforo_actual) {
+        this.aforo_actual = aforo_actual;
+    }
+
+    public int getAforo_maximo() {
+        return aforo_maximo;
+    }
+
+    public void setAforo_maximo(int aforo_maximo) {
+        this.aforo_maximo = aforo_maximo;
     }
 
     @Override
