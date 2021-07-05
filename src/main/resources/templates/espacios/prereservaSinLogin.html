@@ -77,7 +77,7 @@
                     <a th:href="@{~/reservas/listDelFuncionario/{espacio}(espacio=${espacio.id})}" style=" margin-top: 10px;" class="btn boton_verde" >Listar reservas</a>
                     <a th:href="@{~/controlador/listPorEspacio/{espacio}(espacio=${espacio.id})}" style=" margin-top: 10px;" class="btn boton_verde" >Listar controladores</a>
                     <a th:href="@{~/zona/listPorEspacio/{espacio}(espacio=${espacio.id})}" style=" margin-top: 10px;" class="btn boton_verde" >Listar zonas</a>
-                    <a th:href="@{~/espacios/update/{espacio}(espacio=${espacio.id})}" style=" margin-top: 10px;" class="btn btn-warning" >Editar espacio</a>
+                    <a th:href="@{~/espacios/update/{espacio}(espacio=${espacio.id})}" style=" margin-top: 10px;" class="btn boton_verde" >Editar espacio</a>
                 </div>
                 <div th:if="*{tipo=='Controlador'}">
                     <a th:href="@{~/reservas/listDelFuncionario/{espacio}(espacio=${espacio.id})}" style=" margin-top: 10px;" class="btn boton_verde" >Listar reservas</a>

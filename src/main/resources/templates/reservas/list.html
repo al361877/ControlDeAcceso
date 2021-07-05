@@ -18,8 +18,8 @@
             padding: 20px;
             background-color:#a4d7e5;
             border-radius:10px;
-            height:200px;
-            width:1000px;
+             height:300px;
+            width:1200px;
         }
   div.p3{
 
@@ -29,6 +29,14 @@
             color:black;
 
 
+        }
+         .imgRedonda {
+            width:325px;
+            height:200px;
+            border-radius:10px;
+        }
+        img:hover{
+            opacity:0.5;
         }
 </style>
 </head>
@@ -42,7 +50,12 @@
     <div th:each="res: ${reservas}" style="padding:20px;" >
         <div class="p2">
 <!--            <div style="text-align:"></div>-->
+            <div class="p3" >
+                <a style="margin-top: 10px;" th:href="@{/espacios/prereserva/{espacio}(espacio=${res.espacio_publico})}" >
+                    <img th:src="@{/images/espacios/espacio-{espacio}.jpg(espacio=${res.espacio_publico})}" class="imgRedonda">
+                </a>
 
+            </div>
             <div class="p3">
                 <b style="margin:0;display:inline">Reserva en el espacio: </b> <p style="margin:0;display:inline" th:text="${res.nombreEspacio}" class="parrafo"></p>
 

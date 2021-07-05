@@ -387,7 +387,7 @@ public class ReservaController {
     }
 
     @RequestMapping(value="/update", method = RequestMethod.POST)
-    public String processUpdateSubmit(@ModelAttribute("res") Reserva res, HttpSession session,BindingResult bindingResult,Model model ) {
+    public String processUpdateSubmit(@ModelAttribute("reserva") Reserva res, HttpSession session,BindingResult bindingResult,Model model ) {
 
 
         Usuario user = (Usuario) session.getAttribute("user");
@@ -405,7 +405,7 @@ public class ReservaController {
                     List<List<FranjaEspacio>> matrizFranja=crearMatrizFranja();
                     model.addAttribute("matrizZonas", matriz);
                     model.addAttribute("matrizFranja", matrizFranja);
-                    return "reservas/add";
+                    return "reservas/update";
 
                 }
                 String fechaIni=res.getFechaIniString();
